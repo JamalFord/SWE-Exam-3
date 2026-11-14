@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SWE Exam 3 Mastery Suite | CSC 4350 / 6350</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @media print {
+      body * { visibility: hidden; }
+      #cheat-sheet-print-area, #cheat-sheet-print-area * { visibility: visible; }
+      #cheat-sheet-print-area { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0.2in; font-size: 8pt; line-height: 1.15; }
+      .page-break { page-break-before: always; }
+      .no-print { display: none !important; }
+    }
+    .uml-box { border: 2px solid #334155; border-radius: 4px; background: #ffffff; }
+    .uml-header { background: #f1f5f9; border-bottom: 2px solid #334155; padding: 6px; font-weight: bold; text-align: center; }
+    .uml-section { border-bottom: 1px solid #94a3b8; padding: 6px 10px; font-family: monospace; font-size: 12px; min-height: 44px; }
+    .uml-section:last-child { border-bottom: none; }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-indigo-900 text-white shadow-lg sticky top-0 z-50 no-print">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <i data-lucide="graduation-cap" class="w-8 h-8 text-amber-400"></i>
+        <div>
+          <h1 class="text-xl font-bold tracking-tight">SWE Exam 3 Mastery Suite</h1>
+          <p class="text-xs text-indigo-200">GSU CSC 4350 / 6350 • Dr. Tushara Sadasivuni • Exam Date: Nov 19</p>
+        </div>
+      </div>
+      <!-- Tab Navigation -->
+      <nav class="flex space-x-1 bg-indigo-950/60 p-1 rounded-xl text-sm font-medium">
+        <button onclick="switchTab('quiz')" id="tab-btn-quiz" class="tab-btn px-3 py-1.5 rounded-lg transition-colors bg-indigo-600 text-white flex items-center gap-1.5">
+          <i data-lucide="help-circle" class="w-4 h-4"></i> Section A: MCQs
+        </button>
+        <button onclick="switchTab('uml')" id="tab-btn-uml" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-indigo-200 hover:text-white flex items-center gap-1.5">
+          <i data-lucide="layout-grid" class="w-4 h-4"></i> Section B: UML Drills
+        </button>
+        <button onclick="switchTab('testcases')" id="tab-btn-testcases" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-indigo-200 hover:text-white flex items-center gap-1.5">
+          <i data-lucide="check-square" class="w-4 h-4"></i> 5 Test Cases Builder
+        </button>
+        <button onclick="switchTab('cheatsheet')" id="tab-btn-cheatsheet" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-amber-300 hover:text-amber-100 flex items-center gap-1.5">
+          <i data-lucide="file-text" class="w-4 h-4"></i> Printable Cheat Sheet
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: PRACTICE EXAM (MCQs & SHORT ANSWER) -->
+    <!-- ========================================== -->
+    <div id="tab-quiz" class="tab-content block">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900">Randomized Practice Exam</h2>
+            <p class="text-sm text-slate-500">Curated from Dr. Sadasivuni's exact slide decks, in-class traps, and syllabus topics.</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span id="score-counter" class="text-sm font-semibold bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-lg border border-indigo-100">
+              Score: 0 / 0 (0%)
+            </span>
+            <button onclick="renderRandomQuiz(10)" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg flex items-center gap-1.5 shadow-sm transition">
+              <i data-lucide="shuffle" class="w-4 h-4"></i> Generate 10-Question Test
+            </button>
+            <button onclick="renderRandomQuiz(999)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 text-sm font-semibold px-4 py-2 rounded-lg flex items-center gap-1.5 transition">
+              Practice All Questions
+            </button>
+          </div>
+        </div>
+        <div id="quiz-container" class="space-y-6 mt-6">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: UML FILL-IN-THE-BLANK & DIAGRAMS   -->
+    <!-- ========================================== -->
+    <div id="tab-uml" class="tab-content hidden">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <div class="border-b border-slate-100 pb-4 mb-6">
+          <h2 class="text-2xl font-bold text-slate-900">Section B: UML Diagram Fill-in-the-Blank</h2>
+          <p class="text-sm text-slate-500">Master the exact lecture scenarios: Class Diagrams (3-compartment rule), Aggregation vs Composition, Sequence Fragments, and Activity Forks/Joins.</p>
+        </div>
+
+        <!-- Drill Selector -->
+        <div class="flex flex-wrap gap-2 mb-6">
+          <button onclick="showUmlDrill('hospital')" id="btn-drill-hospital" class="uml-drill-btn px-4 py-2 rounded-lg text-sm font-semibold bg-indigo-600 text-white">
+            1. Hospital Scenario (Class Diagram)
+          </button>
+          <button onclick="showUmlDrill('bank')" id="btn-drill-bank" class="uml-drill-btn px-4 py-2 rounded-lg text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            2. Bank Account (Generalization & Realization)
+          </button>
+          <button onclick="showUmlDrill('sequence')" id="btn-drill-sequence" class="uml-drill-btn px-4 py-2 rounded-lg text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            3. Sequence Diagram (Alt / Opt / Loop)
+          </button>
+          <button onclick="showUmlDrill('insulin')" id="btn-drill-insulin" class="uml-drill-btn px-4 py-2 rounded-lg text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            4. Insulin Pump (Activity Fork & Join)
+          </button>
+          <button onclick="showUmlDrill('microwave')" id="btn-drill-microwave" class="uml-drill-btn px-4 py-2 rounded-lg text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            5. Microwave Oven (State Machine)
+          </button>
+        </div>
+
+        <!-- DRILL 1: HOSPITAL -->
+        <div id="drill-hospital" class="uml-drill-view block">
+          <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-amber-900 text-sm">Professor's Strict Rule & Scenario:</h3>
+            <p class="text-xs text-amber-800 mt-1">
+              "Any class with 2 modules is WRONG! Must always draw all 3 compartments."<br>
+              <strong>Scenario:</strong> A Hospital has Departments. Departments employ Doctors and maintain Lab Tests. If a Department closes, its Lab Tests are destroyed, but Doctors retain their licenses and can practice elsewhere. A Medical Record specializes into Surgical Record and Office Visit Record.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Box 1 -->
+            <div class="uml-box shadow-sm">
+              <div class="uml-header text-indigo-900">Department</div>
+              <div class="uml-section">
+                <span class="text-xs text-slate-400 block mb-1">Attributes:</span>
+                - deptId: String<br>- name: String
+              </div>
+              <div class="uml-section">
+                <span class="text-xs text-slate-400 block mb-1">Operations:</span>
+                + getDoctors(): List&lt;Doctor&gt;<br>+ scheduleTest(t: LabTest)
+              </div>
+            </div>
+
+            <!-- Box 2 (Interactive) -->
+            <div class="uml-box shadow-md border-indigo-400 bg-indigo-50/20">
+              <div class="uml-header bg-indigo-100 text-indigo-900">
+                <input id="u1-name" placeholder="Class Name? (e.g. Doctor)" class="w-full text-center font-bold bg-white border border-slate-300 rounded px-1 text-sm">
+              </div>
+              <div class="uml-section">
+                <span class="text-xs text-slate-400 block mb-1">Compartment 2 (Attributes):</span>
+                <textarea id="u1-attr" placeholder="- doctorId: String&#10;- specialty: String" rows="2" class="w-full text-xs font-mono p-1 border border-slate-300 rounded"></textarea>
+              </div>
+              <div class="uml-section">
+                <span class="text-xs text-slate-400 block mb-1">Compartment 3 (Operations):</span>
+                <textarea id="u1-ops" placeholder="+ examinePatient()&#10;+ prescribeMedication()" rows="2" class="w-full text-xs font-mono p-1 border border-slate-300 rounded"></textarea>
+              </div>
+            </div>
+
+            <!-- Box 3 -->
+            <div class="uml-box shadow-sm">
+              <div class="uml-header text-indigo-900">LabTest</div>
+              <div class="uml-section">
+                <span class="text-xs text-slate-400 block mb-1">Attributes:</span>
+                - testId: String<br>- resultData: String
+              </div>
+              <div class="uml-section">
+                <span class="text-xs text-slate-400 block mb-1">Operations:</span>
+                + runAnalysis(): void<br>+ sendReport(): void
+              </div>
+            </div>
+          </div>
+
+          <!-- Relationship Questions -->
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-5 space-y-4">
+            <h4 class="font-bold text-slate-900 text-sm">Identify the Exact Relationship & Multiplicity:</h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              <div>
+                <label class="font-semibold text-slate-700 block mb-1">1. Department to Doctor:</label>
+                <select id="rel-dept-doc" class="w-full p-2 border border-slate-300 rounded bg-white font-mono">
+                  <option value="">-- Select UML Relationship --</option>
+                  <option value="aggregation">Aggregation (Open diamond &lt;&gt;-- at Department) - Doctor outlives Dept</option>
+                  <option value="composition">Composition (Filled diamond &lt;*&gt;-- at Department)</option>
+                  <option value="generalization">Generalization (--|&gt; hollow triangle)</option>
+                  <option value="dependency">Dependency (..&gt; dashed arrow)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="font-semibold text-slate-700 block mb-1">2. Department to LabTest:</label>
+                <select id="rel-dept-lab" class="w-full p-2 border border-slate-300 rounded bg-white font-mono">
+                  <option value="">-- Select UML Relationship --</option>
+                  <option value="composition">Composition (Filled diamond &lt;*&gt;-- at Department) - Tests destroyed with Dept</option>
+                  <option value="aggregation">Aggregation (Open diamond &lt;&gt;-- at Department)</option>
+                  <option value="realization">Realization (..|&gt; dashed with hollow triangle)</option>
+                  <option value="association">Simple Association (---)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="font-semibold text-slate-700 block mb-1">3. MedicalRecord to SurgicalRecord:</label>
+                <select id="rel-med-surg" class="w-full p-2 border border-slate-300 rounded bg-white font-mono">
+                  <option value="">-- Select UML Relationship --</option>
+                  <option value="generalization">Generalization (--|&gt; hollow triangle at MedicalRecord)</option>
+                  <option value="realization">Realization (..|&gt; dashed hollow triangle)</option>
+                  <option value="composition">Composition (&lt;*&gt;--)</option>
+                  <option value="dependency">Dependency (..&gt;)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="font-semibold text-slate-700 block mb-1">4. Golden Rule Check: What if a class has no operations?</label>
+                <select id="rel-compartments" class="w-full p-2 border border-slate-300 rounded bg-white font-mono">
+                  <option value="">-- Select Answer --</option>
+                  <option value="three">MUST still draw 3 compartments (leave the 3rd compartment empty)</option>
+                  <option value="two">Draw only 2 compartments</option>
+                  <option value="one">Draw a simple single box</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <button onclick="checkHospitalDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs px-4 py-2 rounded-lg transition">
+                Check Hospital Scenario Answers
+              </button>
+              <div id="hospital-feedback" class="mt-3 text-xs font-medium"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DRILL 2: BANK ACCOUNT -->
+        <div id="drill-bank" class="uml-drill-view hidden">
+          <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-blue-900 text-sm">Bank Account Hierarchy:</h3>
+            <p class="text-xs text-blue-800 mt-1">
+              <code>BankAccount</code> is an abstract parent class with subclasses <code>CheckingAccount</code> and <code>SavingsAccount</code>. 
+              <code>InterestBearing</code> is an Interface implemented by <code>SavingsAccount</code>. A <code>Customer</code> has an <code>Address</code> (if customer is deleted, address is deleted).
+            </p>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-5 space-y-4 text-xs">
+            <div>
+              <p class="font-bold text-slate-800 mb-1">Q1: How should the class name `BankAccount` be rendered if it is abstract?</p>
+              <label class="block"><input type="radio" name="bank-q1" value="italic"> <em>Italicized text</em> or tagged with &laquo;abstract&raquo;</label>
+              <label class="block"><input type="radio" name="bank-q1" value="bold"> Bold underline only</label>
+            </div>
+            <div>
+              <p class="font-bold text-slate-800 mb-1">Q2: Which arrow connects `SavingsAccount` to the `InterestBearing` interface?</p>
+              <label class="block"><input type="radio" name="bank-q2" value="realization"> Dashed line with hollow triangle pointing to Interface (Realization <code>..|&gt;</code>)</label>
+              <label class="block"><input type="radio" name="bank-q2" value="generalization"> Solid line with hollow triangle pointing to Interface (Generalization <code>--|&gt;</code>)</label>
+              <label class="block"><input type="radio" name="bank-q2" value="dependency"> Dashed arrow with open head (<code>..&gt;</code>)</label>
+            </div>
+            <div>
+              <p class="font-bold text-slate-800 mb-1">Q3: Relationship between `Customer` and `Address`:</p>
+              <label class="block"><input type="radio" name="bank-q3" value="composition"> Composition (Solid black diamond &lt;*&gt; at Customer - Address lifecycle bound)</label>
+              <label class="block"><input type="radio" name="bank-q3" value="aggregation"> Aggregation (Hollow diamond &lt;&gt; at Customer)</label>
+            </div>
+            <button onclick="checkBankDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2 rounded-lg transition">Check Bank Answers</button>
+            <div id="bank-feedback" class="mt-2 font-medium"></div>
+          </div>
+        </div>
+
+        <!-- DRILL 3: SEQUENCE ALT/LOOP -->
+        <div id="drill-sequence" class="uml-drill-view hidden">
+          <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-emerald-900 text-sm">Sequence Diagram Combined Fragments:</h3>
+            <p class="text-xs text-emerald-800 mt-1">
+              Match the UML Combined Fragment operator to its exact meaning from lecture:
+            </p>
+          </div>
+          <div class="space-y-4 text-xs">
+            <div class="p-3 bg-slate-50 border rounded-lg">
+              <span class="font-bold">alt:</span> Represents mutually exclusive alternative behaviors (similar to <code>if-then-else</code>) separated by a dashed horizontal line with guards <code>[condition]</code>.
+            </div>
+            <div class="p-3 bg-slate-50 border rounded-lg">
+              <span class="font-bold">opt:</span> Optional execution branch (similar to <code>if</code> without an else); executes only if guard is true.
+            </div>
+            <div class="p-3 bg-slate-50 border rounded-lg">
+              <span class="font-bold">loop:</span> Repeated execution sequence with condition or bounds <code>[min, max]</code>.
+            </div>
+            <div class="p-3 bg-slate-50 border rounded-lg">
+              <span class="font-bold">par:</span> Concurrent / parallel execution of sub-sequences.
+            </div>
+          </div>
+        </div>
+
+        <!-- DRILL 4: INSULIN PUMP ACTIVITY -->
+        <div id="drill-insulin" class="uml-drill-view hidden">
+          <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-purple-900 text-sm">Insulin Pump Activity Diagram Synchronization:</h3>
+            <p class="text-xs text-purple-800 mt-1">
+              Fork vs Join Bar: A <strong>Fork</strong> has 1 incoming flow and &ge; 2 outgoing parallel flows. A <strong>Join</strong> has &ge; 2 incoming concurrent flows and synchronizes them into 1 outgoing flow.
+            </p>
+          </div>
+          <div class="p-4 bg-slate-50 border rounded-lg text-xs space-y-3">
+            <p class="font-bold text-slate-800">Identify the correct notation:</p>
+            <p>1. Start State = Solid black filled circle.</p>
+            <p>2. Activity State = Rectangle with rounded corners.</p>
+            <p>3. Decision / Merge = Diamond symbol with guard expressions <code>[guard]</code>.</p>
+            <p>4. End State = Bullseye (Solid circle inside an outer ring).</p>
+          </div>
+        </div>
+
+        <!-- DRILL 5: MICROWAVE STATE MACHINE -->
+        <div id="drill-microwave" class="uml-drill-view hidden">
+          <div class="bg-rose-50 border-l-4 border-rose-500 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-rose-900 text-sm">Microwave Oven State Machine Transition Syntax:</h3>
+            <p class="text-xs text-rose-800 mt-1">
+              Standard UML State Transition Label: <code>Event [Guard] / Action</code>
+            </p>
+          </div>
+          <div class="p-4 bg-slate-50 border rounded-lg text-xs space-y-2">
+            <p><strong>Example:</strong> In state <em>Half power</em>, user presses <code>start</code> button while door is closed, triggering the generator:</p>
+            <div class="p-3 bg-white font-mono border rounded text-indigo-700 font-bold">
+              start [door_closed] / run_generator(300W)
+            </div>
+            <p class="text-slate-500">Notice: <code>Event</code> triggers the transition; <code>[Guard]</code> is the boolean prerequisite; <code>/ Action</code> is the side-effect executed upon transition.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: 5 TEST CASES MATRIX BUILDER        -->
+    <!-- ========================================== -->
+    <div id="tab-testcases" class="tab-content hidden">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <div class="border-b border-slate-100 pb-4 mb-4 flex justify-between items-center">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900">Section B: 5 Test Cases Practice Matrix</h2>
+            <p class="text-sm text-slate-500">"Write like 5 test cases" — Practice constructing complete, professional test cases with objectives, pre-conditions, inputs, and expected outcomes.</p>
+          </div>
+          <button onclick="fillExampleTestCases()" class="text-xs bg-slate-100 hover:bg-slate-200 font-semibold text-slate-700 px-3 py-1.5 rounded border border-slate-300">
+            Load Model Solution
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border border-slate-300 rounded-lg">
+            <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-300">
+              <tr>
+                <th class="p-2 border-r border-slate-300 w-16">TC ID</th>
+                <th class="p-2 border-r border-slate-300 w-44">Test Objective / Category</th>
+                <th class="p-2 border-r border-slate-300 w-44">Pre-Conditions</th>
+                <th class="p-2 border-r border-slate-300">Test Steps & Inputs</th>
+                <th class="p-2 border-r border-slate-300">Expected Result</th>
+                <th class="p-2 w-32">Pass/Fail Criteria</th>
+              </tr>
+            </thead>
+            <tbody id="test-case-rows" class="divide-y divide-slate-200">
+              <!-- Dynamically populated rows 1 to 5 -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-4 p-4 bg-indigo-50 border border-indigo-200 rounded-lg text-xs text-indigo-900 space-y-1">
+          <span class="font-bold">Professor Sadasivuni's Grading Rubric for Test Cases:</span>
+          <ul class="list-disc list-inside space-y-0.5 text-indigo-800">
+            <li><strong>Specific Inputs:</strong> Do not write "enter invalid data" — specify <code>"age = -1"</code> or <code>"PIN = 12345"</code>.</li>
+            <li><strong>Unambiguous Expected Result:</strong> Do not write "system fails" — specify <code>"ErrorMessage displayed: 'PIN must be 4 digits'; transaction aborted"</code>.</li>
+            <li><strong>Boundary Values:</strong> Always test boundaries: $min-1, min, max, max+1$.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: PRINTABLE CHEAT SHEET (NO DIAGRAMS) -->
+    <!-- ========================================== -->
+    <div id="tab-cheatsheet" class="tab-content hidden">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <div class="flex justify-between items-center border-b border-slate-100 pb-4 mb-4 no-print">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900">Dr. Sadasivuni Cheat Sheet (Front & Back)</h2>
+            <p class="text-sm text-slate-500 font-semibold text-rose-600">
+              Rule Compliant: Single 8.5" x 11" Paper • ABSOLUTELY NO DIAGRAMS • Syntax, Tables & Notations Only
+            </p>
+          </div>
+          <button onclick="window.print()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition">
+            <i data-lucide="printer" class="w-4 h-4"></i> Print Cheat Sheet
+          </button>
+        </div>
+
+        <!-- PRINT AREA -->
+        <div id="cheat-sheet-print-area" class="font-sans text-slate-900">
+          
+          <!-- SIDE 1 (FRONT) -->
+          <div class="border border-slate-400 p-4 bg-white rounded-lg mb-6">
+            <div class="text-center border-b-2 border-slate-800 pb-1 mb-2">
+              <h2 class="text-sm font-extrabold uppercase tracking-wide">SWE Exam 3 Reference • SIDE 1: Architecture, SDLC & Testing Fundamentals</h2>
+              <p class="text-[9px] text-slate-600 font-mono">STRICT: NO DIAGRAMS ALLOWED • Hand-Written Notation Guide</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 text-[10px] leading-tight">
+              
+              <!-- Block 1: SDLC & Essentials -->
+              <div class="border border-slate-300 p-2 rounded">
+                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">1. SDLC, Ethics & Quality Attributes</h3>
+                <ul class="list-disc list-inside space-y-0.5">
+                  <li><strong>SDLC:</strong> Software Development Life Cycle: Requirements &rarr; Design &rarr; Implementation &rarr; Testing &rarr; Deployment &rarr; Maintenance.</li>
+                  <li><strong>4 P's:</strong> People, Product, Process, Project.</li>
+                  <li><strong>4 Attributes of Good Software:</strong>
+                    1. <em>Maintainability</em> (evolves with needs); 
+                    2. <em>Dependability & Security</em> (reliability, safety); 
+                    3. <em>Efficiency</em> (CPU, memory, response time); 
+                    4. <em>Acceptability</em> (usable, compatible).
+                  </li>
+                  <li><strong>Cost Distribution:</strong> ~60% Development, ~40% Testing. For custom products, evolution costs exceed dev costs!</li>
+                  <li><strong>ACM/IEEE Ethics:</strong> 1. Public, 2. Client & Employer, 3. Product, 4. Judgment, 5. Management, 6. Profession, 7. Colleagues, 8. Self.</li>
+                </ul>
+              </div>
+
+              <!-- Block 2: Requirements Rules -->
+              <div class="border border-slate-300 p-2 rounded">
+                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">2. Requirements Engineering</h3>
+                <ul class="list-disc list-inside space-y-0.5">
+                  <li><strong>Functional:</strong> What system MUST do (services, reactions, inputs &rarr; outputs).</li>
+                  <li><strong>Non-Functional (NFR):</strong> Quality constraints (performance, security, portability, reliability).</li>
+                  <li><strong>Testability Trap:</strong> Subjective terms ("instantaneously", "user-friendly", "little training") must be rewritten into measurable metrics (e.g. "&le; 200ms latency", "&le; 2 errors per 8 hrs").</li>
+                  <li><strong>Use Case Relationships:</strong>
+                    <br>&bull; <code>&laquo;include&raquo;</code>: Mandatory sub-task; base use case is INCOMPLETE without it.
+                    <br>&bull; <code>&laquo;extend&raquo;</code>: Optional sub-task triggered at extension points; base is complete alone.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Block 3: Architectural Design -->
+              <div class="border border-slate-300 p-2 rounded col-span-2">
+                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">3. Kruchten 4+1 View Model & Architectural Styles</h3>
+                <div class="grid grid-cols-4 gap-2 text-[9.5px] mb-2">
+                  <div class="bg-slate-50 p-1.5 border rounded">
+                    <strong>1. Logical View:</strong> Class diagrams, statecharts. End-user domain concepts.
+                  </div>
+                  <div class="bg-slate-50 p-1.5 border rounded">
+                    <strong>2. Process View:</strong> Activity & Sequence. Concurrency, performance, scalability.
+                  </div>
+                  <div class="bg-slate-50 p-1.5 border rounded">
+                    <strong>3. Development View:</strong> Packages, components. Programmers' code organization.
+                  </div>
+                  <div class="bg-slate-50 p-1.5 border rounded">
+                    <strong>4. Physical View:</strong> Hardware nodes, network deployment topology.
+                  </div>
+                </div>
+                <div class="text-[9px] bg-indigo-50/50 p-1.5 border border-indigo-200 rounded">
+                  <strong>+1 Unified View:</strong> Use Cases / Scenarios that tie the 4 views together.
+                </div>
+
+                <div class="mt-2 grid grid-cols-4 gap-2 text-[9px]">
+                  <div class="border p-1 rounded">
+                    <strong>Layered:</strong> UI &rarr; Business &rarr; DB. (+) Modular, portable. (-) Layer overhead.
+                  </div>
+                  <div class="border p-1 rounded">
+                    <strong>Repository:</strong> Central DB + tools. (+) Efficient data sharing. (-) Single point of failure.
+                  </div>
+                  <div class="border p-1 rounded">
+                    <strong>Client-Server:</strong> Distributed servers. (+) Scalable, network-ready. (-) Network latency/security.
+                  </div>
+                  <div class="border p-1 rounded">
+                    <strong>Pipe & Filter:</strong> Unix stream filters. (+) Reusable transforms. (-) Overhead parsing formats.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Block 4: Testing Concepts & V-Model -->
+              <div class="border border-slate-300 p-2 rounded col-span-2">
+                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">4. Software Testing Definitions & Scaffolding</h3>
+                <div class="grid grid-cols-3 gap-2 text-[9.5px]">
+                  <div>
+                    <strong>Verification:</strong> "Are we building the product RIGHT?" (conforms to spec).<br>
+                    <strong>Validation:</strong> "Are we building the RIGHT product?" (meets user needs).<br>
+                    <strong>Dijkstra's Axiom:</strong> Testing shows presence of bugs, NEVER their absence!
+                  </div>
+                  <div>
+                    <strong>Test Scaffolding:</strong><br>
+                    &bull; <em>Driver:</em> Module calling the unit under test.<br>
+                    &bull; <em>Stub / Mock:</em> Dummy module called by unit.<br>
+                    &bull; <em>Harness:</em> Framework executing tests (JUnit).<br>
+                    &bull; <em>Oracle:</em> Verifier comparing expected vs actual.
+                  </div>
+                  <div>
+                    <strong>JUnit Lifecycle:</strong><br>
+                    <code>@Test</code>: Test case method.<br>
+                    <code>@Before / @BeforeEach</code>: Runs before EVERY test.<br>
+                    <code>@After / @AfterEach</code>: Runs after EVERY test.<br>
+                    <code>@BeforeClass / @All</code>: Runs ONCE before suite.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- PAGE BREAK FOR DOUBLE SIDED -->
+          <div class="page-break"></div>
+
+          <!-- SIDE 2 (BACK) -->
+          <div class="border border-slate-400 p-4 bg-white rounded-lg">
+            <div class="text-center border-b-2 border-slate-800 pb-1 mb-2">
+              <h2 class="text-sm font-extrabold uppercase tracking-wide">SWE Exam 3 Reference • SIDE 2: UML Rules, Structural Coverage & Database</h2>
+              <p class="text-[9px] text-slate-600 font-mono">STRICT: NO DIAGRAMS ALLOWED • Hand-Written Notation Guide</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 text-[10px] leading-tight">
+
+              <!-- Block 5: Strict UML Rules -->
+              <div class="border border-slate-300 p-2 rounded">
+                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">5. UML Class Diagram Strict Rules</h3>
+                <ul class="list-disc list-inside space-y-0.5">
+                  <li class="text-rose-700 font-bold">GOLDEN RULE: Any class drawn with 2 compartments is WRONG! Always draw 3 compartments: 1. Name, 2. Attributes, 3. Operations (leave blank if none).</li>
+                  <li><strong>Finding Classes:</strong> Nouns = Class; Noun Phrases = Attributes; Verbs = Operations.</li>
+                  <li><strong>Visibility:</strong> <code>+</code> Public | <code>-</code> Private | <code>#</code> Protected | <code>~</code> Package.</li>
+                  <li><strong>Relationships & Text Notations:</strong>
+                    <br>&bull; <em>Aggregation</em> <code>&lt;&gt;--</code> : "has-a", open diamond at whole. Doctor outlives Department.
+                    <br>&bull; <em>Composition</em> <code>&lt;*&gt;--</code> : "part-of", solid diamond at whole. LabTest destroyed if Department deleted!
+                    <br>&bull; <em>Generalization</em> <code>--|&gt;</code> : "is-a", solid line with hollow triangle at parent.
+                    <br>&bull; <em>Realization</em> <code>..|&gt;</code> : implements interface, dashed line with hollow triangle.
+                    <br>&bull; <em>Dependency</em> <code>..&gt;</code> : uses, dashed line with open arrow.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Block 6: Interaction & Behavioral UML -->
+              <div class="border border-slate-300 p-2 rounded">
+                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">6. Sequence, Activity & State Notations</h3>
+                <ul class="list-disc list-inside space-y-0.5">
+                  <li><strong>Sequence Diagrams:</strong>
+                    <br>&bull; Synchronous call: Solid line, filled arrowhead <code>&mdash;&mdash;&blacktriangleright;</code>
+                    <br>&bull; Asynchronous: Solid line, open arrowhead <code>&mdash;&mdash;&gt;</code>
+                    <br>&bull; Return: Dashed line, open arrowhead <code>&lt;- - -</code>
+                    <br>&bull; Fragments: <code>alt</code> (if-else), <code>opt</code> (if only), <code>loop</code> (while/for), <code>par</code> (parallel).
+                  </li>
+                  <li><strong>Activity Diagrams:</strong>
+                    <br>&bull; Fork: 1 incoming flow &rarr; 2+ concurrent parallel flows.
+                    <br>&bull; Join: 2+ incoming concurrent flows &rarr; 1 outgoing flow.
+                    <br>&bull; Swimlanes: Partitions indicating actor/system responsibility.
+                  </li>
+                  <li><strong>Statechart Transition Syntax:</strong>
+                    <br><code>Event [Guard] / Action</code>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Block 7: Structural Testing & MC/DC -->
+              <div class="border border-slate-300 p-2 rounded col-span-2">
+                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">7. Structural (White-Box) Testing, Coverage & MC/DC</h3>
+                <div class="grid grid-cols-3 gap-2 text-[9.5px]">
+                  <div>
+                    <strong>Statement Coverage ($C_0$):</strong><br>
+                    $\frac{\text{statements executed}}{\text{total statements}} \times 100\%$<br>
+                    <span class="text-rose-700">Weakest!</span> Misses untaken false branches in single <code>if</code> blocks.
+                  </div>
+                  <div>
+                    <strong>Branch Coverage ($C_1$):</strong><br>
+                    Every decision edge (True and False) traversed at least once.<br>
+                    <strong>Subsumption:</strong> Branch coverage subsumes Statement coverage!
+                  </div>
+                  <div>
+                    <strong>MC/DC Coverage:</strong><br>
+                    Avionics safety standard (DO-178C). Each condition must independently affect decision outcome with others fixed.<br>
+                    Test cases required: $n + 1$ (vs $2^n$ full).
+                  </div>
+                </div>
+
+                <div class="mt-2 grid grid-cols-2 gap-2 text-[9.5px] border-t pt-1">
+                  <div>
+                    <strong>Equivalence Partitioning (EP):</strong> Divide inputs into valid and invalid classes. Pick 1 representative per partition.
+                  </div>
+                  <div>
+                    <strong>Boundary Value Analysis (BVA):</strong> Test edges of partitions ($min-1, min, min+1, nom, max-1, max, max+1$).
+                  </div>
+                </div>
+              </div>
+
+              <!-- Block 8: Database Fundamentals -->
+              <div class="border border-slate-300 p-2 rounded col-span-2">
+                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">8. Relational Database & Normalization Summary</h3>
+                <div class="grid grid-cols-3 gap-2 text-[9.5px]">
+                  <div>
+                    <strong>Integrity Rules:</strong><br>
+                    &bull; <em>Entity Integrity:</em> Primary Key cannot be null.<br>
+                    &bull; <em>Referential Integrity:</em> Foreign Key must match valid PK or be null.
+                  </div>
+                  <div>
+                    <strong>Normal Forms (1NF &rarr; 3NF):</strong><br>
+                    &bull; <strong>1NF:</strong> Atomic values, no repeating groups.<br>
+                    &bull; <strong>2NF:</strong> 1NF + no partial key dependencies (attributes depend on full composite PK).
+                  </div>
+                  <div>
+                    &bull; <strong>3NF:</strong> 2NF + no transitive dependencies (non-key attribute depends on another non-key).<br>
+                    <em>"All attributes depend on the key, the whole key, and nothing but the key."</em>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-xs py-4 text-center border-t border-slate-800 no-print">
+    <p>Software Engineering CSC 4350/6350 • Exam 3 Study Suite • Tailored for Dr. Tushara Sadasivuni</p>
+  </footer>
+
+  <!-- Interactive Logic -->
+  <script>
+    // Tab Switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white');
+        btn.classList.add('text-indigo-200');
+      });
+
+      document.getElementById('tab-' + tabId).classList.remove('hidden');
+      const activeBtn = document.getElementById('tab-btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-indigo-200');
+        activeBtn.classList.add('bg-indigo-600', 'text-white');
+      }
+      lucide.createIcons();
+    }
+
+    // UML Drill Sub-views
+    function showUmlDrill(drillId) {
+      document.querySelectorAll('.uml-drill-view').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.uml-drill-btn').forEach(b => {
+        b.classList.remove('bg-indigo-600', 'text-white');
+        b.classList.add('bg-slate-100', 'text-slate-700');
+      });
+
+      document.getElementById('drill-' + drillId).classList.remove('hidden');
+      const activeBtn = document.getElementById('btn-drill-' + drillId);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
+        activeBtn.classList.add('bg-indigo-600', 'text-white');
+      }
+    }
+
+    // Verification Logic for UML Drills
+    function checkHospitalDrill() {
+      const r1 = document.getElementById('rel-dept-doc').value;
+      const r2 = document.getElementById('rel-dept-lab').value;
+      const r3 = document.getElementById('rel-med-surg').value;
+      const r4 = document.getElementById('rel-compartments').value;
+      const fb = document.getElementById('hospital-feedback');
+
+      let correct = (r1 === 'aggregation') && (r2 === 'composition') && (r3 === 'generalization') && (r4 === 'three');
+
+      if (correct) {
+        fb.className = "mt-3 text-xs font-semibold text-emerald-700 bg-emerald-50 p-3 rounded border border-emerald-200";
+        fb.innerHTML = "✅ PERFECT! Department-to-Doctor is Aggregation (Doctor outlives Department). Department-to-LabTest is Composition (tests destroyed). MedicalRecord is Generalization. And class boxes MUST always have 3 compartments!";
+      } else {
+        fb.className = "mt-3 text-xs font-semibold text-rose-700 bg-rose-50 p-3 rounded border border-rose-200";
+        fb.innerHTML = "❌ Check your choices. Remember: Doctors survive hospital closure (Aggregation), but LabTests do not (Composition). And always draw 3 compartments!";
+      }
+    }
+
+    function checkBankDrill() {
+      const q1 = document.querySelector('input[name="bank-q1"]:checked')?.value;
+      const q2 = document.querySelector('input[name="bank-q2"]:checked')?.value;
+      const q3 = document.querySelector('input[name="bank-q3"]:checked')?.value;
+      const fb = document.getElementById('bank-feedback');
+
+      if (q1 === 'italic' && q2 === 'realization' && q3 === 'composition') {
+        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
+        fb.innerHTML = "✅ Correct! Abstract classes are italicized, interfaces are realized with dashed hollow arrows, and Customer-Address is composition.";
+      } else {
+        fb.className = "mt-2 text-xs font-semibold text-rose-700";
+        fb.innerHTML = "❌ Incorrect. Check abstract notation (italicized) and interface realization (dashed line with hollow triangle).";
+      }
+    }
+
+    // Comprehensive Questions Database from all lecture slides
+    const ALL_QUESTIONS = [
+      {
+        q: "According to Dr. Sadasivuni's golden class diagram rule, drawing a class with only 2 compartments when it has no operations is:",
+        options: [
+          "Wrong! You must always draw all 3 compartments, leaving the operations compartment empty.",
+          "Acceptable, as empty compartments can be omitted.",
+          "Standard UML best practice.",
+          "Required by IEEE 830."
+        ],
+        answer: 0,
+        explanation: "Dr. Sadasivuni explicitly stressed in class: 'Any class with 2 modules is WRONG! Must always draw all 3 compartments.'"
+      },
+      {
+        q: "In the hospital management scenario, why is the relationship between Department and Doctor modeled as Aggregation (<>--) rather than Composition (<*>--)?",
+        options: [
+          "Because doctors possess independent licenses and continue to exist if the department closes.",
+          "Because doctors cannot exist without a department.",
+          "Because doctors inherit all methods from the Department.",
+          "Because aggregation is faster to implement in Java."
+        ],
+        answer: 0,
+        explanation: "Aggregation is weak containment: the part (Doctor) outlives the whole (Department). Composition is strong containment where parts are destroyed with the whole."
+      },
+      {
+        q: "Which testing coverage metric guarantees that every decision statement evaluates to both TRUE and FALSE at least once?",
+        options: [
+          "Branch (Decision) Coverage",
+          "Statement Coverage",
+          "Condition Coverage",
+          "Function Coverage"
+        ],
+        answer: 0,
+        explanation: "Branch coverage (C1) requires every decision branch (both True and False edges in the Control Flow Graph) to be traversed at least once. It subsumes statement coverage."
+      },
+      {
+        q: "What is Edsger Dijkstra's famous axiom regarding software testing?",
+        options: [
+          "Program testing can be used to show the presence of bugs, but never to show their absence.",
+          "A program that passes all test cases is proven error-free.",
+          "Testing is 100% effective when branch coverage reaches 100%.",
+          "Verification proves correctness; validation proves efficiency."
+        ],
+        answer: 0,
+        explanation: "Testing demonstrates defects exist; passing all tests only proves no defects were discovered by those specific test cases."
+      },
+      {
+        q: "In Kruchten's 4+1 View Model of software architecture, which view addresses concurrency, performance, and scalability?",
+        options: [
+          "Process View",
+          "Logical View",
+          "Physical View",
+          "Development View"
+        ],
+        answer: 0,
+        explanation: "The Process View deals with runtime threads, processes, synchronization, and scalability. The Logical View deals with domain functionality."
+      },
+      {
+        q: "In a Sequence Diagram, what is the visual difference between a Synchronous message call and an Asynchronous message?",
+        options: [
+          "Synchronous uses a solid line with a filled triangular arrowhead; Asynchronous uses a solid line with an open stick arrowhead.",
+          "Synchronous uses a dashed line; Asynchronous uses a solid line.",
+          "Synchronous has no return arrow; Asynchronous always requires a return arrow.",
+          "Synchronous points upwards; Asynchronous points downwards."
+        ],
+        answer: 0,
+        explanation: "UML standard: filled arrowhead = synchronous (blocking); open/stick arrowhead = asynchronous (non-blocking)."
+      },
+      {
+        q: "What is the primary architectural weakness of the Repository (Blackboard) architecture style?",
+        options: [
+          "The repository is a single point of failure and can easily become a communication bottleneck.",
+          "Components cannot share large datasets.",
+          "Data format changes are isolated and never affect tools.",
+          "It cannot be used with databases."
+        ],
+        answer: 0,
+        explanation: "Central passive repositories create a single point of failure; if the repository crashes or slows down, all dependent tools halt."
+      },
+      {
+        q: "Which JUnit annotation designates a fixture method that must run ONCE before any of the test methods in the test class execute?",
+        options: [
+          "@BeforeClass (JUnit 4) / @BeforeAll (JUnit 5)",
+          "@Before / @BeforeEach",
+          "@TestSetup",
+          "@ClassRule"
+        ],
+        answer: 0,
+        explanation: "@BeforeClass (or @BeforeAll) executes once before any test methods, typically used to open expensive database connections or servers."
+      },
+      {
+        q: "In white-box testing, how does Modified Condition/Decision Coverage (MC/DC) reduce testing cost compared to Multiple Condition Coverage?",
+        options: [
+          "It tests each condition independently affecting the outcome, requiring only n + 1 tests instead of 2^n tests.",
+          "It skips all negative conditions.",
+          "It requires only 2 tests regardless of the number of conditions.",
+          "It ignores composite boolean expressions."
+        ],
+        answer: 0,
+        explanation: "For n boolean conditions, Multiple Condition Coverage requires 2^n test cases, while MC/DC requires only n + 1 test cases while proving independent effect."
+      },
+      {
+        q: "Which normalization stage eliminates partial functional dependencies on a composite primary key?",
+        options: [
+          "Second Normal Form (2NF)",
+          "First Normal Form (1NF)",
+          "Third Normal Form (3NF)",
+          "Boyce-Codd Normal Form (BCNF)"
+        ],
+        answer: 0,
+        explanation: "1NF removes repeating groups. 2NF requires 1NF AND that every non-prime attribute is fully functionally dependent on the entire primary key."
+      },
+      {
+        q: "What is the difference between a Test Driver and a Test Stub?",
+        options: [
+          "A Driver simulates the calling component above the unit; a Stub simulates a called sub-component below the unit.",
+          "A Driver simulates a database; a Stub simulates the operating system.",
+          "A Driver runs assertions; a Stub generates random inputs.",
+          "A Driver is used in black-box testing; a Stub is used in acceptance testing."
+        ],
+        answer: 0,
+        explanation: "In scaffolding: Test Drivers simulate higher-level callers to invoke the method under test; Test Stubs replace unfinished lower-level modules called by the unit."
+      },
+      {
+        q: "What does the 4 P's of Software Engineering stand for?",
+        options: [
+          "People, Product, Process, Project",
+          "Program, Protocol, Performance, Platform",
+          "Planning, Prototyping, Production, Polishing",
+          "Portability, Precision, Performance, Predictability"
+        ],
+        answer: 0,
+        explanation: "The foundational 4 P's covered in Chapter 1 are People, Product, Process, and Project."
+      },
+      {
+        q: "Why is a requirement stating 'The system shall respond instantaneously to user input' considered defective?",
+        options: [
+          "It is subjective and untestable; it must specify a measurable boundary such as 'within 200 ms'.",
+          "Because instantaneous means 0 seconds which violates physics.",
+          "Because non-functional requirements are not allowed in SRS documents.",
+          "Because only user requirements can specify response time."
+        ],
+        answer: 0,
+        explanation: "Requirements must be verifiable and testable. Subjective terms like 'instantaneously' or 'fast' must be rewritten into measurable engineering values."
+      },
+      {
+        q: "In an Activity Diagram, what is the role of a Fork bar?",
+        options: [
+          "It splits a single incoming control flow into two or more concurrent, parallel flows.",
+          "It merges two conditional branches based on a boolean guard.",
+          "It terminates all parallel threads of execution.",
+          "It marks the transition between swimlanes."
+        ],
+        answer: 0,
+        explanation: "A Fork bar synchronizes 1 incoming flow and splits it into multiple concurrent parallel flows. A Join bar does the reverse."
+      },
+      {
+        q: "In UML Class Diagrams, which symbol represents Protected visibility?",
+        options: [
+          "# (Hash)",
+          "- (Minus)",
+          "+ (Plus)",
+          "~ (Tilde)"
+        ],
+        answer: 0,
+        explanation: "+ is Public, - is Private, # is Protected, ~ is Package-private."
+      }
+    ];
+
+    let currentQuiz = [];
+    let userAnswers = {};
+
+    function renderRandomQuiz(count) {
+      userAnswers = {};
+      let shuffled = [...ALL_QUESTIONS].sort(() => 0.5 - Math.random());
+      currentQuiz = count >= shuffled.length ? shuffled : shuffled.slice(0, count);
+
+      const container = document.getElementById('quiz-container');
+      container.innerHTML = '';
+
+      currentQuiz.forEach((item, idx) => {
+        const qCard = document.createElement('div');
+        qCard.className = "p-5 border border-slate-200 rounded-xl bg-slate-50/50 hover:bg-white transition";
+
+        let optionsHtml = item.options.map((opt, optIdx) => `
+          <label class="flex items-start gap-3 p-2.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer text-xs mb-2 transition">
+            <input type="radio" name="q_${idx}" value="${optIdx}" onchange="selectQuizAnswer(${idx}, ${optIdx})" class="mt-0.5 text-indigo-600 focus:ring-indigo-500">
+            <span class="text-slate-700">${opt}</span>
+          </label>
+        `).join('');
+
+        qCard.innerHTML = `
+          <div class="flex items-start justify-between gap-4 mb-3">
+            <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-md">Question ${idx + 1}</span>
+          </div>
+          <p class="text-sm font-semibold text-slate-900 mb-4">${item.q}</p>
+          <div class="space-y-1">${optionsHtml}</div>
+          <div id="q_feedback_${idx}" class="mt-3 text-xs hidden"></div>
+        `;
+        container.appendChild(qCard);
+      });
+
+      updateScoreBadge();
+      lucide.createIcons();
+    }
+
+    function selectQuizAnswer(qIdx, optIdx) {
+      userAnswers[qIdx] = optIdx;
+      const q = currentQuiz[qIdx];
+      const fb = document.getElementById(`q_feedback_${qIdx}`);
+      fb.classList.remove('hidden');
+
+      if (optIdx === q.answer) {
+        fb.className = "mt-3 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium";
+        fb.innerHTML = `✅ <strong>Correct!</strong> ${q.explanation}`;
+      } else {
+        fb.className = "mt-3 p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium";
+        fb.innerHTML = `❌ <strong>Incorrect.</strong> Correct answer: <em>${q.options[q.answer]}</em><br><span class="text-slate-600 mt-1 block">${q.explanation}</span>`;
+      }
+      updateScoreBadge();
+    }
+
+    function updateScoreBadge() {
+      const answeredKeys = Object.keys(userAnswers);
+      const totalAnswered = answeredKeys.length;
+      let correctCount = 0;
+      answeredKeys.forEach(k => {
+        if (userAnswers[k] === currentQuiz[k].answer) correctCount++;
+      });
+      const pct = totalAnswered > 0 ? Math.round((correctCount / totalAnswered) * 100) : 0;
+      document.getElementById('score-counter').innerText = `Score: ${correctCount} / ${totalAnswered} (${pct}%)`;
+    }
+
+    // Populate Test Cases Matrix
+    function initTestCaseRows() {
+      const tbody = document.getElementById('test-case-rows');
+      tbody.innerHTML = '';
+      for (let i = 1; i <= 5; i++) {
+        tbody.innerHTML += `
+          <tr class="hover:bg-slate-50">
+            <td class="p-2 font-mono font-bold text-indigo-700 border-r border-slate-300">TC-0${i}</td>
+            <td class="p-2 border-r border-slate-300"><input id="tc-obj-${i}" class="w-full p-1 border rounded" placeholder="Objective (e.g., Boundary Valid Age)"></td>
+            <td class="p-2 border-r border-slate-300"><input id="tc-pre-${i}" class="w-full p-1 border rounded" placeholder="Pre-condition (e.g., User logged in)"></td>
+            <td class="p-2 border-r border-slate-300"><textarea id="tc-steps-${i}" class="w-full p-1 border rounded" rows="2" placeholder="Inputs (e.g., Age = 18)"></textarea></td>
+            <td class="p-2 border-r border-slate-300"><textarea id="tc-exp-${i}" class="w-full p-1 border rounded" rows="2" placeholder="Expected result (e.g., Account created)"></textarea></td>
+            <td class="p-2"><input id="tc-pass-${i}" class="w-full p-1 border rounded" placeholder="Criteria (e.g., HTTP 201 Created)"></td>
+          </tr>
+        `;
+      }
+    }
+
+    function fillExampleTestCases() {
+      const examples = [
+        { obj: "Valid Patient Registration (Equivalence: Valid)", pre: "User logged in as Receptionist", steps: "Enter name 'John Doe', DOB '1990-05-12', valid SSN, click Save", exp: "Patient profile saved to DB with unique PatientID; Success toast shown", pass: "PatientID generated & HTTP 201" },
+        { obj: "Boundary Value Analysis (Min Age Boundary)", pre: "Registration form open", steps: "Enter age = 0 (boundary minimum permitted age)", exp: "Form accepted, patient classified as 'Infant'", pass: "Profile created with Infant tag" },
+        { obj: "Negative Test (Invalid PIN Boundary)", pre: "ATM card inserted, PIN prompt displayed", steps: "Input 3-digit PIN '123' and press Enter", exp: "Input blocked or error message 'PIN must be 4 digits' displayed", pass: "Transaction denied, card retained or reprompted" },
+        { obj: "Concurrency / Double Withdrawal", pre: "Account balance = $100", steps: "Simultaneous ATM and mobile app withdrawals of $100 triggered within 10ms", exp: "First request completes; second request rejected for insufficient funds", pass: "Balance never becomes negative ($0 balance)" },
+        { obj: "Exception / Null Pointer Handling", pre: "Medical record service running", steps: "Submit prescription request with DoctorID = NULL", exp: "System rejects with 400 Bad Request; logs 'Missing Doctor Reference' safely", pass: "No unhandled stack trace or 500 crash" }
+      ];
+
+      examples.forEach((ex, idx) => {
+        let i = idx + 1;
+        document.getElementById(`tc-obj-${i}`).value = ex.obj;
+        document.getElementById(`tc-pre-${i}`).value = ex.pre;
+        document.getElementById(`tc-steps-${i}`).value = ex.steps;
+        document.getElementById(`tc-exp-${i}`).value = ex.exp;
+        document.getElementById(`tc-pass-${i}`).value = ex.pass;
+      });
+    }
+
+    // Initialize on page load
+    window.onload = function() {
+      renderRandomQuiz(10);
+      initTestCaseRows();
+      lucide.createIcons();
+    };
+  </script>
+</body>
+</html>
