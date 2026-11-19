@@ -1,5 +1,6 @@
-with open(r'c:\Users\jamal\Documents\~~~Software engineering\SWE-Exam-3\fonts\font-b64.txt', 'r') as f:
-    b64_font = f.read().strip()
+import base64
+with open(r'fonts/CATHSGBR.TTF', 'rb') as f:
+    b64_font = base64.b64encode(f.read()).decode('ascii')
 
 template = """<!DOCTYPE html>
 <html lang="en">
@@ -17,12 +18,11 @@ template = """<!DOCTYPE html>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Kalam:wght@300;400&family=Patrick+Hand&display=swap" rel="stylesheet">
   
   <style>
-    /* User Custom Font: Awesome.ttf (both local file and embedded base64 fallback) */
+    /* User Custom Font: Catholic School Girls BB (both local file and embedded base64 fallback) */
     @font-face {
-      font-family: 'Awesome';
-      src: url('./fonts/Awesome.ttf') format('truetype'),
-           url(data:font/truetype;charset=utf-8;base64,__B64_FONT__) format('truetype'),
-           url('./fonts/Awesome.otf') format('opentype');
+      font-family: 'Catholic School Girls BB';
+      src: url('./fonts/CATHSGBR.TTF') format('truetype'),
+           url(data:font/truetype;charset=utf-8;base64,__B64_FONT__) format('truetype');
       font-weight: normal;
       font-style: normal;
       font-display: swap;
@@ -30,7 +30,7 @@ template = """<!DOCTYPE html>
 
     /* Pure Handwritten Font, Completely Unbolded, Natural Pen Look */
     .font-pure-notes {
-      font-family: 'Awesome', 'Kalam', 'Patrick Hand', 'Caveat', cursive;
+      font-family: 'Catholic School Girls BB', 'CatholicSchoolGirls BB', 'Kalam', 'Patrick Hand', 'Caveat', cursive, sans-serif;
       font-weight: 400;
       color: #0f172a;
     }
@@ -561,9 +561,9 @@ template = """<!DOCTYPE html>
         <!-- Screen Top Bar -->
         <div class="flex flex-wrap justify-between items-center border-b border-slate-200 pb-4 mb-4 no-print gap-3">
           <div>
-            <h2 class="text-xl font-bold text-slate-900">Handwritten Cheat Sheet (Awesome Font)</h2>
+            <h2 class="text-xl font-bold text-slate-900">Handwritten Cheat Sheet (Catholic School Girls Font)</h2>
             <p class="text-xs text-slate-500 mt-0.5">
-              Custom installed Awesome.ttf font • Organic micro-variations • Pure unbolded text • Zero lines & zero headers
+              Custom installed Catholic School Girls BB font • Organic micro-variations • Pure unbolded text • Zero lines & zero headers
             </p>
           </div>
           <button onclick="window.print()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition text-xs sm:text-sm">
@@ -582,35 +582,35 @@ template = """<!DOCTYPE html>
           <div class="p-1 mb-4">
             
             <!-- Dense 3-Column Pure Handwritten Text Flow with Organic Spacing -->
-            <div class="grid grid-cols-3 gap-3 text-[8.4pt] leading-[1.16]">
+            <div class="grid grid-cols-3 gap-3 text-[8.8pt] leading-[1.18]">
               
               <!-- Column 1 -->
               <div>
                 
                 <div class="note-cluster-1">
                   sdlc and core fundamentals:<br>
-                  ~ sdlc life cycle stages: requirements -> design -> implementation -> testing -> deployment -> maintenance<br>
-                  ~ 4 p's of swe: people, product, process, project<br>
-                  ~ 4 attributes of good software: maintainability (system evolves with changing customer needs), dependability & security (reliability, safety, resilience), efficiency (optimal cpu, memory, response time), acceptability (understandable, usable, compatible)<br>
-                  ~ cost breakdown: roughly 60% development cost, 40% testing cost. for custom software systems, long-term evolution costs exceed original development costs<br>
-                  ~ acm/ieee professional ethics priority order: 1. public interest, 2. client and employer, 3. product, 4. judgment, 5. management, 6. profession, 7. colleagues, 8. self
+                  - sdlc life cycle stages: requirements -> design -> implementation -> testing -> deployment -> maintenance<br>
+                  - 4 p's of swe: people, product, process, project<br>
+                  - 4 attributes of good software: maintainability (system evolves with changing customer needs), dependability & security (reliability, safety, resilience), efficiency (optimal cpu, memory, response time), acceptability (understandable, usable, compatible)<br>
+                  - cost breakdown: roughly 60% development cost, 40% testing cost. for custom software systems, long-term evolution costs exceed original development costs<br>
+                  - acm/ieee professional ethics priority order: 1. public interest, 2. client and employer, 3. product, 4. judgment, 5. management, 6. profession, 7. colleagues, 8. self
                 </div>
 
                 <div class="note-cluster-2">
                   requirements engineering principles:<br>
-                  ~ functional requirements: statements of services system must provide, reactions to inputs, behavior in specific situations<br>
-                  ~ non-functional requirements nfr: constraints on services such as timing, security, standards, reliability, portability<br>
-                  ~ precision and testability rules: avoid vague subjective language. words like instantaneously, user-friendly, rapidly, little training must be rewritten into measurable engineering numbers (example: response time &lt;= 200 ms, operator training time &lt;= 2 hours, error frequency &lt;= 1 error per 8 hour shift)<br>
-                  ~ use case relationships: &laquo;include&raquo; represents a mandatory sub-routine where base use case is incomplete without it. &laquo;extend&raquo; represents an optional behavior triggered at an extension point where base use case is complete on its own
+                  - functional requirements: statements of services system must provide, reactions to inputs, behavior in specific situations<br>
+                  - non-functional requirements nfr: constraints on services such as timing, security, standards, reliability, portability<br>
+                  - precision and testability rules: avoid vague subjective language. words like instantaneously, user-friendly, rapidly, little training must be rewritten into measurable engineering numbers (example: response time &lt;= 200 ms, operator training time &lt;= 2 hours, error frequency &lt;= 1 error per 8 hour shift)<br>
+                  - use case relationships: <<include>> represents a mandatory sub-routine where base use case is incomplete without it. <<extend>> represents an optional behavior triggered at an extension point where base use case is complete on its own
                 </div>
 
                 <div class="note-cluster-3">
                   kruchten 4+1 view model:<br>
-                  ~ logical view: end-user functionality, domain abstractions, classes, entities. target audience: developers and users. primary concern: functional requirements<br>
-                  ~ process view: dynamic runtime behavior, concurrency, active processes, threads, synchronization, communication (rpc, message bus). target audience: developers. concern: performance and scalability<br>
-                  ~ development view: static organization of code artifacts, packages, modules, libraries, build hierarchy. target audience: developers. concern: software management, reuse, ease of build<br>
-                  ~ physical view: hardware topology, execution nodes, network interconnects, distribution across processors. target audience: system engineers and operations. concern: quality attributes<br>
-                  ~ +1 scenarios (use cases): unifies and links the other 4 views together, validating that architecture satisfies all user requirements
+                  - logical view: end-user functionality, domain abstractions, classes, entities. target audience: developers and users. primary concern: functional requirements<br>
+                  - process view: dynamic runtime behavior, concurrency, active processes, threads, synchronization, communication (rpc, message bus). target audience: developers. concern: performance and scalability<br>
+                  - development view: static organization of code artifacts, packages, modules, libraries, build hierarchy. target audience: developers. concern: software management, reuse, ease of build<br>
+                  - physical view: hardware topology, execution nodes, network interconnects, distribution across processors. target audience: system engineers and operations. concern: quality attributes<br>
+                  - +1 scenarios (use cases): unifies and links the other 4 views together, validating that architecture satisfies all user requirements
                 </div>
 
               </div>
@@ -620,22 +620,22 @@ template = """<!DOCTYPE html>
                 
                 <div class="note-cluster-4">
                   architectural design and patterns:<br>
-                  ~ ieee architecture definition: fundamental organization of a system embodied in its components, relationships to one another and environment, and principles governing its design and evolution<br>
-                  ~ partitioning process: 1. system structuring, 2. control modeling, 3. modular decomposition<br>
-                  ~ why plan architecture explicitly: stakeholder communication, system analysis before coding, large-scale subsystem reuse, security access boundary enforcement<br>
-                  ~ layered architecture: system organized into hierarchical layers where layer n only depends on layer n-1. pros: replaceable layers if interfaces held constant, changes isolated to adjacent layers, multi-layer security defense. cons: clean separation difficult in practice, performance overhead passing calls through multiple layers<br>
-                  ~ repository architecture: central passive data store accessed and updated by independent active subsystems. example: ide with central project information and code surrounded by java editor, python editor, model editor, code generator, report generator, design analyzer. pros: efficient sharing of large datasets, independent components. cons: single point of failure and communication bottleneck, data evolution is difficult<br>
-                  ~ client-server architecture: set of dedicated servers offering services across network to clients. example: film library with wide-bandwidth network connecting clients to catalogue server, video server, picture server, hypertext server. pros: distributed failure isolation, straightforward scaling. cons: network latency, each server is a failure point<br>
-                  ~ pipe and filter architecture: sequential stream transformations where output of one filter serves as input to next through pipe (unix pipes, customer invoicing: invoices -> process invoices -> identify payments -> issue receipts). pros: subsystem reuse, intuitive flow. cons: agreed data format overhead, parsing latency<br>
-                  ~ mvc: controller handles input, model maintains state and logic, view renders display output
+                  - ieee architecture definition: fundamental organization of a system embodied in its components, relationships to one another and environment, and principles governing its design and evolution<br>
+                  - partitioning process: 1. system structuring, 2. control modeling, 3. modular decomposition<br>
+                  - why plan architecture explicitly: stakeholder communication, system analysis before coding, large-scale subsystem reuse, security access boundary enforcement<br>
+                  - layered architecture: system organized into hierarchical layers where layer n only depends on layer n-1. pros: replaceable layers if interfaces held constant, changes isolated to adjacent layers, multi-layer security defense. cons: clean separation difficult in practice, performance overhead passing calls through multiple layers<br>
+                  - repository architecture: central passive data store accessed and updated by independent active subsystems. example: ide with central project information and code surrounded by java editor, python editor, model editor, code generator, report generator, design analyzer. pros: efficient sharing of large datasets, independent components. cons: single point of failure and communication bottleneck, data evolution is difficult<br>
+                  - client-server architecture: set of dedicated servers offering services across network to clients. example: film library with wide-bandwidth network connecting clients to catalogue server, video server, picture server, hypertext server. pros: distributed failure isolation, straightforward scaling. cons: network latency, each server is a failure point<br>
+                  - pipe and filter architecture: sequential stream transformations where output of one filter serves as input to next through pipe (unix pipes, customer invoicing: invoices -> process invoices -> identify payments -> issue receipts). pros: subsystem reuse, intuitive flow. cons: agreed data format overhead, parsing latency<br>
+                  - mvc: controller handles input, model maintains state and logic, view renders display output
                 </div>
 
                 <div class="note-cluster-5">
                   system control models:<br>
-                  ~ centralized call-return model: top-down subroutine call tree applicable to sequential systems (main -> subsystems -> methods)<br>
-                  ~ centralized manager model: single process controls stopping, starting, and coordination of concurrent processes (system controller coordinating sensors, actuators, computation, fault handler, user interface)<br>
-                  ~ decentralized broadcast model: events published to common message bus; registered subsystems handle events. effective for distributed systems, but subsystems do not know if or when event handled<br>
-                  ~ decentralized interrupt-driven model: hardware interrupt array mapped to specific memory locations; dedicated handlers watch address and coordinate response (temperature, radiation, fire alarm, fuel handlers). used for fast real-time response, but complex to program and hard to validate
+                  - centralized call-return model: top-down subroutine call tree applicable to sequential systems (main -> subsystems -> methods)<br>
+                  - centralized manager model: single process controls stopping, starting, and coordination of concurrent processes (system controller coordinating sensors, actuators, computation, fault handler, user interface)<br>
+                  - decentralized broadcast model: events published to common message bus; registered subsystems handle events. effective for distributed systems, but subsystems do not know if or when event handled<br>
+                  - decentralized interrupt-driven model: hardware interrupt array mapped to specific memory locations; dedicated handlers watch address and coordinate response (temperature, radiation, fire alarm, fuel handlers). used for fast real-time response, but complex to program and hard to validate
                 </div>
 
               </div>
@@ -645,24 +645,24 @@ template = """<!DOCTYPE html>
                 
                 <div class="note-cluster-6">
                   software testing fundamentals:<br>
-                  ~ verification: "are we building the product right?" (conformance to specification)<br>
-                  ~ validation: "are we building the right product?" (satisfies customer operational needs)<br>
-                  ~ dijkstra's axiom: "program testing can be used to show the presence of bugs, but never to show their absence."<br>
-                  ~ defect testing exposes flaws; validation testing demonstrates system meets user requirements<br>
-                  ~ v-model lifecycle pairings:<br>
-                  requirements engineering &lt;-&gt; acceptance testing (alpha and beta)<br>
-                  system specification &lt;-&gt; system testing<br>
-                  architectural design &lt;-&gt; subsystem and integration testing<br>
-                  detailed module design &lt;-&gt; unit testing
+                  - verification: "are we building the product right?" (conformance to specification)<br>
+                  - validation: "are we building the right product?" (satisfies customer operational needs)<br>
+                  - dijkstra's axiom: "program testing can be used to show the presence of bugs, but never to show their absence."<br>
+                  - defect testing exposes flaws; validation testing demonstrates system meets user requirements<br>
+                  - v-model lifecycle pairings:<br>
+                  requirements engineering <-> acceptance testing (alpha and beta)<br>
+                  system specification <-> system testing<br>
+                  architectural design <-> subsystem and integration testing<br>
+                  detailed module design <-> unit testing
                 </div>
 
                 <div class="note-cluster-1">
                   test scaffolding and junit:<br>
-                  ~ test driver: software module that invokes the unit under test and passes simulated inputs<br>
-                  ~ test stub / mock: dummy module called by the unit under test that returns synthetic values<br>
-                  ~ test harness: framework environment that automates execution of test suites (example: junit)<br>
-                  ~ test oracle: mechanism (specification, human, dual run) determining if actual output matches expected output<br>
-                  ~ junit annotations:<br>
+                  - test driver: software module that invokes the unit under test and passes simulated inputs<br>
+                  - test stub / mock: dummy module called by the unit under test that returns synthetic values<br>
+                  - test harness: framework environment that automates execution of test suites (example: junit)<br>
+                  - test oracle: mechanism (specification, human, dual run) determining if actual output matches expected output<br>
+                  - junit annotations:<br>
                   @Test: marks executable test method<br>
                   @Before / @BeforeEach: executes before every individual test method to initialize test fixture<br>
                   @After / @AfterEach: executes after every test method to tear down test fixture<br>
@@ -672,9 +672,9 @@ template = """<!DOCTYPE html>
 
                 <div class="note-cluster-2">
                   mentcare and atm architecture reference:<br>
-                  ~ mentcare 4-layer system: layer 1 is web browser; layer 2 is user communications (login, role checking, form & menu manager, data validation); layer 3 is information retrieval and modification (security management, patient info manager, data import/export, report generation); layer 4 is transaction management and patient database<br>
-                  ~ atm 4-tier pipeline: i/o processing &lt;-&gt; application logic &lt;-&gt; transaction manager &lt;-&gt; database<br>
-                  ~ atm 3-phase flow: input (get account id, validate card, select service) -> process (query account, update account) -> output (print details, return card, dispense cash)
+                  - mentcare 4-layer system: layer 1 is web browser; layer 2 is user communications (login, role checking, form & menu manager, data validation); layer 3 is information retrieval and modification (security management, patient info manager, data import/export, report generation); layer 4 is transaction management and patient database<br>
+                  - atm 4-tier pipeline: i/o processing <-> application logic <-> transaction manager <-> database<br>
+                  - atm 3-phase flow: input (get account id, validate card, select service) -> process (query account, update account) -> output (print details, return card, dispense cash)
                 </div>
 
               </div>
@@ -691,45 +691,45 @@ template = """<!DOCTYPE html>
           <div class="p-1">
             
             <!-- Dense 3-Column Pure Handwritten Text Flow with Organic Spacing -->
-            <div class="grid grid-cols-3 gap-3 text-[8.4pt] leading-[1.16]">
+            <div class="grid grid-cols-3 gap-3 text-[8.8pt] leading-[1.18]">
               
               <!-- Column 1: UML Diagrams -->
               <div>
                 
                 <div class="note-cluster-3">
                   uml class diagram syntax and rules:<br>
-                  ~ strict 3-compartment rule: every class box must show all 3 compartments: 1. class name, 2. attributes, 3. operations. even if attributes or operations are empty, draw the 3rd compartment box line<br>
-                  ~ class discovery: nouns become classes, noun phrases become attributes, verbs become operations<br>
-                  ~ abstract class name: render in italic font style or tag with &laquo;abstract&raquo;<br>
-                  ~ visibility symbols: + is public, - is private, # is protected, ~ is package-private<br>
-                  ~ attribute format: visibility name : type = defaultValue<br>
-                  ~ operation format: visibility name(parameter : type) : returnType<br>
-                  ~ association: solid line without arrows or with open navigation arrow; multiplicity placed at both ends (1, 0..1, 1..*, *)<br>
-                  ~ aggregation (&lt;&gt;--): open hollow diamond at whole end. represents weak containment ("has-a"). part can exist independently of whole. doctor outlives department (department &lt;&gt;-- doctor)<br>
-                  ~ composition (&lt;*&gt;--): solid filled diamond at whole end. represents strong containment ("part-of"). part lifetime bound to whole; destroyed when whole is deleted. department &lt;*&gt;-- labtest, customer &lt;*&gt;-- address<br>
-                  ~ generalization (--|&gt;): solid line with hollow triangular arrowhead pointing to parent class. represents inheritance ("is-a"). medicalrecord --|&gt; surgicalrecord, bankaccount --|&gt; checkingaccount<br>
-                  ~ realization (..|&gt;): dashed line with hollow triangular arrowhead pointing to interface. savingsaccount ..|&gt; interestbearing<br>
-                  ~ dependency (..&gt;): dashed line with open arrow ("uses")
+                  - strict 3-compartment rule: every class box must show all 3 compartments: 1. class name, 2. attributes, 3. operations. even if attributes or operations are empty, draw the 3rd compartment box line<br>
+                  - class discovery: nouns become classes, noun phrases become attributes, verbs become operations<br>
+                  - abstract class name: render in italic font style or tag with <<abstract>><br>
+                  - visibility symbols: + is public, - is private, # is protected, - is package-private<br>
+                  - attribute format: visibility name : type = default-val<br>
+                  - operation format: visibility name(parameter : type) : returnType<br>
+                  - association: solid line without arrows or with open navigation arrow; multiplicity placed at both ends (1, 0..1, 1..*, *)<br>
+                  - aggregation (&lt;&gt;--): open hollow diamond at whole end. represents weak containment ("has-a"). part can exist independently of whole. doctor outlives department (department &lt;&gt;-- doctor)<br>
+                  - composition (&lt;*&gt;--): solid filled diamond at whole end. represents strong containment ("part-of"). part lifetime bound to whole; destroyed when whole is deleted. department &lt;*&gt;-- labtest, customer &lt;*&gt;-- address<br>
+                  - generalization (--/->): solid line with hollow triangular arrowhead pointing to parent class. represents inheritance ("is-a"). medicalrecord --/-> surgicalrecord, bankaccount --/-> checkingaccount<br>
+                  - realization (../->): dashed line with hollow triangular arrowhead pointing to interface. savingsaccount ../-> interestbearing<br>
+                  - dependency (..&gt;): dashed line with open arrow ("uses")
                 </div>
 
                 <div class="note-cluster-4">
                   adapter pattern class diagram:<br>
-                  ~ client: calls methods on the target interface<br>
-                  ~ target: abstract interface expected by client<br>
-                  ~ adapter: implements target interface (..|&gt; target) and holds a private reference to the adaptee instance (adapter calls adaptee.specificRequest())<br>
-                  ~ adaptee: existing legacy class with incompatible interface that client cannot call directly
+                  - client: calls methods on the target interface<br>
+                  - target: abstract interface expected by client<br>
+                  - adapter: implements target interface (../-> target) and holds a private reference to the adaptee instance (adapter calls adaptee.specificRequest())<br>
+                  - adaptee: existing legacy class with incompatible interface that client cannot call directly
                 </div>
 
                 <div class="note-cluster-5">
                   sequence diagram rules:<br>
-                  ~ lifeline: vertical dashed line extending downward from object box<br>
-                  ~ activation bar: thin vertical rectangle on lifeline indicating execution control<br>
-                  ~ synchronous call: solid line with filled arrowhead (&mdash;&mdash;&blacktriangleright;); sender halts until reply<br>
-                  ~ asynchronous call: solid line with stick open arrowhead (&mdash;&mdash;&gt;); sender continues without waiting<br>
-                  ~ reply / return message: dashed line with stick open arrow (&lt;- - -)<br>
-                  ~ object creation: message labeled &laquo;create&raquo; points directly to object box<br>
-                  ~ object destruction: an x placed at the base of an activation lifeline<br>
-                  ~ combined fragments: alt (mutually exclusive if-then-else separated by dashed line with [guard]), opt (optional conditional execution if only), loop [min, max] (repetition over elements), par (concurrent parallel sub-sequences)
+                  - lifeline: vertical dashed line extending downward from object box<br>
+                  - activation bar: thin vertical rectangle on lifeline indicating execution control<br>
+                  - synchronous call: solid line with filled arrowhead (----->); sender halts until reply<br>
+                  - asynchronous call: solid line with stick open arrowhead (&mdash;&mdash;&gt;); sender continues without waiting<br>
+                  - reply / return message: dashed line with stick open arrow (<---)<br>
+                  - object creation: message labeled <<create>> points directly to object box<br>
+                  - object destruction: an x placed at the base of an activation lifeline<br>
+                  - combined fragments: alt (mutually exclusive if-then-else separated by dashed line with [guard]), opt (optional conditional execution if only), loop [min, max] (repetition over elements), par (concurrent parallel sub-sequences)
                 </div>
 
               </div>
@@ -739,22 +739,22 @@ template = """<!DOCTYPE html>
                 
                 <div class="note-cluster-6">
                   activity and statechart diagrams:<br>
-                  ~ activity diagram elements: initial node is solid filled circle; activity state is rounded rectangle; decision and merge are diamond symbols with [guard]; fork bar is thick black synchronization bar splitting 1 incoming flow into 2 or more concurrent parallel flows; join bar is thick black synchronization bar waiting for multiple concurrent flows to finish before 1 outgoing flow proceeds; activity final node is bullseye (solid circle inside outer circle); swimlanes (partitions) indicate which role or subsystem performs each activity<br>
-                  ~ insulin pump activity flow: sensor measures blood sugar -> fork bar splits into: (1) calculate required insulin dosage, and (2) log sensor reading -> join bar synchronizes both -> decision diamond [sugar &gt; target] -> inject insulin<br>
-                  ~ state machine diagram: states shown as rounded rectangles (waiting, half power, full power, operation, disabled); initial state is solid black circle; final state is bullseye<br>
-                  ~ transition label syntax: event [guard] / action<br>
-                  ~ microwave example: start [door_closed] / run_generator(300w); door_open / stop_generator(), turn_lamp_on() -> state disabled
+                  - activity diagram elements: initial node is solid filled circle; activity state is rounded rectangle; decision and merge are diamond symbols with [guard]; fork bar is thick black synchronization bar splitting 1 incoming flow into 2 or more concurrent parallel flows; join bar is thick black synchronization bar waiting for multiple concurrent flows to finish before 1 outgoing flow proceeds; activity final node is bullseye (solid circle inside outer circle); swimlanes (partitions) indicate which role or subsystem performs each activity<br>
+                  - insulin pump activity flow: sensor measures blood sugar -> fork bar splits into: (1) calculate required insulin dosage, and (2) log sensor reading -> join bar synchronizes both -> decision diamond [sugar &gt; target] -> inject insulin<br>
+                  - state machine diagram: states shown as rounded rectangles (waiting, half power, full power, operation, disabled); initial state is solid black circle; final state is bullseye<br>
+                  - transition label syntax: event [guard] / action<br>
+                  - microwave example: start [door-closed] / run-generator(300w); door-open / stop-generator(), turn-lamp-on() -> state disabled
                 </div>
 
                 <div class="note-cluster-1">
                   white-box structural testing and coverage:<br>
-                  ~ statement coverage (c0): percentage of executable statements traversed by test cases (statements executed / total statements * 100%). weakest coverage metric! cannot detect missing false branches in single if statements<br>
-                  ~ branch coverage (c1): requires every decision branch (both true and false edges in control flow graph) to be traversed at least once<br>
-                  ~ subsumption rule: branch coverage subsumes statement coverage (100% branch implies 100% statement, but not vice-versa)<br>
-                  ~ condition coverage: requires each individual boolean sub-condition in composite expression to evaluate to true and false at least once<br>
-                  ~ mc/dc (modified condition/decision coverage): required by do-178c avionics safety standard. each condition must be shown to independently affect the overall decision outcome while holding all other conditions fixed. for n conditions, requires n + 1 test cases (compared to 2^n for multiple condition coverage)<br>
-                  ~ path coverage: every possible execution path from entry to exit tested. often infinite or intractable due to loops<br>
-                  ~ loop boundary coverage: test 0 iterations, 1 iteration, typical iterations, max-1 iterations, max iterations
+                  - statement coverage (c0): percentage of executable statements traversed by test cases (statements executed / total statements * 100%). weakest coverage metric! cannot detect missing false branches in single if statements<br>
+                  - branch coverage (c1): requires every decision branch (both true and false edges in control flow graph) to be traversed at least once<br>
+                  - subsumption rule: branch coverage subsumes statement coverage (100% branch implies 100% statement, but not vice-versa)<br>
+                  - condition coverage: requires each individual boolean sub-condition in composite expression to evaluate to true and false at least once<br>
+                  - mc/dc (modified condition/decision coverage): required by do-178c avionics safety standard. each condition must be shown to independently affect the overall decision outcome while holding all other conditions fixed. for n conditions, requires n + 1 test cases (compared to 2**n for multiple condition coverage)<br>
+                  - path coverage: every possible execution path from entry to exit tested. often infinite or intractable due to loops<br>
+                  - loop boundary coverage: test 0 iterations, 1 iteration, typical iterations, max-1 iterations, max iterations
                 </div>
 
               </div>
@@ -764,29 +764,29 @@ template = """<!DOCTYPE html>
                 
                 <div class="note-cluster-2">
                   black-box testing (ep & bva):<br>
-                  ~ equivalence partitioning (ep): divide input domain into valid and invalid equivalence classes; select 1 representative test input per class<br>
-                  ~ boundary value analysis (bva): test values immediately at, below, and above boundary edges: min-1, min, min+1, nominal, max-1, max, max+1<br>
-                  ~ pin [0000..9999]: valid class = 1234; invalid classes = negative numbers (-1), numbers &gt; 9999 (10000), non-digits ("abcd"), 3 digits, 5 digits
+                  - equivalence partitioning (ep): divide input domain into valid and invalid equivalence classes; select 1 representative test input per class<br>
+                  - boundary value analysis (bva): test values immediately at, below, and above boundary edges: min-1, min, min+1, nominal, max-1, max, max+1<br>
+                  - pin [0000..9999]: valid class = 1234; invalid classes = negative numbers (-1), numbers &gt; 9999 (10000), non-digits ("abcd"), 3 digits, 5 digits
                 </div>
 
                 <div class="note-cluster-3">
                   5 test cases structure and rubric:<br>
                   columns: tc id, objective, pre-conditions, test steps/inputs, expected result, pass/fail criteria<br>
-                  ~ tc-01 (valid ep registration): pre-condition: user logged in; inputs: valid name, dob, ssn; expected result: patient record created in db, unique id assigned, http 201 created toast displayed; criteria: record persists in db<br>
-                  ~ tc-02 (min boundary value): inputs: age = 0 (minimum valid age); expected result: form accepted, classified as infant; criteria: profile created with infant tag<br>
-                  ~ tc-03 (negative boundary value): inputs: age = -1; expected result: submission blocked, error message "age must be &gt;= 0" displayed; criteria: no db write, form retains input<br>
-                  ~ tc-04 (concurrency / double withdrawal): pre-condition: balance = $100; inputs: simultaneous atm and mobile app withdrawals of $100 within 10 ms; expected result: 1st transaction succeeds, 2nd rejected for insufficient funds; criteria: balance never negative ($0 balance)<br>
-                  ~ tc-05 (exception / null pointer): inputs: doctorid = null on prescription request; expected result: system rejects with http 400 bad request, logs missing doctor reference safely; criteria: no unhandled 500 crash or stack trace shown
+                  - tc-01 (valid ep registration): pre-condition: user logged in; inputs: valid name, dob, ssn; expected result: patient record created in db, unique id assigned, http 201 created toast displayed; criteria: record persists in db<br>
+                  - tc-02 (min boundary value): inputs: age = 0 (minimum valid age); expected result: form accepted, classified as infant; criteria: profile created with infant tag<br>
+                  - tc-03 (negative boundary value): inputs: age = -1; expected result: submission blocked, error message "age must be &gt;= 0" displayed; criteria: no db write, form retains input<br>
+                  - tc-04 (concurrency / double withdrawal): pre-condition: balance = $100; inputs: simultaneous atm and mobile app withdrawals of $100 within 10 ms; expected result: 1st transaction succeeds, 2nd rejected for insufficient funds; criteria: balance never negative ($0 balance)<br>
+                  - tc-05 (exception / null pointer): inputs: doctorid = null on prescription request; expected result: system rejects with http 400 bad request, logs missing doctor reference safely; criteria: no unhandled 500 crash or stack trace shown
                 </div>
 
                 <div class="note-cluster-4">
                   relational database and normalization:<br>
-                  ~ entity integrity: primary key (pk) column cannot be null and must be unique<br>
-                  ~ referential integrity: foreign key (fk) column must match an existing valid pk value in parent table or be null<br>
-                  ~ 1nf (first normal form): all column values must be atomic (no repeating groups, multi-valued attributes, or composite values)<br>
-                  ~ 2nf (second normal form): table is in 1nf and every non-key attribute is fully functionally dependent on the entire composite primary key (no partial key dependencies)<br>
-                  ~ 3nf (third normal form): table is in 2nf and no non-key attribute depends on another non-key attribute (no transitive dependencies)<br>
-                  ~ canonical rule: "every attribute must depend on the key, the whole key, and nothing but the key."
+                  - entity integrity: primary key (pk) column cannot be null and must be unique<br>
+                  - referential integrity: foreign key (fk) column must match an existing valid pk value in parent table or be null<br>
+                  - 1nf (first normal form): all column values must be atomic (no repeating groups, multi-valued attributes, or composite values)<br>
+                  - 2nf (second normal form): table is in 1nf and every non-key attribute is fully functionally dependent on the entire composite primary key (no partial key dependencies)<br>
+                  - 3nf (third normal form): table is in 2nf and no non-key attribute depends on another non-key attribute (no transitive dependencies)<br>
+                  - canonical rule: "every attribute must depend on the key, the whole key, and nothing but the key."
                 </div>
 
               </div>
