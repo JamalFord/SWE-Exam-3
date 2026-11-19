@@ -31,53 +31,46 @@
       color: #0f172a;
     }
 
-    /* 3-Column Note Sheet (Clean Columns, Only Sentences Crooked) */
-    .hw-columns {
+    /* Unstructured Organic Cram Sheet: Non-linear, Asymmetric Streams */
+    .hw-stream-side1 {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1.08fr 0.94fr 1.02fr;
       column-gap: 13px;
-      font-size: 8.4pt;
-      line-height: 1.15;
+      font-size: 8.3pt;
+      line-height: 1.14;
+    }
+    .hw-stream-side2 {
+      display: grid;
+      grid-template-columns: 0.96fr 1.06fr 1.02fr;
+      column-gap: 12px;
+      font-size: 8.3pt;
+      line-height: 1.14;
     }
 
-    /* Topic Headings (Clear Section Anchor) */
-    .hw-topic {
+    /* Organic Handwritten Blobs (no bullets, no rigid outlines, natural flow) */
+    .hw-blob {
       display: block;
-      margin-top: 7px;
-      margin-bottom: 2px;
-      line-height: 1.15;
+      text-align: left;
     }
-    .hw-topic:first-child { margin-top: 0; }
-    .hw-t-1 { margin-left: -2px; transform: rotate(-0.4deg); transform-origin: left center; }
-    .hw-t-2 { margin-left: 3px;  transform: rotate(0.45deg); transform-origin: left center; }
-    .hw-t-3 { margin-left: -1px; transform: rotate(-0.35deg); transform-origin: left center; }
-    .hw-t-4 { margin-left: 4px;  transform: rotate(0.5deg); transform-origin: left center; }
-    .hw-t-5 { margin-left: -3px; transform: rotate(-0.45deg); transform-origin: left center; }
-    .hw-t-6 { margin-left: 2px;  transform: rotate(0.4deg); transform-origin: left center; }
-    .hw-t-7 { margin-left: -2px; transform: rotate(-0.5deg); transform-origin: left center; }
-    .hw-t-8 { margin-left: 3px;  transform: rotate(0.55deg); transform-origin: left center; }
 
-    /* 16 Individual Crooked, Uneven Sentence Classes (Noticeably Slanted Line-by-Line) */
-    .hw-sentence {
-      display: block;
-      transform-origin: left center;
-    }
-    .hw-s-1  { transform: rotate(-0.75deg); margin-left: -2px; margin-bottom: 2.2px; line-height: 1.14; letter-spacing: -0.05px; }
-    .hw-s-2  { transform: rotate(0.95deg);  margin-left: 5px;  margin-bottom: 2.0px; line-height: 1.18; letter-spacing: 0.10px; }
-    .hw-s-3  { transform: rotate(-0.55deg); margin-left: 1px;  margin-bottom: 3.2px; line-height: 1.12; letter-spacing: -0.08px; }
-    .hw-s-4  { transform: rotate(1.15deg);  margin-left: -4px; margin-bottom: 2.2px; line-height: 1.16; letter-spacing: 0.05px; }
-    .hw-s-5  { transform: rotate(-0.90deg); margin-left: 4px;  margin-bottom: 3.0px; line-height: 1.13; letter-spacing: -0.12px; }
-    .hw-s-6  { transform: rotate(0.65deg);  margin-left: 0px;  margin-bottom: 2.0px; line-height: 1.17; letter-spacing: 0.08px; }
-    .hw-s-7  { transform: rotate(-1.10deg); margin-left: 3px;  margin-bottom: 3.5px; line-height: 1.11; letter-spacing: -0.06px; }
-    .hw-s-8  { transform: rotate(0.80deg);  margin-left: -3px; margin-bottom: 2.5px; line-height: 1.15; letter-spacing: 0.12px; }
-    .hw-s-9  { transform: rotate(-0.65deg); margin-left: 6px;  margin-bottom: 2.2px; line-height: 1.14; letter-spacing: -0.10px; }
-    .hw-s-10 { transform: rotate(1.25deg);  margin-left: -2px; margin-bottom: 3.0px; line-height: 1.19; letter-spacing: 0.04px; }
-    .hw-s-11 { transform: rotate(-0.80deg); margin-left: 2px;  margin-bottom: 2.0px; line-height: 1.12; letter-spacing: -0.08px; }
-    .hw-s-12 { transform: rotate(0.70deg);  margin-left: -4px; margin-bottom: 3.5px; line-height: 1.16; letter-spacing: 0.10px; }
-    .hw-s-13 { transform: rotate(-1.00deg); margin-left: 5px;  margin-bottom: 2.2px; line-height: 1.13; letter-spacing: -0.14px; }
-    .hw-s-14 { transform: rotate(0.60deg);  margin-left: 1px;  margin-bottom: 2.8px; line-height: 1.17; letter-spacing: 0.06px; }
-    .hw-s-15 { transform: rotate(-0.70deg); margin-left: -3px; margin-bottom: 3.2px; line-height: 1.15; letter-spacing: -0.07px; }
-    .hw-s-16 { transform: rotate(1.05deg);  margin-left: 4px;  margin-bottom: 2.0px; line-height: 1.11; letter-spacing: 0.12px; }
+    /* Organic Angle & Offset Variations (Noticeable handwritten tilts & wandering margins) */
+    .hw-b-1  { transform: rotate(-1.2deg); transform-origin: top left; margin-left: -5px; font-size: 8.5pt; line-height: 1.16; letter-spacing: -0.05px; margin-bottom: 12px; }
+    .hw-b-2  { transform: rotate(1.4deg);  transform-origin: top left; margin-left: 9px;  font-size: 8.1pt; line-height: 1.12; letter-spacing: -0.15px; margin-bottom: 14px; }
+    .hw-b-3  { transform: rotate(-0.8deg); transform-origin: top left; margin-left: -2px; font-size: 8.4pt; line-height: 1.15; letter-spacing: 0.05px;  margin-bottom: 11px; }
+    .hw-b-4  { transform: rotate(1.1deg);  transform-origin: top left; margin-left: 6px;  font-size: 8.2pt; line-height: 1.13; letter-spacing: -0.10px; margin-bottom: 15px; }
+    .hw-b-5  { transform: rotate(-1.4deg); transform-origin: top left; margin-left: -4px; font-size: 8.0pt; line-height: 1.11; letter-spacing: -0.18px; margin-bottom: 10px; }
+    .hw-b-6  { transform: rotate(0.95deg); transform-origin: top left; margin-left: 7px;  font-size: 8.4pt; line-height: 1.14; letter-spacing: 0.08px;  margin-bottom: 13px; }
+    .hw-b-7  { transform: rotate(-1.1deg); transform-origin: top left; margin-left: -3px; font-size: 8.1pt; line-height: 1.12; letter-spacing: -0.12px; margin-bottom: 11px; }
+    .hw-b-8  { transform: rotate(1.5deg);  transform-origin: top left; margin-left: 8px;  font-size: 8.3pt; line-height: 1.15; letter-spacing: -0.05px; margin-bottom: 12px; }
+
+    .hw-b-9  { transform: rotate(1.3deg);  transform-origin: top left; margin-left: 7px;  font-size: 8.4pt; line-height: 1.15; letter-spacing: -0.05px; margin-bottom: 12px; }
+    .hw-b-10 { transform: rotate(-1.3deg); transform-origin: top left; margin-left: -5px; font-size: 8.1pt; line-height: 1.11; letter-spacing: -0.15px; margin-bottom: 13px; }
+    .hw-b-11 { transform: rotate(0.9deg);  transform-origin: top left; margin-left: 6px;  font-size: 8.3pt; line-height: 1.14; letter-spacing: 0.05px;  margin-bottom: 11px; }
+    .hw-b-12 { transform: rotate(-1.5deg); transform-origin: top left; margin-left: -3px; font-size: 8.0pt; line-height: 1.10; letter-spacing: -0.20px; margin-bottom: 14px; }
+    .hw-b-13 { transform: rotate(1.2deg);  transform-origin: top left; margin-left: 9px;  font-size: 8.3pt; line-height: 1.13; letter-spacing: -0.08px; margin-bottom: 12px; }
+    .hw-b-14 { transform: rotate(-1.0deg); transform-origin: top left; margin-left: -2px; font-size: 8.2pt; line-height: 1.12; letter-spacing: 0.04px;  margin-bottom: 11px; }
+    .hw-b-15 { transform: rotate(1.4deg);  transform-origin: top left; margin-left: 5px;  font-size: 8.1pt; line-height: 1.11; letter-spacing: -0.14px; margin-bottom: 13px; }
+    .hw-b-16 { transform: rotate(-1.2deg); transform-origin: top left; margin-left: -4px; font-size: 8.4pt; line-height: 1.14; letter-spacing: -0.06px; margin-bottom: 12px; }
 
     /* Print Specific Rules: Strict 2-Page Double Sided Sheet */
     @media print {
@@ -582,75 +575,27 @@
           <!-- ============================== -->
           <div class="p-1 mb-4">
             
-            <!-- 3-Column Bulleted Sheet with Individual Crooked & Uneven Sentences -->
-            <div class="hw-columns">
+            <!-- Dense Organic Unstructured Cram Streams -->
+            <div class="hw-stream-side1">
               
               <!-- Column 1 -->
               <div>
-                <div class="hw-topic hw-t-1">sdlc and core fundamentals:</div>
-                <div class="hw-sentence hw-s-1">- sdlc life cycle stages: requirements -> design -> implementation -> testing -> deployment -> maintenance</div>
-                <div class="hw-sentence hw-s-2">- 4 p's of swe: people, product, process, project</div>
-                <div class="hw-sentence hw-s-3">- 4 attributes of good software: maintainability (system evolves with changing customer needs), dependability & security (reliability, safety, resilience), efficiency (optimal cpu, memory, response time), acceptability (understandable, usable, compatible)</div>
-                <div class="hw-sentence hw-s-4">- cost breakdown: roughly 60% development cost, 40% testing cost. for custom software systems, long-term evolution costs exceed original development costs</div>
-                <div class="hw-sentence hw-s-5">- acm/ieee professional ethics priority order: 1. public interest, 2. client and employer, 3. product, 4. judgment, 5. management, 6. profession, 7. colleagues, 8. self</div>
-                <div class="hw-topic hw-t-2">requirements engineering principles:</div>
-                <div class="hw-sentence hw-s-6">- functional requirements: statements of services system must provide, reactions to inputs, behavior in specific situations</div>
-                <div class="hw-sentence hw-s-7">- non-functional requirements nfr: constraints on services such as timing, security, standards, reliability, portability</div>
-                <div class="hw-sentence hw-s-8">- precision and testability rules: avoid vague subjective language. words like instantaneously, user-friendly, rapidly, little training must be rewritten into measurable engineering numbers (example: response time <= 200 ms, operator training time <= 2 hours, error frequency <= 1 error per 8 hour shift)</div>
-                <div class="hw-sentence hw-s-9">- use case relationships: <<include>> represents a mandatory sub-routine where base use case is incomplete without it. <<extend>> represents an optional behavior triggered at an extension point where base use case is complete on its own</div>
-                <div class="hw-topic hw-t-3">kruchten 4+1 view model:</div>
-                <div class="hw-sentence hw-s-10">- logical view: end-user functionality, domain abstractions, classes, entities. target audience: developers and users. primary concern: functional requirements</div>
-                <div class="hw-sentence hw-s-11">- process view: dynamic runtime behavior, concurrency, active processes, threads, synchronization, communication (rpc, message bus). target audience: developers. concern: performance and scalability</div>
-                <div class="hw-sentence hw-s-12">- development view: static organization of code artifacts, packages, modules, libraries, build hierarchy. target audience: developers. concern: software management, reuse, ease of build</div>
-                <div class="hw-sentence hw-s-13">- physical view: hardware topology, execution nodes, network interconnects, distribution across processors. target audience: system engineers and operations. concern: quality attributes</div>
-                <div class="hw-sentence hw-s-14">- +1 scenarios (use cases): unifies and links the other 4 views together, validating that architecture satisfies all user requirements</div>
+                <div class="hw-blob hw-b-1">sdlc & fundamentals: reqs -> design -> code -> test -> deploy -> maint. 4 p's: people, product, process, project. 4 attributes of good software: maintainability (system evolves w/ customer needs), dependability & security (reliable, safe, resilient), efficiency (optimal cpu, memory, response time), acceptability (understandable, usable, compatible). cost breakdown: roughly 60% dev cost, 40% testing cost; for custom software, long-term evolution costs exceed original development! acm/ieee ethics priority: 1.public interest 2.client & employer 3.product 4.judgment 5.management 6.profession 7.colleagues 8.self.</div>
+                <div class="hw-blob hw-b-2">requirements & use cases: functional = services system must provide & reactions to inputs. non-functional (nfr) = constraints on services (timing, security, standards, reliability, portability). testability rule: avoid subjective vague words (instantaneously, user-friendly, rapidly, little training) -> must rewrite into measurable numbers (e.g. response <= 200 ms, training time <= 2 hours, errors <= 1 per 8 hour shift). use cases: <<include>> = mandatory subroutine (base incomplete without it); <<extend>> = optional behavior triggered at extension point (base is complete on its own).</div>
+                <div class="hw-blob hw-b-3">kruchten 4+1 view model: logical view = end-user functionality, domain abstractions, classes, entities (audience: dev/user, concern: functional reqs). process view = dynamic runtime behavior, concurrency, processes, threads, synchronization, rpc/message bus (audience: dev, concern: performance & scalability). development view = static organization of code, packages, modules, libraries, build hierarchy (audience: dev, concern: reuse & ease of build). physical view = hardware topology, execution nodes, network interconnects, distribution across processors (audience: sys eng/ops, concern: quality attributes). +1 scenarios (use cases) = unifies and links the other 4 views together, validating architecture against all requirements.</div>
               </div>
 
               <!-- Column 2 -->
               <div>
-                <div class="hw-topic hw-t-4">architectural design and patterns:</div>
-                <div class="hw-sentence hw-s-15">- ieee architecture definition: fundamental organization of a system embodied in its components, relationships to one another and environment, and principles governing its design and evolution</div>
-                <div class="hw-sentence hw-s-16">- partitioning process: 1. system structuring, 2. control modeling, 3. modular decomposition</div>
-                <div class="hw-sentence hw-s-1">- why plan architecture explicitly: stakeholder communication, system analysis before coding, large-scale subsystem reuse, security access boundary enforcement</div>
-                <div class="hw-sentence hw-s-2">- layered architecture: system organized into hierarchical layers where layer n only depends on layer n-1. pros: replaceable layers if interfaces held constant, changes isolated to adjacent layers, multi-layer security defense. cons: clean separation difficult in practice, performance overhead passing calls through multiple layers</div>
-                <div class="hw-sentence hw-s-3">- repository architecture: central passive data store accessed and updated by independent active subsystems. example: ide with central project information and code surrounded by java editor, python editor, model editor, code generator, report generator, design analyzer. pros: efficient sharing of large datasets, independent components. cons: single point of failure and communication bottleneck, data evolution is difficult</div>
-                <div class="hw-sentence hw-s-4">- client-server architecture: set of dedicated servers offering services across network to clients. example: film library with wide-bandwidth network connecting clients to catalogue server, video server, picture server, hypertext server. pros: distributed failure isolation, straightforward scaling. cons: network latency, each server is a failure point</div>
-                <div class="hw-sentence hw-s-5">- pipe and filter architecture: sequential stream transformations where output of one filter serves as input to next through pipe (unix pipes, customer invoicing: invoices -> process invoices -> identify payments -> issue receipts). pros: subsystem reuse, intuitive flow. cons: agreed data format overhead, parsing latency</div>
-                <div class="hw-sentence hw-s-6">- mvc: controller handles input, model maintains state and logic, view renders display output</div>
-                <div class="hw-topic hw-t-5">system control models:</div>
-                <div class="hw-sentence hw-s-7">- centralized call-return model: top-down subroutine call tree applicable to sequential systems (main -> subsystems -> methods)</div>
-                <div class="hw-sentence hw-s-8">- centralized manager model: single process controls stopping, starting, and coordination of concurrent processes (system controller coordinating sensors, actuators, computation, fault handler, user interface)</div>
-                <div class="hw-sentence hw-s-9">- decentralized broadcast model: events published to common message bus; registered subsystems handle events. effective for distributed systems, but subsystems do not know if or when event handled</div>
-                <div class="hw-sentence hw-s-10">- decentralized interrupt-driven model: hardware interrupt array mapped to specific memory locations; dedicated handlers watch address and coordinate response (temperature, radiation, fire alarm, fuel handlers). used for fast real-time response, but complex to program and hard to validate</div>
+                <div class="hw-blob hw-b-4">architecture & patterns: ieee definition: fundamental organization of a system embodied in its components, relationships to one another and environment, and principles governing design and evolution. partitioning: 1.system structuring -> 2.control modeling -> 3.modular decomposition. why plan: stakeholder communication, system analysis before code, large-scale reuse, security access boundary enforcement. layered architecture: hierarchical layers where layer n only depends on n-1; pros: replaceable layers if interfaces constant, changes localized to adjacent layers, multi-layer security defense; cons: clean separation hard in practice, performance overhead passing calls through layers. repository: central passive data store accessed and updated by independent active subsystems (example: ide w/ project info and code surrounded by java editor, python editor, code gen, report gen); pros: efficient sharing of large data, independent components; cons: single point of failure and bottleneck, data evolution difficult. client-server: dedicated servers offering services across network to clients (film library: catalogue server, video server, picture server); pros: distributed failure isolation, straightforward scaling; cons: network latency, each server a failure point. pipe & filter: sequential stream transformations (unix pipes, customer invoicing: invoices -> process invoices -> identify payments -> issue receipts); pros: subsystem reuse, intuitive; cons: agreed data format overhead, parsing latency. mvc: controller handles input -> updates model -> view renders display.</div>
+                <div class="hw-blob hw-b-5">system control models: centralized call-return model = top-down subroutine call tree for sequential code (main -> subsystems -> methods). centralized manager model = single process controls stopping, starting, and coordination of concurrent processes (controller coordinating sensors, actuators, computation, fault handler, ui). decentralized broadcast model = events published to common message bus; registered subsystems handle events (effective for distributed systems, but sender does not know if or when event handled). decentralized interrupt-driven model = hardware interrupt array mapped to specific memory locations; dedicated handlers watch address and coordinate response (temperature, radiation, fire alarm, fuel handlers; used for fast real-time response, but complex to program and hard to validate).</div>
               </div>
 
               <!-- Column 3 -->
               <div>
-                <div class="hw-topic hw-t-6">software testing fundamentals:</div>
-                <div class="hw-sentence hw-s-11">- verification: "are we building the product right?" (conformance to specification)</div>
-                <div class="hw-sentence hw-s-12">- validation: "are we building the right product?" (satisfies customer operational needs)</div>
-                <div class="hw-sentence hw-s-13">- dijkstra's axiom: "program testing can be used to show the presence of bugs, but never to show their absence."</div>
-                <div class="hw-sentence hw-s-14">- defect testing exposes flaws; validation testing demonstrates system meets user requirements</div>
-                <div class="hw-sentence hw-s-15">- v-model lifecycle pairings:</div>
-                <div class="hw-sentence hw-s-16">requirements engineering <-> acceptance testing (alpha and beta)</div>
-                <div class="hw-sentence hw-s-1">system specification <-> system testing</div>
-                <div class="hw-sentence hw-s-2">architectural design <-> subsystem and integration testing</div>
-                <div class="hw-sentence hw-s-3">detailed module design <-> unit testing</div>
-                <div class="hw-topic hw-t-7">test scaffolding and junit:</div>
-                <div class="hw-sentence hw-s-4">- test driver: software module that invokes the unit under test and passes simulated inputs</div>
-                <div class="hw-sentence hw-s-5">- test stub / mock: dummy module called by the unit under test that returns synthetic values</div>
-                <div class="hw-sentence hw-s-6">- test harness: framework environment that automates execution of test suites (example: junit)</div>
-                <div class="hw-sentence hw-s-7">- test oracle: mechanism (specification, human, dual run) determining if actual output matches expected output</div>
-                <div class="hw-sentence hw-s-8">- junit annotations:</div>
-                <div class="hw-sentence hw-s-9">@Test: marks executable test method</div>
-                <div class="hw-sentence hw-s-10">@Before / @BeforeEach: executes before every individual test method to initialize test fixture</div>
-                <div class="hw-sentence hw-s-11">@After / @AfterEach: executes after every test method to tear down test fixture</div>
-                <div class="hw-sentence hw-s-12">@BeforeClass / @BeforeAll: executes once before all test methods in class (static, opens db/sockets)</div>
-                <div class="hw-sentence hw-s-13">@AfterClass / @AfterAll: executes once after all test methods finish (static, closes db/sockets)</div>
-                <div class="hw-topic hw-t-8">mentcare and atm architecture reference:</div>
-                <div class="hw-sentence hw-s-14">- mentcare 4-layer system: layer 1 is web browser; layer 2 is user communications (login, role checking, form & menu manager, data validation); layer 3 is information retrieval and modification (security management, patient info manager, data import/export, report generation); layer 4 is transaction management and patient database</div>
-                <div class="hw-sentence hw-s-15">- atm 4-tier pipeline: i/o processing <-> application logic <-> transaction manager <-> database</div>
-                <div class="hw-sentence hw-s-16">- atm 3-phase flow: input (get account id, validate card, select service) -> process (query account, update account) -> output (print details, return card, dispense cash)</div>
+                <div class="hw-blob hw-b-6">software testing fundamentals: verification = "are we building the product right?" (conformance to specification). validation = "are we building the right product?" (satisfies customer operational needs). dijkstra's axiom: "program testing can be used to show the presence of bugs, but never to show their absence!" defect testing exposes flaws; validation testing demonstrates system meets user requirements. v-model lifecycle pairings: requirements engineering <-> acceptance testing (alpha and beta); system specification <-> system testing; architectural design <-> subsystem and integration testing; detailed module design <-> unit testing.</div>
+                <div class="hw-blob hw-b-7">test scaffolding & junit: test driver = software module that invokes unit under test and passes simulated inputs. test stub / mock = dummy module called by unit under test that returns synthetic values. test harness = framework automating execution of test suites (example: junit). test oracle = mechanism determining if actual output matches expected output. junit annotations: @Test = marks executable test method; @Before / @BeforeEach = executes before every individual test method (fixture init); @After / @AfterEach = executes after every test method (fixture teardown); @BeforeClass / @BeforeAll = static, executes once before all tests in class (opens db/sockets); @AfterClass / @AfterAll = static, executes once after all tests finish (closes db/sockets).</div>
+                <div class="hw-blob hw-b-8">mentcare & atm architecture: mentcare 4-layer system: layer 1 is web browser; layer 2 is user communications (login, role checking, form & menu manager, data validation); layer 3 is information retrieval and modification (security management, patient info manager, data import/export, report generation); layer 4 is transaction management and patient database. atm 4-tier pipeline: i/o processing <-> application logic <-> transaction manager <-> database. atm 3-phase flow: input (get account id, validate card, select service) -> process (query account, update account) -> output (print details, return card, dispense cash).</div>
               </div>
 
             </div>
@@ -664,78 +609,27 @@
           <!-- ============================== -->
           <div class="p-1">
             
-            <!-- 3-Column Bulleted Sheet with Individual Crooked & Uneven Sentences -->
-            <div class="hw-columns">
+            <!-- Dense Organic Unstructured Cram Streams -->
+            <div class="hw-stream-side2">
               
               <!-- Column 1 -->
               <div>
-                <div class="hw-topic hw-t-1">uml class diagram syntax and rules:</div>
-                <div class="hw-sentence hw-s-1">- strict 3-compartment rule: every class box must show all 3 compartments: 1. class name, 2. attributes, 3. operations. even if attributes or operations are empty, draw the 3rd compartment box line</div>
-                <div class="hw-sentence hw-s-2">- class discovery: nouns become classes, noun phrases become attributes, verbs become operations</div>
-                <div class="hw-sentence hw-s-3">- abstract class name: render in italic font style or tag with <<abstract>></div>
-                <div class="hw-sentence hw-s-4">- visibility symbols: + is public, - is private, # is protected, - is package-private</div>
-                <div class="hw-sentence hw-s-5">- attribute format: visibility name : type = default-val</div>
-                <div class="hw-sentence hw-s-6">- operation format: visibility name(parameter : type) : returnType</div>
-                <div class="hw-sentence hw-s-7">- association: solid line without arrows or with open navigation arrow; multiplicity placed at both ends (1, 0..1, 1..*, *)</div>
-                <div class="hw-sentence hw-s-8">- aggregation (<>--): open hollow diamond at whole end. represents weak containment ("has-a"). part can exist independently of whole. doctor outlives department (department <>-- doctor)</div>
-                <div class="hw-sentence hw-s-9">- composition (<*>--): solid filled diamond at whole end. represents strong containment ("part-of"). part lifetime bound to whole; destroyed when whole is deleted. department <*>-- labtest, customer <*>-- address</div>
-                <div class="hw-sentence hw-s-10">- generalization (--/->): solid line with hollow triangular arrowhead pointing to parent class. represents inheritance ("is-a"). medicalrecord --/-> surgicalrecord, bankaccount --/-> checkingaccount</div>
-                <div class="hw-sentence hw-s-11">- realization (../->): dashed line with hollow triangular arrowhead pointing to interface. savingsaccount ../-> interestbearing</div>
-                <div class="hw-sentence hw-s-12">- dependency (..>): dashed line with open arrow ("uses")</div>
-                <div class="hw-topic hw-t-2">adapter pattern class diagram:</div>
-                <div class="hw-sentence hw-s-13">- client: calls methods on the target interface</div>
-                <div class="hw-sentence hw-s-14">- target: abstract interface expected by client</div>
-                <div class="hw-sentence hw-s-15">- adapter: implements target interface (../-> target) and holds a private reference to the adaptee instance (adapter calls adaptee.specificRequest())</div>
-                <div class="hw-sentence hw-s-16">- adaptee: existing legacy class with incompatible interface that client cannot call directly</div>
-                <div class="hw-topic hw-t-3">sequence diagram rules:</div>
-                <div class="hw-sentence hw-s-1">- lifeline: vertical dashed line extending downward from object box</div>
-                <div class="hw-sentence hw-s-2">- activation bar: thin vertical rectangle on lifeline indicating execution control</div>
-                <div class="hw-sentence hw-s-3">- synchronous call: solid line with filled arrowhead (----->); sender halts until reply</div>
-                <div class="hw-sentence hw-s-4">- asynchronous call: solid line with stick open arrowhead (--->); sender continues without waiting</div>
-                <div class="hw-sentence hw-s-5">- reply / return message: dashed line with stick open arrow (<---)</div>
-                <div class="hw-sentence hw-s-6">- object creation: message labeled <<create>> points directly to object box</div>
-                <div class="hw-sentence hw-s-7">- object destruction: an x placed at the base of an activation lifeline</div>
-                <div class="hw-sentence hw-s-8">- combined fragments: alt (mutually exclusive if-then-else separated by dashed line with [guard]), opt (optional conditional execution if only), loop [min, max] (repetition over elements), par (concurrent parallel sub-sequences)</div>
+                <div class="hw-blob hw-b-9">uml class diagrams: strict 3-compartment rule: every class box must show all 3 compartments: 1.class name 2.attributes 3.operations (even if attributes or operations are empty, draw the 3rd compartment box line!). class discovery: nouns become classes, noun phrases become attributes, verbs become operations. abstract class: render name in italic font style or tag with <<abstract>>. visibility symbols: + is public, - is private, # is protected, - is package-private. attribute format: visibility name : type = default-val. operation format: visibility name(parameter : type) : returnType. association: solid line without arrows or with open navigation arrow; multiplicity placed at both ends (1, 0..1, 1..*, *). aggregation (<>--): open hollow diamond at whole end ("has-a", weak containment, part can exist independently of whole: department <>-- doctor). composition (<*>--): solid filled diamond at whole end ("part-of", strong containment, part lifetime bound to whole; destroyed when whole deleted: department <*>-- labtest, customer <*>-- address). generalization (--/->): solid line with hollow triangular arrowhead pointing to parent ("is-a", inheritance: medicalrecord --/-> surgicalrecord, bankaccount --/-> checkingaccount). realization (../->): dashed line with hollow triangular arrowhead pointing to interface (savingsaccount ../-> interestbearing). dependency (..>): dashed line with open arrow ("uses").</div>
+                <div class="hw-blob hw-b-10">adapter pattern: client calls methods on target interface; target = abstract interface expected by client; adapter = implements target interface (../-> target) and holds private reference to adaptee instance (adapter calls adaptee.specificRequest()); adaptee = existing legacy class with incompatible interface that client cannot call directly.</div>
+                <div class="hw-blob hw-b-11">sequence diagrams: lifeline = vertical dashed line extending downward from object box; activation bar = thin vertical rectangle on lifeline indicating execution control; synchronous call = solid line with filled arrowhead (----->); sender halts until reply; asynchronous call = solid line with stick open arrowhead (--->); sender continues without waiting; reply / return message = dashed line with stick open arrow (<---); object creation = message labeled <<create>> points directly to object box; object destruction = an x placed at base of an activation lifeline. combined fragments: alt = mutually exclusive if-then-else separated by dashed line with [guard]; opt = optional conditional execution if only; loop [min, max] = repetition over elements; par = concurrent parallel sub-sequences.</div>
               </div>
 
               <!-- Column 2 -->
               <div>
-                <div class="hw-topic hw-t-4">activity and statechart diagrams:</div>
-                <div class="hw-sentence hw-s-9">- activity diagram elements: initial node is solid filled circle; activity state is rounded rectangle; decision and merge are diamond symbols with [guard]; fork bar is thick black synchronization bar splitting 1 incoming flow into 2 or more concurrent parallel flows; join bar is thick black synchronization bar waiting for multiple concurrent flows to finish before 1 outgoing flow proceeds; activity final node is bullseye (solid circle inside outer circle); swimlanes (partitions) indicate which role or subsystem performs each activity</div>
-                <div class="hw-sentence hw-s-10">- insulin pump activity flow: sensor measures blood sugar -> fork bar splits into: (1) calculate required insulin dosage, and (2) log sensor reading -> join bar synchronizes both -> decision diamond [sugar > target] -> inject insulin</div>
-                <div class="hw-sentence hw-s-11">- state machine diagram: states shown as rounded rectangles (waiting, half power, full power, operation, disabled); initial state is solid black circle; final state is bullseye</div>
-                <div class="hw-sentence hw-s-12">- transition label syntax: event [guard] / action</div>
-                <div class="hw-sentence hw-s-13">- microwave example: start [door-closed] / run-generator(300w); door-open / stop-generator(), turn-lamp-on() -> state disabled</div>
-                <div class="hw-topic hw-t-5">white-box structural testing and coverage:</div>
-                <div class="hw-sentence hw-s-14">- statement coverage (c0): percentage of executable statements traversed by test cases (statements executed / total statements * 100%). weakest coverage metric! cannot detect missing false branches in single if statements</div>
-                <div class="hw-sentence hw-s-15">- branch coverage (c1): requires every decision branch (both true and false edges in control flow graph) to be traversed at least once</div>
-                <div class="hw-sentence hw-s-16">- subsumption rule: branch coverage subsumes statement coverage (100% branch implies 100% statement, but not vice-versa)</div>
-                <div class="hw-sentence hw-s-1">- condition coverage: requires each individual boolean sub-condition in composite expression to evaluate to true and false at least once</div>
-                <div class="hw-sentence hw-s-2">- mc/dc (modified condition/decision coverage): required by do-178c avionics safety standard. each condition must be shown to independently affect the overall decision outcome while holding all other conditions fixed. for n conditions, requires n + 1 test cases (compared to 2**n for multiple condition coverage)</div>
-                <div class="hw-sentence hw-s-3">- path coverage: every possible execution path from entry to exit tested. often infinite or intractable due to loops</div>
-                <div class="hw-sentence hw-s-4">- loop boundary coverage: test 0 iterations, 1 iteration, typical iterations, max-1 iterations, max iterations</div>
+                <div class="hw-blob hw-b-12">activity & statechart diagrams: activity elements: initial node = solid filled circle; activity state = rounded rectangle; decision and merge = diamond symbols with [guard]; fork bar = thick black synchronization bar splitting 1 incoming flow into 2 or more concurrent parallel flows; join bar = thick black synchronization bar waiting for multiple concurrent flows to finish before 1 outgoing flow proceeds; final node = bullseye (solid circle inside outer circle); swimlanes (partitions) = indicate which role or subsystem performs each activity. insulin pump flow: sensor measures blood sugar -> fork bar splits into: (1) calculate required insulin dosage, and (2) log sensor reading -> join bar synchronizes both -> decision diamond [sugar > target] -> inject insulin. state machine: states = rounded rectangles (waiting, half power, full power, operation, disabled); initial state = solid black circle; final state = bullseye; transition label syntax: event [guard] / action (example: start [door-closed] / run-generator(300w); door-open / stop-generator(), turn-lamp-on() -> state disabled).</div>
+                <div class="hw-blob hw-b-13">white-box structural testing: statement coverage (c0) = percentage of executable statements traversed by test cases (statements executed / total statements * 100%; weakest metric! cannot detect missing false branches in single if). branch coverage (c1) = requires every decision branch (both true and false edges in control flow graph) traversed at least once. subsumption rule: branch coverage subsumes statement coverage (100% branch implies 100% statement, but not vice-versa!). condition coverage = requires each individual boolean sub-condition in composite expression to evaluate to true and false at least once. mc/dc (modified condition/decision coverage) = required by do-178c avionics safety standard: each condition must be shown to independently affect overall decision outcome while holding all other conditions fixed; for n conditions, requires n + 1 test cases (compared to 2**n for multiple condition coverage). path coverage = every possible execution path from entry to exit tested (often infinite or intractable due to loops). loop boundary = test 0 iterations, 1 iteration, typical iterations, max-1 iterations, max iterations.</div>
               </div>
 
               <!-- Column 3 -->
               <div>
-                <div class="hw-topic hw-t-6">black-box testing (ep & bva):</div>
-                <div class="hw-sentence hw-s-5">- equivalence partitioning (ep): divide input domain into valid and invalid equivalence classes; select 1 representative test input per class</div>
-                <div class="hw-sentence hw-s-6">- boundary value analysis (bva): test values immediately at, below, and above boundary edges: min-1, min, min+1, nominal, max-1, max, max+1</div>
-                <div class="hw-sentence hw-s-7">- pin [0000..9999]: valid class = 1234; invalid classes = negative numbers (-1), numbers > 9999 (10000), non-digits ("abcd"), 3 digits, 5 digits</div>
-                <div class="hw-topic hw-t-7">5 test cases structure and rubric:</div>
-                <div class="hw-sentence hw-s-8">columns: tc id, objective, pre-conditions, test steps/inputs, expected result, pass/fail criteria</div>
-                <div class="hw-sentence hw-s-9">- tc-01 (valid ep registration): pre-condition: user logged in; inputs: valid name, dob, ssn; expected result: patient record created in db, unique id assigned, http 201 created toast displayed; criteria: record persists in db</div>
-                <div class="hw-sentence hw-s-10">- tc-02 (min boundary value): inputs: age = 0 (minimum valid age); expected result: form accepted, classified as infant; criteria: profile created with infant tag</div>
-                <div class="hw-sentence hw-s-11">- tc-03 (negative boundary value): inputs: age = -1; expected result: submission blocked, error message "age must be >= 0" displayed; criteria: no db write, form retains input</div>
-                <div class="hw-sentence hw-s-12">- tc-04 (concurrency / double withdrawal): pre-condition: balance = $100; inputs: simultaneous atm and mobile app withdrawals of $100 within 10 ms; expected result: 1st transaction succeeds, 2nd rejected for insufficient funds; criteria: balance never negative ($0 balance)</div>
-                <div class="hw-sentence hw-s-13">- tc-05 (exception / null pointer): inputs: doctorid = null on prescription request; expected result: system rejects with http 400 bad request, logs missing doctor reference safely; criteria: no unhandled 500 crash or stack trace shown</div>
-                <div class="hw-topic hw-t-8">relational database and normalization:</div>
-                <div class="hw-sentence hw-s-14">- entity integrity: primary key (pk) column cannot be null and must be unique</div>
-                <div class="hw-sentence hw-s-15">- referential integrity: foreign key (fk) column must match an existing valid pk value in parent table or be null</div>
-                <div class="hw-sentence hw-s-16">- 1nf (first normal form): all column values must be atomic (no repeating groups, multi-valued attributes, or composite values)</div>
-                <div class="hw-sentence hw-s-1">- 2nf (second normal form): table is in 1nf and every non-key attribute is fully functionally dependent on the entire composite primary key (no partial key dependencies)</div>
-                <div class="hw-sentence hw-s-2">- 3nf (third normal form): table is in 2nf and no non-key attribute depends on another non-key attribute (no transitive dependencies)</div>
-                <div class="hw-sentence hw-s-3">- canonical rule: "every attribute must depend on the key, the whole key, and nothing but the key."</div>
+                <div class="hw-blob hw-b-14">black-box testing (ep & bva): equivalence partitioning (ep) = divide input domain into valid and invalid equivalence classes; select 1 representative test input per class. boundary value analysis (bva) = test values immediately at, below, and above boundary edges: min-1, min, min+1, nominal, max-1, max, max+1. pin [0000..9999]: valid class = 1234; invalid classes = negative numbers (-1), numbers > 9999 (10000), non-digits ("abcd"), 3 digits, 5 digits.</div>
+                <div class="hw-blob hw-b-15">5 test cases structure & rubric: format: [tc id, objective, pre-conditions, test steps/inputs, expected result, pass/fail criteria]. tc-01 (valid ep registration): pre: user logged in; inputs: valid name, dob, ssn; expected: patient record created in db, unique id assigned, http 201 toast; criteria: record persists in db. tc-02 (min boundary value): inputs: age = 0 (minimum valid age); expected: form accepted, classified as infant; criteria: profile created with infant tag. tc-03 (negative boundary value): inputs: age = -1; expected: submission blocked, error message "age must be >= 0" displayed; criteria: no db write, form retains input. tc-04 (concurrency / double withdrawal): pre: balance = $100; inputs: simultaneous atm and mobile app withdrawals of $100 within 10 ms; expected: 1st transaction succeeds, 2nd rejected for insufficient funds; criteria: balance never negative ($0 balance). tc-05 (exception / null pointer): inputs: doctorid = null on prescription request; expected: system rejects with http 400 bad request, logs missing doctor reference safely; criteria: no unhandled 500 crash or stack trace shown.</div>
+                <div class="hw-blob hw-b-16">relational database & normalization: entity integrity: primary key (pk) column cannot be null and must be unique. referential integrity: foreign key (fk) column must match an existing valid pk value in parent table or be null. 1nf (first normal form): all column values must be atomic (no repeating groups, multi-valued attributes, or composite values). 2nf (second normal form): table is in 1nf and every non-key attribute is fully functionally dependent on the entire composite primary key (no partial key dependencies). 3nf (third normal form): table is in 2nf and no non-key attribute depends on another non-key attribute (no transitive dependencies). canonical rule: "every attribute must depend on the key, the whole key, and nothing but the key!"</div>
               </div>
 
             </div>
