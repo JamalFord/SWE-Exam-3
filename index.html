@@ -8,13 +8,61 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts: Authentic Handwritten Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&family=Permanent+Marker&display=swap" rel="stylesheet">
+  
   <style>
+    /* Handwritten Font Styling */
+    .font-handwriting {
+      font-family: 'Kalam', 'Patrick Hand', 'Caveat', cursive;
+    }
+    .font-caveat {
+      font-family: 'Caveat', cursive;
+    }
+
+    /* Print Specific Rules */
     @media print {
       body * { visibility: hidden; }
       #cheat-sheet-print-area, #cheat-sheet-print-area * { visibility: visible; }
-      #cheat-sheet-print-area { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0.2in; font-size: 8pt; line-height: 1.15; }
+      #cheat-sheet-print-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0.15in;
+        font-size: 8.5pt;
+        line-height: 1.12;
+        color: #1e293b;
+      }
       .page-break { page-break-before: always; }
       .no-print { display: none !important; }
+      @page {
+        size: letter portrait;
+        margin: 0.2in;
+      }
+    }
+
+    .handwritten-title {
+      font-family: 'Permanent Marker', cursive;
+      letter-spacing: 0.5px;
+    }
+
+    /* UML & Architecture Diagram styling */
+    .arch-box {
+      border: 2px solid #334155;
+      border-radius: 6px;
+      background: #ffffff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .arch-header {
+      background: #f8fafc;
+      border-bottom: 2px solid #334155;
+      padding: 6px;
+      font-weight: bold;
+      text-align: center;
     }
     .uml-box { border: 2px solid #334155; border-radius: 4px; background: #ffffff; }
     .uml-header { background: #f1f5f9; border-bottom: 2px solid #334155; padding: 6px; font-weight: bold; text-align: center; }
@@ -30,14 +78,17 @@
       <div class="flex items-center space-x-3">
         <i data-lucide="graduation-cap" class="w-8 h-8 text-amber-400"></i>
         <div>
-          <h1 class="text-xl font-bold tracking-tight">SWE Exam 3 Mastery Suite</h1>
-          <p class="text-xs text-indigo-200">GSU CSC 4350 / 6350 • Dr. Tushara Sadasivuni • Exam Date: Nov 19</p>
+          <h1 class="text-xl font-bold tracking-tight">SWE Exam 3 Interactive Trainer & Architecture Lab</h1>
+          <p class="text-xs text-indigo-200">GSU CSC 4350 / 6350 • Dr. Tushara Sadasivuni • Exam: Nov 19</p>
         </div>
       </div>
       <!-- Tab Navigation -->
-      <nav class="flex space-x-1 bg-indigo-950/60 p-1 rounded-xl text-sm font-medium">
+      <nav class="flex space-x-1 bg-indigo-950/60 p-1 rounded-xl text-xs sm:text-sm font-medium">
         <button onclick="switchTab('quiz')" id="tab-btn-quiz" class="tab-btn px-3 py-1.5 rounded-lg transition-colors bg-indigo-600 text-white flex items-center gap-1.5">
           <i data-lucide="help-circle" class="w-4 h-4"></i> Section A: MCQs
+        </button>
+        <button onclick="switchTab('architecture')" id="tab-btn-architecture" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-indigo-200 hover:text-white flex items-center gap-1.5">
+          <i data-lucide="network" class="w-4 h-4"></i> Architecture Diagrams (8 Drills)
         </button>
         <button onclick="switchTab('uml')" id="tab-btn-uml" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-indigo-200 hover:text-white flex items-center gap-1.5">
           <i data-lucide="layout-grid" class="w-4 h-4"></i> Section B: UML Drills
@@ -45,8 +96,8 @@
         <button onclick="switchTab('testcases')" id="tab-btn-testcases" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-indigo-200 hover:text-white flex items-center gap-1.5">
           <i data-lucide="check-square" class="w-4 h-4"></i> 5 Test Cases Builder
         </button>
-        <button onclick="switchTab('cheatsheet')" id="tab-btn-cheatsheet" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-amber-300 hover:text-amber-100 flex items-center gap-1.5">
-          <i data-lucide="file-text" class="w-4 h-4"></i> Printable Cheat Sheet
+        <button onclick="switchTab('cheatsheet')" id="tab-btn-cheatsheet" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-amber-300 hover:text-amber-100 flex items-center gap-1.5 font-bold">
+          <i data-lucide="pen-tool" class="w-4 h-4 text-amber-400"></i> Handwritten Cheat Sheet
         </button>
       </nav>
     </div>
@@ -63,7 +114,7 @@
         <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
           <div>
             <h2 class="text-2xl font-bold text-slate-900">Randomized Practice Exam</h2>
-            <p class="text-sm text-slate-500">Curated from Dr. Sadasivuni's exact slide decks, in-class traps, and syllabus topics.</p>
+            <p class="text-sm text-slate-500">Curated from all lecture slides: Architectural Design, System Modeling, UML, Testing & MC/DC, SDLC.</p>
           </div>
           <div class="flex items-center gap-3">
             <span id="score-counter" class="text-sm font-semibold bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-lg border border-indigo-100">
@@ -84,7 +135,347 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- TAB 2: UML FILL-IN-THE-BLANK & DIAGRAMS   -->
+    <!-- TAB 2: ARCHITECTURE DESIGN DIAGRAMS (8)    -->
+    <!-- ========================================== -->
+    <div id="tab-architecture" class="tab-content hidden">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <div class="border-b border-slate-100 pb-4 mb-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-2xl font-bold text-slate-900">Architecture Design Diagrams (7-8 Core Slides)</h2>
+              <p class="text-sm text-slate-500">Practice drawing and filling in the exact system architecture models from Dr. Sadasivuni's slides.</p>
+            </div>
+            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full border border-purple-200">
+              High Probability on Exam!
+            </span>
+          </div>
+        </div>
+
+        <!-- Arch Drill Selector -->
+        <div class="flex flex-wrap gap-2 mb-6">
+          <button onclick="showArchDrill('mentcare')" id="btn-arch-mentcare" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-indigo-600 text-white">
+            1. Mentcare 4-Layer Architecture
+          </button>
+          <button onclick="showArchDrill('repository')" id="btn-arch-repository" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            2. IDE Repository Model
+          </button>
+          <button onclick="showArchDrill('clientserver')" id="btn-arch-clientserver" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            3. Film Library Client-Server
+          </button>
+          <button onclick="showArchDrill('pipefilter')" id="btn-arch-pipefilter" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            4. Invoicing Pipe & Filter
+          </button>
+          <button onclick="showArchDrill('atm')" id="btn-arch-atm" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            5. ATM Transaction Architecture
+          </button>
+          <button onclick="showArchDrill('callreturn')" id="btn-arch-callreturn" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            6. Call-Return vs Manager Control
+          </button>
+          <button onclick="showArchDrill('interrupt')" id="btn-arch-interrupt" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            7. Interrupt-Driven Control Model
+          </button>
+          <button onclick="showArchDrill('compiler')" id="btn-arch-compiler" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            8. Language Processing Architecture
+          </button>
+        </div>
+
+        <!-- DRILL A1: MENTCARE LAYERED -->
+        <div id="arch-mentcare" class="arch-drill-view block">
+          <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-blue-900 text-sm">Slide 54: The Mentcare Layered System Implementation</h3>
+            <p class="text-xs text-blue-800 mt-1">
+              In a layered architecture, each layer only depends on the services provided by the layer immediately below it. Fill in the 4 canonical layers and their components:
+            </p>
+          </div>
+
+          <div class="max-w-2xl mx-auto space-y-3 font-mono text-xs">
+            <!-- Layer 1 -->
+            <div class="p-4 border-2 border-slate-700 rounded-lg bg-sky-50 text-center">
+              <span class="text-xs font-bold text-slate-500 uppercase block mb-1">Layer 1 (Top Layer): User Interface</span>
+              <select id="m-layer-1" class="w-full p-2 border rounded bg-white font-bold text-slate-800">
+                <option value="">-- Select Component --</option>
+                <option value="correct">Web browser</option>
+                <option value="wrong1">Security Management & DB</option>
+                <option value="wrong2">Login & Role checking</option>
+              </select>
+            </div>
+            <div class="text-center text-slate-400 font-bold">&uarr; &darr; (depends only on layer below)</div>
+
+            <!-- Layer 2 -->
+            <div class="p-4 border-2 border-slate-700 rounded-lg bg-indigo-50 text-center">
+              <span class="text-xs font-bold text-slate-500 uppercase block mb-1">Layer 2: User Communications & Authentication</span>
+              <select id="m-layer-2" class="w-full p-2 border rounded bg-white font-bold text-slate-800">
+                <option value="">-- Select Components --</option>
+                <option value="wrong1">Patient Database & Transaction Manager</option>
+                <option value="correct">Login, Role checking, Form & menu manager, Data validation</option>
+                <option value="wrong2">Search Index & Document Retrieval</option>
+              </select>
+            </div>
+            <div class="text-center text-slate-400 font-bold">&uarr; &darr; (depends only on layer below)</div>
+
+            <!-- Layer 3 -->
+            <div class="p-4 border-2 border-slate-700 rounded-lg bg-purple-50 text-center">
+              <span class="text-xs font-bold text-slate-500 uppercase block mb-1">Layer 3: Information Retrieval & Modification (Core Business Logic)</span>
+              <select id="m-layer-3" class="w-full p-2 border rounded bg-white font-bold text-slate-800">
+                <option value="">-- Select Components --</option>
+                <option value="correct">Security management, Patient info manager, Data import/export, Report generation</option>
+                <option value="wrong1">Web browser, HTML, CSS</option>
+                <option value="wrong2">SQL Database & Hardware drivers</option>
+              </select>
+            </div>
+            <div class="text-center text-slate-400 font-bold">&uarr; &darr; (depends only on layer below)</div>
+
+            <!-- Layer 4 -->
+            <div class="p-4 border-2 border-slate-700 rounded-lg bg-emerald-50 text-center">
+              <span class="text-xs font-bold text-slate-500 uppercase block mb-1">Layer 4 (Bottom Layer): System Support & Persistence</span>
+              <select id="m-layer-4" class="w-full p-2 border rounded bg-white font-bold text-slate-800">
+                <option value="">-- Select Components --</option>
+                <option value="wrong1">Web browser</option>
+                <option value="correct">Transaction management, Patient database</option>
+                <option value="wrong2">Role checking & form manager</option>
+              </select>
+            </div>
+
+            <div class="pt-3 text-center">
+              <button onclick="checkMentcareDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-6 py-2.5 rounded-lg shadow transition">
+                Check Layered Model Answers
+              </button>
+              <div id="mentcare-fb" class="mt-3 text-xs font-semibold"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DRILL A2: REPOSITORY MODEL -->
+        <div id="arch-repository" class="arch-drill-view hidden">
+          <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-amber-900 text-sm">Slide 31: IDE Shared Repository Model</h3>
+            <p class="text-xs text-amber-800 mt-1">
+              In a Repository Model, all data is held centrally and accessed by independent active subsystems. Identify the center and surrounding components:
+            </p>
+          </div>
+          <div class="max-w-2xl mx-auto space-y-4 text-xs">
+            <div class="p-4 border rounded bg-slate-50">
+              <label class="font-bold block mb-1">1. What is placed in the CENTRAL box of an IDE repository architecture?</label>
+              <select id="repo-q1" class="w-full p-2 border rounded bg-white">
+                <option value="">-- Select Central Component --</option>
+                <option value="correct">Project Information and Code (passive central data store)</option>
+                <option value="wrong1">Java Editor</option>
+                <option value="wrong2">The Operating System Kernel</option>
+              </select>
+            </div>
+            <div class="p-4 border rounded bg-slate-50">
+              <label class="font-bold block mb-1">2. Which tools surround and interact with the central Project Information and Code?</label>
+              <select id="repo-q2" class="w-full p-2 border rounded bg-white">
+                <option value="">-- Select Surrounding Components --</option>
+                <option value="correct">Model Editor, Code Generator, Java Editor, Python Editor, Report Generator, Design Analyzer, Design Translator</option>
+                <option value="wrong1">Web browser, Apache Server, MySQL client</option>
+                <option value="wrong2">Invoices, Receipts, Payment reminders</option>
+              </select>
+            </div>
+            <div class="p-4 border rounded bg-slate-50">
+              <label class="font-bold block mb-1">3. What is the #1 architectural risk of this model according to Dr. Sadasivuni?</label>
+              <select id="repo-q3" class="w-full p-2 border rounded bg-white">
+                <option value="">-- Select Disadvantage --</option>
+                <option value="correct">Single point of failure: if repository fails, all subsystems fail; communication bottleneck.</option>
+                <option value="wrong1">Components cannot share large datasets.</option>
+                <option value="wrong2">Requires network connection across the internet.</option>
+              </select>
+            </div>
+            <button onclick="checkRepoDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-lg text-xs">Verify Repository Drill</button>
+            <div id="repo-fb" class="mt-2 text-xs font-semibold"></div>
+          </div>
+        </div>
+
+        <!-- DRILL A3: FILM LIBRARY CLIENT-SERVER -->
+        <div id="arch-clientserver" class="arch-drill-view hidden">
+          <div class="bg-teal-50 border-l-4 border-teal-500 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-teal-900 text-sm">Slide 34: Film Library Client-Server Architecture</h3>
+            <p class="text-xs text-teal-800 mt-1">
+              Functionality is distributed across distinct servers offering services to multiple clients across a wide-bandwidth network.
+            </p>
+          </div>
+          <div class="max-w-2xl mx-auto space-y-4 text-xs">
+            <div class="p-4 border rounded bg-slate-50">
+              <label class="font-bold block mb-1">1. What connects Client 1, 2, 3, 4 to the specialized backend servers?</label>
+              <input id="cs-q1" placeholder="Name of network connection layer? (Slide 34)" class="w-full p-2 border rounded bg-white">
+            </div>
+            <div class="p-4 border rounded bg-slate-50">
+              <label class="font-bold block mb-1">2. Name the 4 specialized servers in the Film Library example:</label>
+              <select id="cs-q2" class="w-full p-2 border rounded bg-white">
+                <option value="">-- Select the 4 Servers --</option>
+                <option value="correct">Catalogue server, Video server, Picture server, Hypertext server</option>
+                <option value="wrong1">Web server, DNS server, DHCP server, Mail server</option>
+                <option value="wrong2">Login server, DB server, Auth server, Print server</option>
+              </select>
+            </div>
+            <div class="p-4 border rounded bg-slate-50">
+              <label class="font-bold block mb-1">3. What is the key advantage of Client-Server over Centralized Repository?</label>
+              <select id="cs-q3" class="w-full p-2 border rounded bg-white">
+                <option value="">-- Select Advantage --</option>
+                <option value="correct">Distributed architecture: Failure in one server does not impact others; easy to scale/upgrade servers independently.</option>
+                <option value="wrong1">Guaranteed predictable network performance with zero latency.</option>
+                <option value="wrong2">No data format agreement required.</option>
+              </select>
+            </div>
+            <button onclick="checkClientServerDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-lg text-xs">Verify Client-Server Drill</button>
+            <div id="cs-fb" class="mt-2 text-xs font-semibold"></div>
+          </div>
+        </div>
+
+        <!-- DRILL A4: INVOICING PIPE & FILTER -->
+        <div id="arch-pipefilter" class="arch-drill-view hidden">
+          <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-indigo-900 text-sm">Slide 38: Customer Invoicing Pipe and Filter Architecture</h3>
+            <p class="text-xs text-indigo-800 mt-1">
+              Transformations take input streams and pass transformed output downstream through pipes. Recreate the flow from invoices & payments:
+            </p>
+          </div>
+          <div class="max-w-2xl mx-auto space-y-4 text-xs font-mono">
+            <div class="p-4 border rounded bg-white space-y-2">
+              <p class="font-bold text-slate-800">Order the Transformation Filters:</p>
+              <p>Step 1: <code>Invoices</code> &rarr; Filter: <input id="pf-s1" placeholder="Filter 1?" class="p-1 border rounded w-48 text-xs font-bold text-indigo-700"></p>
+              <p>Step 2: Adds <code>Payments</code> &rarr; Filter: <input id="pf-s2" placeholder="Filter 2?" class="p-1 border rounded w-48 text-xs font-bold text-indigo-700"></p>
+              <p>Branch A: &rarr; Filter: <code>Issue Receipts</code> &rarr; Target Data: <input id="pf-s3" placeholder="Target Data A?" class="p-1 border rounded w-48 text-xs font-bold text-indigo-700"></p>
+              <p>Branch B: &rarr; Filter: <code>Find Payments Due</code> &rarr; Filter: <code>Issue Payment Reminder</code> &rarr; Target: <input id="pf-s4" placeholder="Target Data B?" class="p-1 border rounded w-48 text-xs font-bold text-indigo-700"></p>
+            </div>
+            <button onclick="checkPipeFilterDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-lg text-xs">Check Pipe & Filter Answers</button>
+            <div id="pf-fb" class="mt-2 text-xs font-semibold"></div>
+          </div>
+        </div>
+
+        <!-- DRILL A5: ATM TRANSACTION ARCHITECTURE -->
+        <div id="arch-atm" class="arch-drill-view hidden">
+          <div class="bg-rose-50 border-l-4 border-rose-500 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-rose-900 text-sm">Slide 53: ATM System Transaction Processing Pipeline</h3>
+            <p class="text-xs text-rose-800 mt-1">
+              Transaction processing systems are data-centered systems that process user requests in real time and update a database.
+            </p>
+          </div>
+          <div class="max-w-2xl mx-auto space-y-4 text-xs">
+            <div class="p-4 border rounded bg-slate-50">
+              <p class="font-bold text-slate-800 mb-2">1. The 4-Tier Transaction Processing Pipeline (Slide 53 Bottom):</p>
+              <div class="grid grid-cols-4 gap-2 text-center font-mono">
+                <div class="p-2 border bg-white rounded font-bold">I/O Processing</div>
+                <div class="p-2 border bg-indigo-50 rounded">
+                  <input id="atm-tier2" placeholder="Tier 2?" class="w-full text-center p-1 border rounded font-bold text-indigo-700">
+                </div>
+                <div class="p-2 border bg-indigo-50 rounded">
+                  <input id="atm-tier3" placeholder="Tier 3?" class="w-full text-center p-1 border rounded font-bold text-indigo-700">
+                </div>
+                <div class="p-2 border bg-white rounded font-bold">Database</div>
+              </div>
+            </div>
+
+            <div class="p-4 border rounded bg-slate-50">
+              <p class="font-bold text-slate-800 mb-2">2. ATM 3-Phase Flow (Input &rarr; Process &rarr; Output):</p>
+              <ul class="space-y-1">
+                <li>&bull; <strong>Input (ATM):</strong> Get customer account ID, Validate card, Select service</li>
+                <li>&bull; <strong>Process (Database):</strong> Query account, Update account</li>
+                <li>&bull; <strong>Output (ATM):</strong> Print details, Return card, Dispense cash</li>
+              </ul>
+            </div>
+            <button onclick="checkAtmDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-lg text-xs">Verify ATM Drill</button>
+            <div id="atm-fb" class="mt-2 text-xs font-semibold"></div>
+          </div>
+        </div>
+
+        <!-- DRILL A6: CALL-RETURN VS MANAGER CONTROL -->
+        <div id="arch-callreturn" class="arch-drill-view hidden">
+          <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-purple-900 text-sm">Slides 41-43: Centralized Control Models (Call-Return vs. Manager)</h3>
+            <p class="text-xs text-purple-800 mt-1">
+              One subsystem has overall responsibility for control and stopping/starting other subsystems.
+            </p>
+          </div>
+          <div class="max-w-2xl mx-auto space-y-4 text-xs">
+            <div class="p-4 border rounded bg-slate-50">
+              <label class="font-bold block mb-1">1. When is the Call-Return model applicable vs. the Manager model?</label>
+              <select id="ctrl-q1" class="w-full p-2 border rounded bg-white">
+                <option value="">-- Select Answer --</option>
+                <option value="correct">Call-Return is for SEQUENTIAL systems (top-down subroutine tree); Manager model is for CONCURRENT systems.</option>
+                <option value="wrong1">Call-Return is for real-time avionics; Manager is for batch processing.</option>
+                <option value="wrong2">They are completely interchangeable.</option>
+              </select>
+            </div>
+            <div class="p-4 border rounded bg-slate-50">
+              <label class="font-bold block mb-1">2. In the Manager Model (Slide 43), what does the central System Controller coordinate?</label>
+              <select id="ctrl-q2" class="w-full p-2 border rounded bg-white">
+                <option value="">-- Select Components --</option>
+                <option value="correct">Sensor Processes, Actuator Processes, Computation Processes, Fault Handler, User Interface</option>
+                <option value="wrong1">Only CPU registers and L1 cache</option>
+                <option value="wrong2">Main program and Methods 1.1, 1.2, 2.1, 2.2</option>
+              </select>
+            </div>
+            <button onclick="checkControlDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-lg text-xs">Verify Control Models Drill</button>
+            <div id="ctrl-fb" class="mt-2 text-xs font-semibold"></div>
+          </div>
+        </div>
+
+        <!-- DRILL A7: INTERRUPT-DRIVEN CONTROL -->
+        <div id="arch-interrupt" class="arch-drill-view hidden">
+          <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-amber-900 text-sm">Slide 46: Interrupt-Driven Control Model</h3>
+            <p class="text-xs text-amber-800 mt-1">
+              Decentralized control driven by externally-generated events where timing is unpredictable.
+            </p>
+          </div>
+          <div class="max-w-2xl mx-auto space-y-4 text-xs">
+            <div class="p-4 border rounded bg-slate-50">
+              <p class="font-bold text-slate-800 mb-2">1. How does the Interrupt-Driven Model ensure fast response?</p>
+              <select id="int-q1" class="w-full p-2 border rounded bg-white">
+                <option value="">-- Select Answer --</option>
+                <option value="correct">Each interrupt type is associated with a memory location; dedicated handlers watch that address and coordinate response.</option>
+                <option value="wrong1">By broadcasting events over an HTTP REST API.</option>
+                <option value="wrong2">By caching all requests in a single database table.</option>
+              </select>
+            </div>
+            <div class="p-4 border rounded bg-slate-50">
+              <p class="font-bold text-slate-800 mb-2">2. What are the 4 specialized handlers in Slide 46?</p>
+              <div class="font-mono text-xs text-indigo-700 font-bold p-2 bg-white border rounded">
+                Temperature Event Handler, Radiation Event Handler, Fire Alarm Event Handler, Fuel Event Handler
+              </div>
+            </div>
+            <div class="p-4 border rounded bg-slate-50">
+              <p class="font-bold text-slate-800 mb-2">3. What is the major drawback of the Interrupt-Driven Model?</p>
+              <select id="int-q3" class="w-full p-2 border rounded bg-white">
+                <option value="">-- Select Disadvantage --</option>
+                <option value="correct">Complex to program and very hard to validate/test due to non-deterministic concurrency and timing.</option>
+                <option value="wrong1">Too slow for real-time systems.</option>
+                <option value="wrong2">Cannot handle hardware events.</option>
+              </select>
+            </div>
+            <button onclick="checkInterruptDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-lg text-xs">Verify Interrupt Drill</button>
+            <div id="int-fb" class="mt-2 text-xs font-semibold"></div>
+          </div>
+        </div>
+
+        <!-- DRILL A8: COMPILER REPOSITORY VS PIPE & FILTER -->
+        <div id="arch-compiler" class="arch-drill-view hidden">
+          <div class="bg-cyan-50 border-l-4 border-cyan-500 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-cyan-900 text-sm">Slides 56 & 57: Language Processing Architectures (Repository vs. Pipe & Filter)</h3>
+            <p class="text-xs text-cyan-800 mt-1">
+              Comparing how a Compiler is structured as a Repository vs. as a Pipe & Filter pipeline.
+            </p>
+          </div>
+          <div class="max-w-2xl mx-auto space-y-4 text-xs font-mono">
+            <div class="p-4 border rounded bg-slate-50">
+              <p class="font-bold text-slate-800 mb-2">Pipe & Filter Compiler Pipeline Sequence (Slide 57):</p>
+              <p>Step 1: <input id="comp-s1" placeholder="1st Stage" class="p-1 border rounded w-44 font-bold text-indigo-700"> (Source Program &rarr; Tokens)</p>
+              <p>Step 2: <input id="comp-s2" placeholder="2nd Stage" class="p-1 border rounded w-44 font-bold text-indigo-700"> (Tokens &rarr; Parse Tree)</p>
+              <p>Step 3: <input id="comp-s3" placeholder="3rd Stage" class="p-1 border rounded w-44 font-bold text-indigo-700"> (Type checking & decoration)</p>
+              <p>Step 4: <input id="comp-s4" placeholder="4th Stage" class="p-1 border rounded w-44 font-bold text-indigo-700"> (&rarr; Object Code)</p>
+              <p class="text-slate-500 text-[11px] mt-1">Shared structures accessed: <code>Symbol table</code> & <code>Syntax tree</code></p>
+            </div>
+            <button onclick="checkCompilerDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-lg text-xs">Verify Compiler Pipeline</button>
+            <div id="comp-fb" class="mt-2 text-xs font-semibold"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: UML FILL-IN-THE-BLANK & DIAGRAMS   -->
     <!-- ========================================== -->
     <div id="tab-uml" class="tab-content hidden">
       <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
@@ -112,7 +503,7 @@
           </button>
         </div>
 
-        <!-- DRILL 1: HOSPITAL -->
+        <!-- DRILL U1: HOSPITAL -->
         <div id="drill-hospital" class="uml-drill-view block">
           <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg mb-6">
             <h3 class="font-bold text-amber-900 text-sm">Professor's Strict Rule & Scenario:</h3>
@@ -223,7 +614,7 @@
           </div>
         </div>
 
-        <!-- DRILL 2: BANK ACCOUNT -->
+        <!-- DRILL U2: BANK ACCOUNT -->
         <div id="drill-bank" class="uml-drill-view hidden">
           <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-6">
             <h3 class="font-bold text-blue-900 text-sm">Bank Account Hierarchy:</h3>
@@ -254,7 +645,7 @@
           </div>
         </div>
 
-        <!-- DRILL 3: SEQUENCE ALT/LOOP -->
+        <!-- DRILL U3: SEQUENCE ALT/LOOP -->
         <div id="drill-sequence" class="uml-drill-view hidden">
           <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-lg mb-6">
             <h3 class="font-bold text-emerald-900 text-sm">Sequence Diagram Combined Fragments:</h3>
@@ -278,7 +669,7 @@
           </div>
         </div>
 
-        <!-- DRILL 4: INSULIN PUMP ACTIVITY -->
+        <!-- DRILL U4: INSULIN PUMP ACTIVITY -->
         <div id="drill-insulin" class="uml-drill-view hidden">
           <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg mb-6">
             <h3 class="font-bold text-purple-900 text-sm">Insulin Pump Activity Diagram Synchronization:</h3>
@@ -295,7 +686,7 @@
           </div>
         </div>
 
-        <!-- DRILL 5: MICROWAVE STATE MACHINE -->
+        <!-- DRILL U5: MICROWAVE STATE MACHINE -->
         <div id="drill-microwave" class="uml-drill-view hidden">
           <div class="bg-rose-50 border-l-4 border-rose-500 p-4 rounded-r-lg mb-6">
             <h3 class="font-bold text-rose-900 text-sm">Microwave Oven State Machine Transition Syntax:</h3>
@@ -316,7 +707,7 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- TAB 3: 5 TEST CASES MATRIX BUILDER        -->
+    <!-- TAB 4: 5 TEST CASES MATRIX BUILDER        -->
     <!-- ========================================== -->
     <div id="tab-testcases" class="tab-content hidden">
       <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
@@ -359,232 +750,318 @@
       </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- TAB 4: PRINTABLE CHEAT SHEET (NO DIAGRAMS) -->
-    <!-- ========================================== -->
+    <!-- ============================================================== -->
+    <!-- TAB 5: PRINTABLE HANDWRITTEN CHEAT SHEET (ULTRA DENSE CRAMMED) -->
+    <!-- ============================================================== -->
     <div id="tab-cheatsheet" class="tab-content hidden">
       <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
-        <div class="flex justify-between items-center border-b border-slate-100 pb-4 mb-4 no-print">
+        <div class="flex flex-wrap justify-between items-center border-b border-slate-200 pb-4 mb-4 no-print gap-3">
           <div>
-            <h2 class="text-2xl font-bold text-slate-900">Dr. Sadasivuni Cheat Sheet (Front & Back)</h2>
-            <p class="text-sm text-slate-500 font-semibold text-rose-600">
-              Rule Compliant: Single 8.5" x 11" Paper • ABSOLUTELY NO DIAGRAMS • Syntax, Tables & Notations Only
+            <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+              <i data-lucide="pen-tool" class="w-6 h-6 text-indigo-600"></i>
+              Ultra-Dense Handwritten Cheat Sheet (Front & Back)
+            </h2>
+            <p class="text-xs text-rose-600 font-bold mt-1">
+              ✓ 100% Professor Compliant: Single 8.5" x 11" Paper • ABSOLUTELY NO DIAGRAMS • Crammed Text, Syntax & Tables
             </p>
           </div>
-          <button onclick="window.print()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition">
-            <i data-lucide="printer" class="w-4 h-4"></i> Print Cheat Sheet
-          </button>
+          <div class="flex items-center gap-2">
+            <span class="text-xs bg-amber-100 text-amber-800 px-3 py-1.5 rounded font-semibold border border-amber-300">
+              Styling: Authentic Student Handwritten Pen Ink (Kalam / Caveat)
+            </span>
+            <button onclick="window.print()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition text-xs sm:text-sm">
+              <i data-lucide="printer" class="w-4 h-4"></i> Print Cheat Sheet
+            </button>
+          </div>
         </div>
 
-        <!-- PRINT AREA -->
-        <div id="cheat-sheet-print-area" class="font-sans text-slate-900">
+        <!-- ============================================== -->
+        <!-- PRINT AREA: AUTHENTIC HANDWRITTEN CRAMMED LOOK -->
+        <!-- ============================================== -->
+        <div id="cheat-sheet-print-area" class="font-handwriting text-slate-900 leading-tight">
           
-          <!-- SIDE 1 (FRONT) -->
-          <div class="border border-slate-400 p-4 bg-white rounded-lg mb-6">
-            <div class="text-center border-b-2 border-slate-800 pb-1 mb-2">
-              <h2 class="text-sm font-extrabold uppercase tracking-wide">SWE Exam 3 Reference • SIDE 1: Architecture, SDLC & Testing Fundamentals</h2>
-              <p class="text-[9px] text-slate-600 font-mono">STRICT: NO DIAGRAMS ALLOWED • Hand-Written Notation Guide</p>
+          <!-- ============================== -->
+          <!-- SIDE 1: FRONT (ARCH + TESTING) -->
+          <!-- ============================== -->
+          <div class="border-2 border-slate-700 p-2.5 bg-white rounded mb-6 shadow-sm">
+            
+            <!-- Header Banner -->
+            <div class="text-center border-b-2 border-slate-800 pb-1 mb-1.5 flex justify-between items-center px-1">
+              <span class="text-[10px] font-bold text-slate-600">SWE Exam 3 • Dr. Sadasivuni</span>
+              <span class="handwritten-title text-sm font-bold text-indigo-950 uppercase tracking-tight">PAGE 1: ARCHITECTURE, SDLC & SOFTWARE TESTING</span>
+              <span class="text-[9px] font-bold text-rose-600 border border-rose-400 px-1 rounded">NO DIAGRAMS • NOTATION & TEXT ONLY</span>
             </div>
 
-            <div class="grid grid-cols-2 gap-3 text-[10px] leading-tight">
+            <div class="grid grid-cols-3 gap-2 text-[8.5pt] leading-[1.12]">
               
-              <!-- Block 1: SDLC & Essentials -->
-              <div class="border border-slate-300 p-2 rounded">
-                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">1. SDLC, Ethics & Quality Attributes</h3>
-                <ul class="list-disc list-inside space-y-0.5">
-                  <li><strong>SDLC:</strong> Software Development Life Cycle: Requirements &rarr; Design &rarr; Implementation &rarr; Testing &rarr; Deployment &rarr; Maintenance.</li>
-                  <li><strong>4 P's:</strong> People, Product, Process, Project.</li>
-                  <li><strong>4 Attributes of Good Software:</strong>
-                    1. <em>Maintainability</em> (evolves with needs); 
-                    2. <em>Dependability & Security</em> (reliability, safety); 
-                    3. <em>Efficiency</em> (CPU, memory, response time); 
-                    4. <em>Acceptability</em> (usable, compatible).
-                  </li>
-                  <li><strong>Cost Distribution:</strong> ~60% Development, ~40% Testing. For custom products, evolution costs exceed dev costs!</li>
-                  <li><strong>ACM/IEEE Ethics:</strong> 1. Public, 2. Client & Employer, 3. Product, 4. Judgment, 5. Management, 6. Profession, 7. Colleagues, 8. Self.</li>
-                </ul>
+              <!-- Column 1: SDLC + Kruchten 4+1 -->
+              <div class="space-y-1.5 border-r border-slate-300 pr-1.5">
+                
+                <!-- SDLC & 4 Ps -->
+                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
+                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
+                    1. SDLC, 4 P's & Ethics
+                  </div>
+                  • <b>SDLC:</b> Req &rarr; Design &rarr; Impl &rarr; Test &rarr; Deploy &rarr; Maint.<br>
+                  • <b>4 P's:</b> People, Product, Process, Project.<br>
+                  • <b>4 Attributes:</b> Maintainability, Dependability/Security, Efficiency, Acceptability.<br>
+                  • <b>Cost:</b> 60% Dev, 40% Test. Evolution cost &gt; Dev cost for custom software.<br>
+                  • <b>Ethics (ACM/IEEE):</b> Public &gt; Client/Employer &gt; Product &gt; Judgment &gt; Management &gt; Profession &gt; Colleagues &gt; Self.
+                </div>
+
+                <!-- Kruchten 4+1 View Model -->
+                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
+                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
+                    2. Kruchten 4+1 View Model
+                  </div>
+                  • <b>Logical View:</b> End-user functionality, classes, domain models. (Audience: Devs/Users)<br>
+                  • <b>Process View:</b> Concurrency, threads, runtime performance, scalability. (Audience: Devs)<br>
+                  • <b>Development View:</b> Code artifacts, packages, modules, build hierarchy. (Audience: Devs)<br>
+                  • <b>Physical View:</b> Hardware nodes, networks, servers, deployment. (Audience: Ops)<br>
+                  • <b>+1 Scenarios (Use Cases):</b> Unifies & links all 4 views together!
+                </div>
+
+                <!-- IEEE Architecture Def & Decisions -->
+                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
+                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
+                    3. Architecture Decisions
+                  </div>
+                  • <b>IEEE Def:</b> "Fundamental organization embodied in components, relationships to one another/environment, principles of design & evolution."<br>
+                  • <b>Partitioning 3 steps:</b> 1. System Structuring, 2. Control Modeling, 3. Modular Decomposition.<br>
+                  • <b>Why Plan?</b> Stakeholder communication, pre-code system analysis, large-scale reuse, security control access.
+                </div>
+
               </div>
 
-              <!-- Block 2: Requirements Rules -->
-              <div class="border border-slate-300 p-2 rounded">
-                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">2. Requirements Engineering</h3>
-                <ul class="list-disc list-inside space-y-0.5">
-                  <li><strong>Functional:</strong> What system MUST do (services, reactions, inputs &rarr; outputs).</li>
-                  <li><strong>Non-Functional (NFR):</strong> Quality constraints (performance, security, portability, reliability).</li>
-                  <li><strong>Testability Trap:</strong> Subjective terms ("instantaneously", "user-friendly", "little training") must be rewritten into measurable metrics (e.g. "&le; 200ms latency", "&le; 2 errors per 8 hrs").</li>
-                  <li><strong>Use Case Relationships:</strong>
-                    <br>&bull; <code>&laquo;include&raquo;</code>: Mandatory sub-task; base use case is INCOMPLETE without it.
-                    <br>&bull; <code>&laquo;extend&raquo;</code>: Optional sub-task triggered at extension points; base is complete alone.
-                  </li>
-                </ul>
+              <!-- Column 2: 4 Architectural Patterns & Control Models -->
+              <div class="space-y-1.5 border-r border-slate-300 pr-1.5">
+                
+                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
+                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
+                    4. Four Architectural Patterns
+                  </div>
+                  • <b>1. Layered:</b> Functionality split into levels; layer N only calls layer N-1.<br>
+                  &nbsp;&nbsp;(+) Modular, replaceable layers, security defense-in-depth.<br>
+                  &nbsp;&nbsp;(-) Hard clean separation; perf overhead through calls.<br>
+                  &nbsp;&nbsp;<i>Ex:</i> UI &rarr; Auth/Forms &rarr; Logic &rarr; DB.<br>
+                  • <b>2. Repository (Blackboard):</b> Passive central DB + active tools.<br>
+                  &nbsp;&nbsp;(+) Efficient large data sharing, tool independence.<br>
+                  &nbsp;&nbsp;(-) Single point of failure; data schema compromise.<br>
+                  &nbsp;&nbsp;<i>Ex:</i> IDE (Project Info/Code in center).<br>
+                  • <b>3. Client-Server:</b> Servers provide services; clients call via network.<br>
+                  &nbsp;&nbsp;(+) Distributed, scalable, independent upgrades.<br>
+                  &nbsp;&nbsp;(-) Network latency, each service point of failure.<br>
+                  &nbsp;&nbsp;<i>Ex:</i> Film Library (Video, Catalogue, Picture servers).<br>
+                  • <b>4. Pipe & Filter:</b> Sequential data transformations.<br>
+                  &nbsp;&nbsp;(+) High reuse, easy to add filter, Unix style.<br>
+                  &nbsp;&nbsp;(-) Agreed data format overhead, latency.<br>
+                  &nbsp;&nbsp;<i>Ex:</i> Invoice &rarr; Process &rarr; Payments &rarr; Receipts.
+                </div>
+
+                <!-- Control Models -->
+                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
+                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
+                    5. System Control Models
+                  </div>
+                  • <b>Centralized - Call-Return:</b> Top-down subroutine tree for sequential systems (Main &rarr; Subsystems &rarr; Methods).<br>
+                  • <b>Centralized - Manager:</b> One System Controller starts/stops/coordinates concurrent tasks (Sensors, Actuators, Fault Handler, UI).<br>
+                  • <b>Event - Broadcast:</b> Events sent to message bus; registered subsystems handle. (Decentralized, but uncertain handling time).<br>
+                  • <b>Event - Interrupt-Driven:</b> Memory-mapped hardware interrupt array &rarr; handlers. Ultra fast real-time, but hard to validate!
+                </div>
+
               </div>
 
-              <!-- Block 3: Architectural Design -->
-              <div class="border border-slate-300 p-2 rounded col-span-2">
-                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">3. Kruchten 4+1 View Model & Architectural Styles</h3>
-                <div class="grid grid-cols-4 gap-2 text-[9.5px] mb-2">
-                  <div class="bg-slate-50 p-1.5 border rounded">
-                    <strong>1. Logical View:</strong> Class diagrams, statecharts. End-user domain concepts.
+              <!-- Column 3: Testing Fundamentals, V-Model & Scaffolding -->
+              <div class="space-y-1.5">
+                
+                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
+                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
+                    6. Testing V&V & Scaffolding
                   </div>
-                  <div class="bg-slate-50 p-1.5 border rounded">
-                    <strong>2. Process View:</strong> Activity & Sequence. Concurrency, performance, scalability.
-                  </div>
-                  <div class="bg-slate-50 p-1.5 border rounded">
-                    <strong>3. Development View:</strong> Packages, components. Programmers' code organization.
-                  </div>
-                  <div class="bg-slate-50 p-1.5 border rounded">
-                    <strong>4. Physical View:</strong> Hardware nodes, network deployment topology.
-                  </div>
-                </div>
-                <div class="text-[9px] bg-indigo-50/50 p-1.5 border border-indigo-200 rounded">
-                  <strong>+1 Unified View:</strong> Use Cases / Scenarios that tie the 4 views together.
+                  • <b>Verification:</b> "Are we building the product RIGHT?" (conforms to specification).<br>
+                  • <b>Validation:</b> "Are we building the RIGHT product?" (satisfies user needs).<br>
+                  • <b>Dijkstra's Axiom:</b> "Testing shows the presence of bugs, NEVER their absence!"<br>
+                  • <b>Defect vs Validation:</b> Defect exposes flaws; Validation demonstrates functionality meets requirements.<br>
+                  • <b>Test Scaffolding:</b><br>
+                  &nbsp;&nbsp;* <i>Driver:</i> Simulates caller module (invokes unit).<br>
+                  &nbsp;&nbsp;* <i>Stub/Mock:</i> Simulates called sub-module (dummy return).<br>
+                  &nbsp;&nbsp;* <i>Harness:</i> Test execution environment (JUnit).<br>
+                  &nbsp;&nbsp;* <i>Oracle:</i> Compares actual vs expected output.
                 </div>
 
-                <div class="mt-2 grid grid-cols-4 gap-2 text-[9px]">
-                  <div class="border p-1 rounded">
-                    <strong>Layered:</strong> UI &rarr; Business &rarr; DB. (+) Modular, portable. (-) Layer overhead.
+                <!-- V-Model & JUnit -->
+                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
+                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
+                    7. V-Model & JUnit Lifecycle
                   </div>
-                  <div class="border p-1 rounded">
-                    <strong>Repository:</strong> Central DB + tools. (+) Efficient data sharing. (-) Single point of failure.
-                  </div>
-                  <div class="border p-1 rounded">
-                    <strong>Client-Server:</strong> Distributed servers. (+) Scalable, network-ready. (-) Network latency/security.
-                  </div>
-                  <div class="border p-1 rounded">
-                    <strong>Pipe & Filter:</strong> Unix stream filters. (+) Reusable transforms. (-) Overhead parsing formats.
-                  </div>
+                  • <b>V-Model Pairs:</b><br>
+                  &nbsp;&nbsp;Req &harr; Acceptance Test (Alpha/Beta)<br>
+                  &nbsp;&nbsp;System Spec &harr; System Testing<br>
+                  &nbsp;&nbsp;Arch Design &harr; Subsystem/Integration Testing<br>
+                  &nbsp;&nbsp;Detailed Design &harr; Unit Testing<br>
+                  • <b>JUnit Annotations:</b><br>
+                  &nbsp;&nbsp;<code>@Test</code>: Defines test method.<br>
+                  &nbsp;&nbsp;<code>@Before / @BeforeEach</code>: Runs before EVERY test.<br>
+                  &nbsp;&nbsp;<code>@After / @AfterEach</code>: Runs after EVERY test.<br>
+                  &nbsp;&nbsp;<code>@BeforeClass / @BeforeAll</code>: Runs ONCE before suite (static, e.g. open DB).<br>
+                  &nbsp;&nbsp;<code>@AfterClass / @AfterAll</code>: Runs ONCE after suite.
                 </div>
-              </div>
 
-              <!-- Block 4: Testing Concepts & V-Model -->
-              <div class="border border-slate-300 p-2 rounded col-span-2">
-                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">4. Software Testing Definitions & Scaffolding</h3>
-                <div class="grid grid-cols-3 gap-2 text-[9.5px]">
-                  <div>
-                    <strong>Verification:</strong> "Are we building the product RIGHT?" (conforms to spec).<br>
-                    <strong>Validation:</strong> "Are we building the RIGHT product?" (meets user needs).<br>
-                    <strong>Dijkstra's Axiom:</strong> Testing shows presence of bugs, NEVER their absence!
+                <!-- Mentcare & ATM Architecture -->
+                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
+                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
+                    8. App Architectures (ATM & Mentcare)
                   </div>
-                  <div>
-                    <strong>Test Scaffolding:</strong><br>
-                    &bull; <em>Driver:</em> Module calling the unit under test.<br>
-                    &bull; <em>Stub / Mock:</em> Dummy module called by unit.<br>
-                    &bull; <em>Harness:</em> Framework executing tests (JUnit).<br>
-                    &bull; <em>Oracle:</em> Verifier comparing expected vs actual.
-                  </div>
-                  <div>
-                    <strong>JUnit Lifecycle:</strong><br>
-                    <code>@Test</code>: Test case method.<br>
-                    <code>@Before / @BeforeEach</code>: Runs before EVERY test.<br>
-                    <code>@After / @AfterEach</code>: Runs after EVERY test.<br>
-                    <code>@BeforeClass / @All</code>: Runs ONCE before suite.
-                  </div>
+                  • <b>ATM 4-Tier Pipeline:</b><br>
+                  &nbsp;&nbsp;I/O Processing &harr; App Logic &harr; Tx Manager &harr; DB<br>
+                  • <b>ATM 3 Phases:</b> Input (Get ID, Validate, Select) &rarr; Process (Query, Update) &rarr; Output (Print, Return card, Dispense cash).<br>
+                  • <b>Mentcare 4 Layers:</b> 1. Web Browser &rarr; 2. Login, Role, Menu, Validation &rarr; 3. Security, Patient Info, Report &rarr; 4. Patient DB.
                 </div>
+
               </div>
 
             </div>
           </div>
 
-          <!-- PAGE BREAK FOR DOUBLE SIDED -->
+          <!-- PAGE BREAK FOR DOUBLE-SIDED PRINTING -->
           <div class="page-break"></div>
 
-          <!-- SIDE 2 (BACK) -->
-          <div class="border border-slate-400 p-4 bg-white rounded-lg">
-            <div class="text-center border-b-2 border-slate-800 pb-1 mb-2">
-              <h2 class="text-sm font-extrabold uppercase tracking-wide">SWE Exam 3 Reference • SIDE 2: UML Rules, Structural Coverage & Database</h2>
-              <p class="text-[9px] text-slate-600 font-mono">STRICT: NO DIAGRAMS ALLOWED • Hand-Written Notation Guide</p>
+          <!-- ============================== -->
+          <!-- SIDE 2: BACK (UML + WHITE-BOX) -->
+          <!-- ============================== -->
+          <div class="border-2 border-slate-700 p-2.5 bg-white rounded shadow-sm">
+            
+            <!-- Header Banner -->
+            <div class="text-center border-b-2 border-slate-800 pb-1 mb-1.5 flex justify-between items-center px-1">
+              <span class="text-[10px] font-bold text-slate-600">SWE Exam 3 • Dr. Sadasivuni</span>
+              <span class="handwritten-title text-sm font-bold text-indigo-950 uppercase tracking-tight">PAGE 2: UML STRICT RULES, WHITE-BOX TESTING & DATABASE</span>
+              <span class="text-[9px] font-bold text-rose-600 border border-rose-400 px-1 rounded">NO DIAGRAMS • NOTATION & TEXT ONLY</span>
             </div>
 
-            <div class="grid grid-cols-2 gap-3 text-[10px] leading-tight">
-
-              <!-- Block 5: Strict UML Rules -->
-              <div class="border border-slate-300 p-2 rounded">
-                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">5. UML Class Diagram Strict Rules</h3>
-                <ul class="list-disc list-inside space-y-0.5">
-                  <li class="text-rose-700 font-bold">GOLDEN RULE: Any class drawn with 2 compartments is WRONG! Always draw 3 compartments: 1. Name, 2. Attributes, 3. Operations (leave blank if none).</li>
-                  <li><strong>Finding Classes:</strong> Nouns = Class; Noun Phrases = Attributes; Verbs = Operations.</li>
-                  <li><strong>Visibility:</strong> <code>+</code> Public | <code>-</code> Private | <code>#</code> Protected | <code>~</code> Package.</li>
-                  <li><strong>Relationships & Text Notations:</strong>
-                    <br>&bull; <em>Aggregation</em> <code>&lt;&gt;--</code> : "has-a", open diamond at whole. Doctor outlives Department.
-                    <br>&bull; <em>Composition</em> <code>&lt;*&gt;--</code> : "part-of", solid diamond at whole. LabTest destroyed if Department deleted!
-                    <br>&bull; <em>Generalization</em> <code>--|&gt;</code> : "is-a", solid line with hollow triangle at parent.
-                    <br>&bull; <em>Realization</em> <code>..|&gt;</code> : implements interface, dashed line with hollow triangle.
-                    <br>&bull; <em>Dependency</em> <code>..&gt;</code> : uses, dashed line with open arrow.
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Block 6: Interaction & Behavioral UML -->
-              <div class="border border-slate-300 p-2 rounded">
-                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">6. Sequence, Activity & State Notations</h3>
-                <ul class="list-disc list-inside space-y-0.5">
-                  <li><strong>Sequence Diagrams:</strong>
-                    <br>&bull; Synchronous call: Solid line, filled arrowhead <code>&mdash;&mdash;&blacktriangleright;</code>
-                    <br>&bull; Asynchronous: Solid line, open arrowhead <code>&mdash;&mdash;&gt;</code>
-                    <br>&bull; Return: Dashed line, open arrowhead <code>&lt;- - -</code>
-                    <br>&bull; Fragments: <code>alt</code> (if-else), <code>opt</code> (if only), <code>loop</code> (while/for), <code>par</code> (parallel).
-                  </li>
-                  <li><strong>Activity Diagrams:</strong>
-                    <br>&bull; Fork: 1 incoming flow &rarr; 2+ concurrent parallel flows.
-                    <br>&bull; Join: 2+ incoming concurrent flows &rarr; 1 outgoing flow.
-                    <br>&bull; Swimlanes: Partitions indicating actor/system responsibility.
-                  </li>
-                  <li><strong>Statechart Transition Syntax:</strong>
-                    <br><code>Event [Guard] / Action</code>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Block 7: Structural Testing & MC/DC -->
-              <div class="border border-slate-300 p-2 rounded col-span-2">
-                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">7. Structural (White-Box) Testing, Coverage & MC/DC</h3>
-                <div class="grid grid-cols-3 gap-2 text-[9.5px]">
-                  <div>
-                    <strong>Statement Coverage ($C_0$):</strong><br>
-                    $\frac{\text{statements executed}}{\text{total statements}} \times 100\%$<br>
-                    <span class="text-rose-700">Weakest!</span> Misses untaken false branches in single <code>if</code> blocks.
+            <div class="grid grid-cols-3 gap-2 text-[8.5pt] leading-[1.12]">
+              
+              <!-- Column 1: UML Strict Class Diagram Rules -->
+              <div class="space-y-1.5 border-r border-slate-300 pr-1.5">
+                
+                <div class="p-1 border-2 border-rose-500 rounded bg-rose-50/30">
+                  <div class="font-bold text-rose-950 uppercase text-[9.5pt] border-b border-rose-300 pb-0.5 mb-0.5">
+                    ★ PROFESSOR'S GOLDEN RULE
                   </div>
-                  <div>
-                    <strong>Branch Coverage ($C_1$):</strong><br>
-                    Every decision edge (True and False) traversed at least once.<br>
-                    <strong>Subsumption:</strong> Branch coverage subsumes Statement coverage!
-                  </div>
-                  <div>
-                    <strong>MC/DC Coverage:</strong><br>
-                    Avionics safety standard (DO-178C). Each condition must independently affect decision outcome with others fixed.<br>
-                    Test cases required: $n + 1$ (vs $2^n$ full).
-                  </div>
+                  <span class="text-rose-800 font-bold">"Any class with 2 compartments is WRONG! Always draw all 3 compartments."</span><br>
+                  • Compartment 1: Class Name (Italic = Abstract)<br>
+                  • Compartment 2: Attributes <code>visibility name: type</code><br>
+                  • Compartment 3: Operations <code>visibility name(args): ret</code><br>
+                  <i>(Even if empty, 3rd box line MUST be drawn!)</i>
                 </div>
 
-                <div class="mt-2 grid grid-cols-2 gap-2 text-[9.5px] border-t pt-1">
-                  <div>
-                    <strong>Equivalence Partitioning (EP):</strong> Divide inputs into valid and invalid classes. Pick 1 representative per partition.
+                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
+                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
+                    9. UML Notations & Visibility
                   </div>
-                  <div>
-                    <strong>Boundary Value Analysis (BVA):</strong> Test edges of partitions ($min-1, min, min+1, nom, max-1, max, max+1$).
-                  </div>
+                  • <b>Visibility:</b> <code>+</code> Public | <code>-</code> Private | <code>#</code> Protected | <code>~</code> Package<br>
+                  • <b>Finding:</b> Noun = Class, Noun phrase = Attribute, Verb = Method.<br>
+                  • <b>Association:</b> Solid line <code>---</code> with multiplicity (1, 0..1, 1..*, *).<br>
+                  • <b>Aggregation <code>&lt;&gt;--</code> :</b> Open diamond at whole. "has-a", weak ownership. Part outlives whole! E.g. <code>Department &lt;&gt;-- Doctor</code> (doctors retain licenses).<br>
+                  • <b>Composition <code>&lt;*&gt;--</code> :</b> Solid diamond at whole. "part-of", strong ownership. Part destroyed with whole! E.g. <code>Department &lt;*&gt;-- LabTest</code>, <code>Customer &lt;*&gt;-- Address</code>.<br>
+                  • <b>Generalization <code>--|&gt;</code> :</b> Hollow triangle at parent. "is-a" inheritance. E.g. <code>MedicalRecord --|&gt; SurgicalRecord</code>.<br>
+                  • <b>Realization <code>..|&gt;</code> :</b> Dashed line with hollow triangle at Interface. E.g. <code>SavingsAccount ..|&gt; InterestBearing</code>.<br>
+                  • <b>Dependency <code>..&gt;</code> :</b> Dashed line with open arrow ("uses").
                 </div>
+
+                <!-- Sequence Diagram -->
+                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
+                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
+                    10. Sequence Diagram Rules
+                  </div>
+                  • <b>Lifeline:</b> Vertical dashed line under object box.<br>
+                  • <b>Activation:</b> Vertical thin rectangle of execution.<br>
+                  • <b>Sync Message:</b> Solid line + filled arrowhead <code>&mdash;&mdash;&blacktriangleright;</code> (blocking).<br>
+                  • <b>Async Message:</b> Solid line + stick open arrow <code>&mdash;&mdash;&gt;</code> (non-blocking).<br>
+                  • <b>Return:</b> Dashed line + stick arrow <code>&lt;- - -</code><br>
+                  • <b>Fragments:</b> <code>alt</code> (if-else separated by dashed line), <code>opt</code> (if only), <code>loop [min, max]</code>, <code>par</code> (parallel).<br>
+                  • <b>Creation/Destruction:</b> <code>&laquo;create&raquo;</code> message points to box; <code>X</code> marks destruction.
+                </div>
+
               </div>
 
-              <!-- Block 8: Database Fundamentals -->
-              <div class="border border-slate-300 p-2 rounded col-span-2">
-                <h3 class="font-bold text-indigo-950 uppercase border-b pb-0.5 mb-1 text-[11px]">8. Relational Database & Normalization Summary</h3>
-                <div class="grid grid-cols-3 gap-2 text-[9.5px]">
-                  <div>
-                    <strong>Integrity Rules:</strong><br>
-                    &bull; <em>Entity Integrity:</em> Primary Key cannot be null.<br>
-                    &bull; <em>Referential Integrity:</em> Foreign Key must match valid PK or be null.
+              <!-- Column 2: Behavioral UML & White-Box Testing -->
+              <div class="space-y-1.5 border-r border-slate-300 pr-1.5">
+                
+                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
+                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
+                    11. Activity & Statechart UML
                   </div>
-                  <div>
-                    <strong>Normal Forms (1NF &rarr; 3NF):</strong><br>
-                    &bull; <strong>1NF:</strong> Atomic values, no repeating groups.<br>
-                    &bull; <strong>2NF:</strong> 1NF + no partial key dependencies (attributes depend on full composite PK).
-                  </div>
-                  <div>
-                    &bull; <strong>3NF:</strong> 2NF + no transitive dependencies (non-key attribute depends on another non-key).<br>
-                    <em>"All attributes depend on the key, the whole key, and nothing but the key."</em>
-                  </div>
+                  • <b>Activity Diagrams:</b><br>
+                  &nbsp;&nbsp;* Initial Node: Solid black circle.<br>
+                  &nbsp;&nbsp;* Activity: Rounded rectangle.<br>
+                  &nbsp;&nbsp;* Decision / Merge: Diamond with <code>[guard]</code>.<br>
+                  &nbsp;&nbsp;* Fork: 1 incoming &rarr; 2+ concurrent flows (thick bar).<br>
+                  &nbsp;&nbsp;* Join: 2+ concurrent &rarr; 1 outgoing flow (thick bar).<br>
+                  &nbsp;&nbsp;* Final Node: Bullseye (dot in circle).<br>
+                  &nbsp;&nbsp;* Swimlanes: Partitions showing responsible actors.<br>
+                  • <b>State Machine (Microwave):</b><br>
+                  &nbsp;&nbsp;* Transition Syntax: <code>Event [Guard] / Action</code><br>
+                  &nbsp;&nbsp;<i>Ex:</i> <code>start [door_closed] / run_generator(300W)</code>
                 </div>
+
+                <!-- White-Box & Structural Coverage -->
+                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
+                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
+                    12. Structural Testing & Coverage
+                  </div>
+                  • <b>Statement Coverage ($C_0$):</b><br>
+                  &nbsp;&nbsp;$\frac{\text{statements executed}}{\text{total statements}} \times 100\%$. Weakest! Misses false branches in single <code>if</code> blocks.<br>
+                  • <b>Branch Coverage ($C_1$):</b><br>
+                  &nbsp;&nbsp;Every decision edge (True & False) taken &ge; 1.<br>
+                  &nbsp;&nbsp;<b>Subsumption:</b> Branch subsumes Statement ($C_1 \implies C_0$).<br>
+                  • <b>Condition Coverage:</b> Each individual boolean sub-expression evaluates to T & F at least once.<br>
+                  • <b>MC/DC (Modified Condition/Decision):</b><br>
+                  &nbsp;&nbsp;Avionics DO-178C standard. Each condition shown to independently affect decision outcome with other conditions held fixed.<br>
+                  &nbsp;&nbsp;Test count: <b>$n + 1$</b> tests (vs $2^n$ multiple condition).<br>
+                  • <b>Path Coverage:</b> Every execution path. Often infinite/intractable due to loops.<br>
+                  • <b>Loop Boundary:</b> 0 iterations, 1 iteration, typical, max-1, max iterations.
+                </div>
+
+              </div>
+
+              <!-- Column 3: Black-Box, 5 Test Cases & Database -->
+              <div class="space-y-1.5">
+                
+                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
+                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
+                    13. Black-Box (EP & BVA)
+                  </div>
+                  • <b>Equivalence Partitioning (EP):</b> Partition input into valid & invalid classes. Pick 1 test value per class.<br>
+                  • <b>Boundary Value Analysis (BVA):</b> Test edges of ranges ($min-1, min, min+1, nom, max-1, max, max+1$).<br>
+                  • <b>Example PIN [0000..9999]:</b> Valid: 1234; Invalid: -1, 10000, "ABCD", 3-digits, 5-digits.
+                </div>
+
+                <!-- 5 Test Cases Exam Template -->
+                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
+                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
+                    14. 5 Test Cases Structure
+                  </div>
+                  Format: <code>[ID, Objective, Pre-Cond, Steps/Input, Expected Result, Criteria]</code><br>
+                  • <b>TC-1 (Valid Eq):</b> Normal input &rarr; Success HTTP 200/201.<br>
+                  • <b>TC-2 (Min BVA):</b> Input = 0 or min &rarr; Valid boundary accepted.<br>
+                  • <b>TC-3 (Negative BVA):</b> Input = min-1 or max+1 &rarr; Form blocked, specific error message displayed.<br>
+                  • <b>TC-4 (Concurrency):</b> Simultaneous requests &rarr; Balance protected, race condition prevented.<br>
+                  • <b>TC-5 (Exception/Null):</b> Null required field &rarr; HTTP 400 Bad Request, graceful error logging (no 500 crash).
+                </div>
+
+                <!-- Database & Normalization -->
+                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
+                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
+                    15. Database & Normal Forms
+                  </div>
+                  • <b>Entity Integrity:</b> Primary Key (PK) cannot be NULL.<br>
+                  • <b>Referential Integrity:</b> Foreign Key (FK) must match existing PK in referenced table or be NULL.<br>
+                  • <b>1NF:</b> Atomic column values, no repeating groups.<br>
+                  • <b>2NF:</b> 1NF + no partial functional dependencies (all non-key attributes fully depend on composite PK).<br>
+                  • <b>3NF:</b> 2NF + no transitive dependencies (no non-key attribute depends on another non-key attribute).<br>
+                  <i>"Each attribute must depend on the key, the whole key, and nothing but the key!"</i>
+                </div>
+
               </div>
 
             </div>
@@ -620,6 +1097,22 @@
       lucide.createIcons();
     }
 
+    // Architecture Drill Switching
+    function showArchDrill(drillId) {
+      document.querySelectorAll('.arch-drill-view').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.arch-drill-btn').forEach(b => {
+        b.classList.remove('bg-indigo-600', 'text-white');
+        b.classList.add('bg-slate-100', 'text-slate-700');
+      });
+
+      document.getElementById('arch-' + drillId).classList.remove('hidden');
+      const activeBtn = document.getElementById('btn-arch-' + drillId);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
+        activeBtn.classList.add('bg-indigo-600', 'text-white');
+      }
+    }
+
     // UML Drill Sub-views
     function showUmlDrill(drillId) {
       document.querySelectorAll('.uml-drill-view').forEach(el => el.classList.add('hidden'));
@@ -636,7 +1129,142 @@
       }
     }
 
-    // Verification Logic for UML Drills
+    // Architecture Verifications
+    function checkMentcareDrill() {
+      const l1 = document.getElementById('m-layer-1').value;
+      const l2 = document.getElementById('m-layer-2').value;
+      const l3 = document.getElementById('m-layer-3').value;
+      const l4 = document.getElementById('m-layer-4').value;
+      const fb = document.getElementById('mentcare-fb');
+
+      if (l1 === 'correct' && l2 === 'correct' && l3 === 'correct' && l4 === 'correct') {
+        fb.className = "mt-3 text-xs font-semibold text-emerald-700 bg-emerald-50 p-2.5 rounded border border-emerald-200";
+        fb.innerHTML = "✅ PERFECT! Layer 1: Web browser &rarr; Layer 2: Login, Role checking, Menu mgr, Validation &rarr; Layer 3: Security, Patient info, Reports &rarr; Layer 4: Transaction mgmt & Patient DB.";
+      } else {
+        fb.className = "mt-3 text-xs font-semibold text-rose-700 bg-rose-50 p-2.5 rounded border border-rose-200";
+        fb.innerHTML = "❌ Check your layers. Top is Web browser; Layer 2 is Auth & Communications; Layer 3 is Business Logic (Patient info & reports); Bottom is Database!";
+      }
+    }
+
+    function checkRepoDrill() {
+      const q1 = document.getElementById('repo-q1').value;
+      const q2 = document.getElementById('repo-q2').value;
+      const q3 = document.getElementById('repo-q3').value;
+      const fb = document.getElementById('repo-fb');
+
+      if (q1 === 'correct' && q2 === 'correct' && q3 === 'correct') {
+        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
+        fb.innerHTML = "✅ Correct! Central store = Project Info/Code; surrounded by editors, generators, translators; weakness = single point of failure.";
+      } else {
+        fb.className = "mt-2 text-xs font-semibold text-rose-700";
+        fb.innerHTML = "❌ Re-check your answers. Look at Slide 31 (IDE Example).";
+      }
+    }
+
+    function checkClientServerDrill() {
+      const q1 = document.getElementById('cs-q1').value.toLowerCase().trim();
+      const q2 = document.getElementById('cs-q2').value;
+      const q3 = document.getElementById('cs-q3').value;
+      const fb = document.getElementById('cs-fb');
+
+      const q1Correct = q1.includes('network') || q1.includes('wide-bandwidth') || q1.includes('bandwidth');
+      if (q1Correct && q2 === 'correct' && q3 === 'correct') {
+        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
+        fb.innerHTML = "✅ Excellent! Connected via Wide-bandwidth network to Catalogue, Video, Picture, Hypertext servers.";
+      } else {
+        fb.className = "mt-2 text-xs font-semibold text-rose-700";
+        fb.innerHTML = "❌ Check: Connecting line is 'Wide-bandwidth network'; servers are Catalogue, Video, Picture, Hypertext.";
+      }
+    }
+
+    function checkPipeFilterDrill() {
+      const s1 = document.getElementById('pf-s1').value.toLowerCase().trim();
+      const s2 = document.getElementById('pf-s2').value.toLowerCase().trim();
+      const s3 = document.getElementById('pf-s3').value.toLowerCase().trim();
+      const s4 = document.getElementById('pf-s4').value.toLowerCase().trim();
+      const fb = document.getElementById('pf-fb');
+
+      const ok1 = s1.includes('process') || s1.includes('invoice');
+      const ok2 = s2.includes('identify') || s2.includes('payment');
+      const ok3 = s3.includes('receipt');
+      const ok4 = s4.includes('reminder');
+
+      if (ok1 && ok2 && ok3 && ok4) {
+        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
+        fb.innerHTML = "✅ Perfect Invoicing Pipeline: Process Invoices &rarr; Identify Payments &rarr; Issue Receipts (Receipts) & Find Payments Due &rarr; Issue Reminders!";
+      } else {
+        fb.className = "mt-2 text-xs font-semibold text-rose-700";
+        fb.innerHTML = "❌ Hints: Filter 1 = 'Process Invoices', Filter 2 = 'Identify Payments', Target A = 'Receipts', Target B = 'Reminders'.";
+      }
+    }
+
+    function checkAtmDrill() {
+      const t2 = document.getElementById('atm-tier2').value.toLowerCase().trim();
+      const t3 = document.getElementById('atm-tier3').value.toLowerCase().trim();
+      const fb = document.getElementById('atm-fb');
+
+      const ok2 = t2.includes('application') || t2.includes('logic');
+      const ok3 = t3.includes('transaction') || t3.includes('manager');
+
+      if (ok2 && ok3) {
+        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
+        fb.innerHTML = "✅ Correct 4-tier pipeline: I/O Processing &harr; Application Logic &harr; Transaction Manager &harr; Database.";
+      } else {
+        fb.className = "mt-2 text-xs font-semibold text-rose-700";
+        fb.innerHTML = "❌ Hint: Tier 2 is 'Application logic'; Tier 3 is 'Transaction manager' (Slide 53).";
+      }
+    }
+
+    function checkControlDrill() {
+      const q1 = document.getElementById('ctrl-q1').value;
+      const q2 = document.getElementById('ctrl-q2').value;
+      const fb = document.getElementById('ctrl-fb');
+
+      if (q1 === 'correct' && q2 === 'correct') {
+        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
+        fb.innerHTML = "✅ Correct! Call-Return = sequential subroutine tree; Manager model = concurrent systems coordinating sensors, actuators, handlers, and UI.";
+      } else {
+        fb.className = "mt-2 text-xs font-semibold text-rose-700";
+        fb.innerHTML = "❌ Check: Call-Return applies to sequential; Manager applies to concurrent.";
+      }
+    }
+
+    function checkInterruptDrill() {
+      const q1 = document.getElementById('int-q1').value;
+      const q3 = document.getElementById('int-q3').value;
+      const fb = document.getElementById('int-fb');
+
+      if (q1 === 'correct' && q3 === 'correct') {
+        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
+        fb.innerHTML = "✅ Correct! Memory-mapped handlers ensure fast response, but concurrent timing makes validation/testing complex.";
+      } else {
+        fb.className = "mt-2 text-xs font-semibold text-rose-700";
+        fb.innerHTML = "❌ Check answers against Slide 46.";
+      }
+    }
+
+    function checkCompilerDrill() {
+      const s1 = document.getElementById('comp-s1').value.toLowerCase().trim();
+      const s2 = document.getElementById('comp-s2').value.toLowerCase().trim();
+      const s3 = document.getElementById('comp-s3').value.toLowerCase().trim();
+      const s4 = document.getElementById('comp-s4').value.toLowerCase().trim();
+      const fb = document.getElementById('comp-fb');
+
+      const ok1 = s1.includes('lexical');
+      const ok2 = s2.includes('syntactic') || s2.includes('syntax');
+      const ok3 = s3.includes('semantic');
+      const ok4 = s4.includes('code');
+
+      if (ok1 && ok2 && ok3 && ok4) {
+        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
+        fb.innerHTML = "✅ 100% Correct Compiler Pipeline: Lexical Analysis &rarr; Syntactic Analysis &rarr; Semantic Analysis &rarr; Code Generation (sharing Symbol table & Syntax tree)!";
+      } else {
+        fb.className = "mt-2 text-xs font-semibold text-rose-700";
+        fb.innerHTML = "❌ Hint: 1. Lexical analysis, 2. Syntactic analysis, 3. Semantic analysis, 4. Code generation (Slide 57).";
+      }
+    }
+
+    // UML Hospital Drill
     function checkHospitalDrill() {
       const r1 = document.getElementById('rel-dept-doc').value;
       const r2 = document.getElementById('rel-dept-lab').value;
@@ -673,6 +1301,39 @@
     // Comprehensive Questions Database from all lecture slides
     const ALL_QUESTIONS = [
       {
+        q: "What is the IEEE definition of software architecture?",
+        options: [
+          "The fundamental organization of a system, embodied in its components, their relationships to one another and the environment, and the principles governing its design and evolution.",
+          "The detailed class diagrams and database schema required for code implementation.",
+          "The high-level user interface mockups presented to the client.",
+          "The hardware topology consisting of cloud servers, microprocessors, and network switches."
+        ],
+        answer: 0,
+        explanation: "Slide 9 quotes the exact IEEE Definition of Software Architecture."
+      },
+      {
+        q: "In Kruchten's 4+1 View Model of software architecture, which view addresses concurrency, performance, and scalability?",
+        options: [
+          "Process View",
+          "Logical View",
+          "Physical View",
+          "Development View"
+        ],
+        answer: 0,
+        explanation: "The Process View deals with dynamic runtime threads, concurrency, and performance (Slide 20). Logical view deals with domain functionality."
+      },
+      {
+        q: "In Kruchten's 4+1 View Model, what is the role of the '+1' (Use Case Scenarios)?",
+        options: [
+          "It unifies and links the elements of the other 4 views together.",
+          "It is an optional view only used for web applications.",
+          "It replaces the physical hardware deployment model.",
+          "It is used exclusively by database administrators."
+        ],
+        answer: 0,
+        explanation: "Slide 16 notes that Use Case Scenarios unify and link the elements of the other 4 views, ensuring completeness with respect to requirements."
+      },
+      {
         q: "According to Dr. Sadasivuni's golden class diagram rule, drawing a class with only 2 compartments when it has no operations is:",
         options: [
           "Wrong! You must always draw all 3 compartments, leaving the operations compartment empty.",
@@ -693,6 +1354,50 @@
         ],
         answer: 0,
         explanation: "Aggregation is weak containment: the part (Doctor) outlives the whole (Department). Composition is strong containment where parts are destroyed with the whole."
+      },
+      {
+        q: "What is the primary architectural weakness of the Repository (Blackboard) architecture style?",
+        options: [
+          "The repository is a single point of failure and can easily become a communication bottleneck.",
+          "Components cannot share large datasets.",
+          "Data format changes are isolated and never affect tools.",
+          "It cannot be used with databases."
+        ],
+        answer: 0,
+        explanation: "Central passive repositories create a single point of failure; if the repository crashes or slows down, all dependent tools halt (Slide 32)."
+      },
+      {
+        q: "Which architectural style is best illustrated by Unix command-line pipes such as 'cat file.txt | cut -d, -f2 | sort | uniq -c'?",
+        options: [
+          "Pipe and Filter Architecture",
+          "Layered Model",
+          "Shared Repository Model",
+          "Client-Server Architecture"
+        ],
+        answer: 0,
+        explanation: "Slide 36 uses the exact Unix command line pipeline to illustrate the Pipe and Filter architecture."
+      },
+      {
+        q: "In system control modeling, what is the key difference between the Call-Return model and the Manager model?",
+        options: [
+          "Call-Return applies to sequential systems (top-down subroutine tree); Manager model applies to concurrent systems.",
+          "Call-Return is decentralized; Manager model is event-driven.",
+          "Call-Return requires hardware interrupts; Manager does not.",
+          "Manager model cannot handle user interfaces."
+        ],
+        answer: 0,
+        explanation: "Slides 42 & 43: Call-Return is top-down for sequential systems; Manager model is for concurrent systems where one process coordinates others."
+      },
+      {
+        q: "In the Mentcare layered architecture (Slide 54), what constitutes Layer 2 (User Communications / Interface Management)?",
+        options: [
+          "Login, Role checking, Form and menu manager, Data validation",
+          "Web browser and HTML UI only",
+          "Patient Database and Transaction Management",
+          "Security management and Report generation"
+        ],
+        answer: 0,
+        explanation: "Slide 54: Layer 2 contains Login, Role checking, Form and menu manager, and Data validation."
       },
       {
         q: "Which testing coverage metric guarantees that every decision statement evaluates to both TRUE and FALSE at least once?",
@@ -717,37 +1422,15 @@
         explanation: "Testing demonstrates defects exist; passing all tests only proves no defects were discovered by those specific test cases."
       },
       {
-        q: "In Kruchten's 4+1 View Model of software architecture, which view addresses concurrency, performance, and scalability?",
+        q: "In white-box testing, how does Modified Condition/Decision Coverage (MC/DC) reduce testing cost compared to Multiple Condition Coverage?",
         options: [
-          "Process View",
-          "Logical View",
-          "Physical View",
-          "Development View"
+          "It tests each condition independently affecting the outcome, requiring only n + 1 tests instead of 2^n tests.",
+          "It skips all negative conditions.",
+          "It requires only 2 tests regardless of the number of conditions.",
+          "It ignores composite boolean expressions."
         ],
         answer: 0,
-        explanation: "The Process View deals with runtime threads, processes, synchronization, and scalability. The Logical View deals with domain functionality."
-      },
-      {
-        q: "In a Sequence Diagram, what is the visual difference between a Synchronous message call and an Asynchronous message?",
-        options: [
-          "Synchronous uses a solid line with a filled triangular arrowhead; Asynchronous uses a solid line with an open stick arrowhead.",
-          "Synchronous uses a dashed line; Asynchronous uses a solid line.",
-          "Synchronous has no return arrow; Asynchronous always requires a return arrow.",
-          "Synchronous points upwards; Asynchronous points downwards."
-        ],
-        answer: 0,
-        explanation: "UML standard: filled arrowhead = synchronous (blocking); open/stick arrowhead = asynchronous (non-blocking)."
-      },
-      {
-        q: "What is the primary architectural weakness of the Repository (Blackboard) architecture style?",
-        options: [
-          "The repository is a single point of failure and can easily become a communication bottleneck.",
-          "Components cannot share large datasets.",
-          "Data format changes are isolated and never affect tools.",
-          "It cannot be used with databases."
-        ],
-        answer: 0,
-        explanation: "Central passive repositories create a single point of failure; if the repository crashes or slows down, all dependent tools halt."
+        explanation: "For n boolean conditions, Multiple Condition Coverage requires 2^n test cases, while MC/DC requires only n + 1 test cases while proving independent effect."
       },
       {
         q: "Which JUnit annotation designates a fixture method that must run ONCE before any of the test methods in the test class execute?",
@@ -761,28 +1444,6 @@
         explanation: "@BeforeClass (or @BeforeAll) executes once before any test methods, typically used to open expensive database connections or servers."
       },
       {
-        q: "In white-box testing, how does Modified Condition/Decision Coverage (MC/DC) reduce testing cost compared to Multiple Condition Coverage?",
-        options: [
-          "It tests each condition independently affecting the outcome, requiring only n + 1 tests instead of 2^n tests.",
-          "It skips all negative conditions.",
-          "It requires only 2 tests regardless of the number of conditions.",
-          "It ignores composite boolean expressions."
-        ],
-        answer: 0,
-        explanation: "For n boolean conditions, Multiple Condition Coverage requires 2^n test cases, while MC/DC requires only n + 1 test cases while proving independent effect."
-      },
-      {
-        q: "Which normalization stage eliminates partial functional dependencies on a composite primary key?",
-        options: [
-          "Second Normal Form (2NF)",
-          "First Normal Form (1NF)",
-          "Third Normal Form (3NF)",
-          "Boyce-Codd Normal Form (BCNF)"
-        ],
-        answer: 0,
-        explanation: "1NF removes repeating groups. 2NF requires 1NF AND that every non-prime attribute is fully functionally dependent on the entire primary key."
-      },
-      {
         q: "What is the difference between a Test Driver and a Test Stub?",
         options: [
           "A Driver simulates the calling component above the unit; a Stub simulates a called sub-component below the unit.",
@@ -794,48 +1455,15 @@
         explanation: "In scaffolding: Test Drivers simulate higher-level callers to invoke the method under test; Test Stubs replace unfinished lower-level modules called by the unit."
       },
       {
-        q: "What does the 4 P's of Software Engineering stand for?",
+        q: "Which normalization stage eliminates partial functional dependencies on a composite primary key?",
         options: [
-          "People, Product, Process, Project",
-          "Program, Protocol, Performance, Platform",
-          "Planning, Prototyping, Production, Polishing",
-          "Portability, Precision, Performance, Predictability"
+          "Second Normal Form (2NF)",
+          "First Normal Form (1NF)",
+          "Third Normal Form (3NF)",
+          "Boyce-Codd Normal Form (BCNF)"
         ],
         answer: 0,
-        explanation: "The foundational 4 P's covered in Chapter 1 are People, Product, Process, and Project."
-      },
-      {
-        q: "Why is a requirement stating 'The system shall respond instantaneously to user input' considered defective?",
-        options: [
-          "It is subjective and untestable; it must specify a measurable boundary such as 'within 200 ms'.",
-          "Because instantaneous means 0 seconds which violates physics.",
-          "Because non-functional requirements are not allowed in SRS documents.",
-          "Because only user requirements can specify response time."
-        ],
-        answer: 0,
-        explanation: "Requirements must be verifiable and testable. Subjective terms like 'instantaneously' or 'fast' must be rewritten into measurable engineering values."
-      },
-      {
-        q: "In an Activity Diagram, what is the role of a Fork bar?",
-        options: [
-          "It splits a single incoming control flow into two or more concurrent, parallel flows.",
-          "It merges two conditional branches based on a boolean guard.",
-          "It terminates all parallel threads of execution.",
-          "It marks the transition between swimlanes."
-        ],
-        answer: 0,
-        explanation: "A Fork bar synchronizes 1 incoming flow and splits it into multiple concurrent parallel flows. A Join bar does the reverse."
-      },
-      {
-        q: "In UML Class Diagrams, which symbol represents Protected visibility?",
-        options: [
-          "# (Hash)",
-          "- (Minus)",
-          "+ (Plus)",
-          "~ (Tilde)"
-        ],
-        answer: 0,
-        explanation: "+ is Public, - is Private, # is Protected, ~ is Package-private."
+        explanation: "1NF removes repeating groups. 2NF requires 1NF AND that every non-prime attribute is fully functionally dependent on the entire primary key."
       }
     ];
 
