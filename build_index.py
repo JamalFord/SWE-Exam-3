@@ -1,5 +1,5 @@
 import base64
-with open(r'fonts/GoodDogPlain.ttf', 'rb') as f:
+with open(r'fonts/CATHSGBR.TTF', 'rb') as f:
     b64_font = base64.b64encode(f.read()).decode('ascii')
 
 template = """<!DOCTYPE html>
@@ -18,10 +18,10 @@ template = """<!DOCTYPE html>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Kalam:wght@300;400&family=Patrick+Hand&display=swap" rel="stylesheet">
   
   <style>
-                    /* User Custom Font: GoodDog Plain (both local file and embedded base64 fallback) */
+                        /* User Custom Font: Catholic School Girls BB (both local file and embedded base64 fallback) */
     @font-face {
-      font-family: 'GoodDog Plain';
-      src: url('./fonts/GoodDogPlain.ttf') format('truetype'),
+      font-family: 'Catholic School Girls BB';
+      src: url('./fonts/CATHSGBR.TTF') format('truetype'),
            url(data:font/truetype;charset=utf-8;base64,__B64_FONT__) format('truetype');
       font-weight: normal;
       font-style: normal;
@@ -30,25 +30,25 @@ template = """<!DOCTYPE html>
 
     /* Pure Handwritten Font, Completely Unbolded, Natural Pen Look */
     .font-pure-notes {
-      font-family: 'GoodDog Plain', 'GoodDogPlain', 'Kalam', 'Patrick Hand', 'Caveat', cursive, sans-serif;
+      font-family: 'Catholic School Girls BB', 'CatholicSchoolGirls BB', 'Kalam', 'Patrick Hand', 'Caveat', cursive, sans-serif;
       font-weight: 400;
       color: #0f172a;
     }
 
-    /* Unstructured Organic Cram Sheet: Non-linear, Asymmetric Streams */
+        /* Unstructured Organic Cram Sheet: Non-linear, Asymmetric Streams */
     .hw-stream-side1 {
       display: grid;
-      grid-template-columns: 1.08fr 0.94fr 1.02fr;
+      grid-template-columns: 1.05fr 1.02fr 0.98fr;
       column-gap: 13px;
-      font-size: 8.3pt;
-      line-height: 1.14;
+      font-size: 10.3pt;
+      line-height: 1.18;
     }
     .hw-stream-side2 {
       display: grid;
-      grid-template-columns: 0.96fr 1.06fr 1.02fr;
-      column-gap: 12px;
-      font-size: 8.3pt;
-      line-height: 1.14;
+      grid-template-columns: 1.02fr 0.98fr 1.04fr;
+      column-gap: 13px;
+      font-size: 10.3pt;
+      line-height: 1.18;
     }
 
     /* Organic Handwritten Blobs (no bullets, no rigid outlines, natural flow) */
@@ -58,25 +58,25 @@ template = """<!DOCTYPE html>
     }
 
     /* Organic Angle & Offset Variations (Noticeable handwritten tilts & wandering margins) */
-    .hw-b-1  { transform: rotate(-1.2deg); transform-origin: top left; margin-left: -5px; font-size: 8.5pt; line-height: 1.16; letter-spacing: -0.05px; margin-bottom: 12px; }
-    .hw-b-2  { transform: rotate(1.4deg);  transform-origin: top left; margin-left: 9px;  font-size: 8.1pt; line-height: 1.12; letter-spacing: -0.15px; margin-bottom: 14px; }
-    .hw-b-3  { transform: rotate(-0.8deg); transform-origin: top left; margin-left: -2px; font-size: 8.4pt; line-height: 1.15; letter-spacing: 0.05px;  margin-bottom: 11px; }
-    .hw-b-4  { transform: rotate(1.1deg);  transform-origin: top left; margin-left: 6px;  font-size: 8.2pt; line-height: 1.13; letter-spacing: -0.10px; margin-bottom: 15px; }
-    .hw-b-5  { transform: rotate(-1.4deg); transform-origin: top left; margin-left: -4px; font-size: 8.0pt; line-height: 1.11; letter-spacing: -0.18px; margin-bottom: 10px; }
-    .hw-b-6  { transform: rotate(0.95deg); transform-origin: top left; margin-left: 7px;  font-size: 8.4pt; line-height: 1.14; letter-spacing: 0.08px;  margin-bottom: 13px; }
-    .hw-b-7  { transform: rotate(-1.1deg); transform-origin: top left; margin-left: -3px; font-size: 8.1pt; line-height: 1.12; letter-spacing: -0.12px; margin-bottom: 11px; }
-    .hw-b-8  { transform: rotate(1.5deg);  transform-origin: top left; margin-left: 8px;  font-size: 8.3pt; line-height: 1.15; letter-spacing: -0.05px; margin-bottom: 12px; }
+    .hw-b-1  { transform: rotate(-1.1deg); transform-origin: top left; margin-left: -4px; font-size: 10.4pt; line-height: 1.18; letter-spacing: -0.05px; margin-bottom: 12px; }
+    .hw-b-2  { transform: rotate(1.2deg);  transform-origin: top left; margin-left: 6px;  font-size: 10.2pt; line-height: 1.17; letter-spacing: -0.10px; margin-bottom: 13px; }
+    .hw-b-3  { transform: rotate(-0.8deg); transform-origin: top left; margin-left: -2px; font-size: 10.3pt; line-height: 1.18; letter-spacing: 0.05px;  margin-bottom: 12px; }
+    .hw-b-4  { transform: rotate(1.0deg);  transform-origin: top left; margin-left: 5px;  font-size: 10.3pt; line-height: 1.18; letter-spacing: -0.05px; margin-bottom: 14px; }
+    .hw-b-5  { transform: rotate(-1.2deg); transform-origin: top left; margin-left: -3px; font-size: 10.2pt; line-height: 1.16; letter-spacing: -0.10px; margin-bottom: 12px; }
+    .hw-b-6  { transform: rotate(0.9deg);  transform-origin: top left; margin-left: 6px;  font-size: 10.4pt; line-height: 1.18; letter-spacing: 0.05px;  margin-bottom: 13px; }
+    .hw-b-7  { transform: rotate(-1.0deg); transform-origin: top left; margin-left: -3px; font-size: 10.2pt; line-height: 1.17; letter-spacing: -0.08px; margin-bottom: 12px; }
+    .hw-b-8  { transform: rotate(1.3deg);  transform-origin: top left; margin-left: 7px;  font-size: 10.3pt; line-height: 1.18; letter-spacing: -0.05px; margin-bottom: 12px; }
 
-    .hw-b-9  { transform: rotate(1.3deg);  transform-origin: top left; margin-left: 7px;  font-size: 8.4pt; line-height: 1.15; letter-spacing: -0.05px; margin-bottom: 12px; }
-    .hw-b-10 { transform: rotate(-1.3deg); transform-origin: top left; margin-left: -5px; font-size: 8.1pt; line-height: 1.11; letter-spacing: -0.15px; margin-bottom: 13px; }
-    .hw-b-11 { transform: rotate(0.9deg);  transform-origin: top left; margin-left: 6px;  font-size: 8.3pt; line-height: 1.14; letter-spacing: 0.05px;  margin-bottom: 11px; }
-    .hw-b-12 { transform: rotate(-1.5deg); transform-origin: top left; margin-left: -3px; font-size: 8.0pt; line-height: 1.10; letter-spacing: -0.20px; margin-bottom: 14px; }
-    .hw-b-13 { transform: rotate(1.2deg);  transform-origin: top left; margin-left: 9px;  font-size: 8.3pt; line-height: 1.13; letter-spacing: -0.08px; margin-bottom: 12px; }
-    .hw-b-14 { transform: rotate(-1.0deg); transform-origin: top left; margin-left: -2px; font-size: 8.2pt; line-height: 1.12; letter-spacing: 0.04px;  margin-bottom: 11px; }
-    .hw-b-15 { transform: rotate(1.4deg);  transform-origin: top left; margin-left: 5px;  font-size: 8.1pt; line-height: 1.11; letter-spacing: -0.14px; margin-bottom: 13px; }
-    .hw-b-16 { transform: rotate(-1.2deg); transform-origin: top left; margin-left: -4px; font-size: 8.4pt; line-height: 1.14; letter-spacing: -0.06px; margin-bottom: 12px; }
+    .hw-b-9  { transform: rotate(-1.1deg); transform-origin: top left; margin-left: -4px; font-size: 10.3pt; line-height: 1.18; letter-spacing: -0.05px; margin-bottom: 13px; }
+    .hw-b-10 { transform: rotate(1.2deg);  transform-origin: top left; margin-left: 5px;  font-size: 10.2pt; line-height: 1.17; letter-spacing: -0.08px; margin-bottom: 12px; }
+    .hw-b-11 { transform: rotate(-0.9deg); transform-origin: top left; margin-left: -3px; font-size: 10.3pt; line-height: 1.18; letter-spacing: 0.05px;  margin-bottom: 12px; }
+    .hw-b-12 { transform: rotate(1.1deg);  transform-origin: top left; margin-left: 6px;  font-size: 10.2pt; line-height: 1.17; letter-spacing: -0.10px; margin-bottom: 14px; }
+    .hw-b-13 { transform: rotate(-1.2deg); transform-origin: top left; margin-left: -3px; font-size: 10.3pt; line-height: 1.18; letter-spacing: 0.04px;  margin-bottom: 13px; }
+    .hw-b-14 { transform: rotate(1.0deg);  transform-origin: top left; margin-left: 5px;  font-size: 10.4pt; line-height: 1.18; letter-spacing: -0.06px; margin-bottom: 12px; }
+    .hw-b-15 { transform: rotate(-1.0deg); transform-origin: top left; margin-left: -4px; font-size: 10.2pt; line-height: 1.17; letter-spacing: -0.08px; margin-bottom: 13px; }
+    .hw-b-16 { transform: rotate(1.1deg);  transform-origin: top left; margin-left: 6px;  font-size: 10.3pt; line-height: 1.18; letter-spacing: -0.05px; margin-bottom: 12px; }
 
-    /* Print Specific Rules: Strict 2-Page Double Sided Sheet */
+/* Print Specific Rules: Strict 2-Page Double Sided Sheet */
     @media print {
       body * { visibility: hidden; }
       #cheat-sheet-print-area, #cheat-sheet-print-area * { visibility: visible; }
@@ -87,8 +87,8 @@ template = """<!DOCTYPE html>
         width: 100%;
         margin: 0;
         padding: 0.12in;
-        font-size: 8.2pt;
-        line-height: 1.15;
+        font-size: 10.3pt;
+        line-height: 1.18;
         color: #0f172a !important;
       }
       .page-break { page-break-before: always; }
@@ -559,9 +559,9 @@ template = """<!DOCTYPE html>
         <!-- Screen Top Bar -->
         <div class="flex flex-wrap justify-between items-center border-b border-slate-200 pb-4 mb-4 no-print gap-3">
           <div>
-            <h2 class="text-xl font-bold text-slate-900">Handwritten Cheat Sheet (Good Dog Plain Font)</h2>
+            <h2 class="text-xl font-bold text-slate-900">Handwritten Cheat Sheet (Catholic School Girls Font)</h2>
             <p class="text-xs text-slate-500 mt-0.5">
-              Custom installed GoodDog Plain font • Organic micro-variations • Pure unbolded text • Zero lines & zero headers
+              Custom installed Catholic School Girls BB font • Organic micro-variations • Pure unbolded text • Zero lines & zero headers
             </p>
           </div>
           <button onclick="window.print()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition text-xs sm:text-sm">
@@ -569,8 +569,8 @@ template = """<!DOCTYPE html>
           </button>
         </div>
 
-        <!-- ============================================== -->
-        <!-- PRINT AREA: GOOD DOG PLAIN HANDWRITTEN NOTES     -->
+                <!-- ============================================== -->
+        <!-- PRINT AREA: CATHOLIC SCHOOL GIRLS BB HANDWRITTEN NOTES -->
         <!-- ============================================== -->
         <div id="cheat-sheet-print-area" class="font-pure-notes text-slate-900 leading-snug">
           
@@ -582,24 +582,24 @@ template = """<!DOCTYPE html>
             <!-- Dense Organic Unstructured Cram Streams -->
             <div class="hw-stream-side1">
               
-              <!-- Column 1 -->
+              <!-- Column 1: SDLC, Reqs, 4+1 View Model, Adapter Pattern -->
               <div>
                 <div class="hw-blob hw-b-1">sdlc & fundamentals: reqs -> design -> code -> test -> deploy -> maint. 4 p's: people, product, process, project. 4 attributes of good software: maintainability (system evolves w/ customer needs), dependability & security (reliable, safe, resilient), efficiency (optimal cpu, memory, response time), acceptability (understandable, usable, compatible). cost breakdown: roughly 60% dev cost, 40% testing cost; for custom software, long-term evolution costs exceed original development! acm/ieee ethics priority: 1.public interest 2.client & employer 3.product 4.judgment 5.management 6.profession 7.colleagues 8.self.</div>
                 <div class="hw-blob hw-b-2">requirements & use cases: functional = services system must provide & reactions to inputs. non-functional (nfr) = constraints on services (timing, security, standards, reliability, portability). testability rule: avoid subjective vague words (instantaneously, user-friendly, rapidly, little training) -> must rewrite into measurable numbers (e.g. response <= 200 ms, training time <= 2 hours, errors <= 1 per 8 hour shift). use cases: <<include>> = mandatory subroutine (base incomplete without it); <<extend>> = optional behavior triggered at extension point (base is complete on its own).</div>
                 <div class="hw-blob hw-b-3">kruchten 4+1 view model: logical view = end-user functionality, domain abstractions, classes, entities (audience: dev/user, concern: functional reqs). process view = dynamic runtime behavior, concurrency, processes, threads, synchronization, rpc/message bus (audience: dev, concern: performance & scalability). development view = static organization of code, packages, modules, libraries, build hierarchy (audience: dev, concern: reuse & ease of build). physical view = hardware topology, execution nodes, network interconnects, distribution across processors (audience: sys eng/ops, concern: quality attributes). +1 scenarios (use cases) = unifies and links the other 4 views together, validating architecture against all requirements.</div>
+                <div class="hw-blob hw-b-10">adapter pattern: client calls methods on target interface; target = abstract interface expected by client; adapter = implements target interface (../-> target) and holds private reference to adaptee instance (adapter calls adaptee.specificRequest()); adaptee = existing legacy class with incompatible interface that client cannot call directly.</div>
               </div>
 
-              <!-- Column 2 -->
+              <!-- Column 2: Architecture Patterns & System Control Models -->
               <div>
                 <div class="hw-blob hw-b-4">architecture & patterns: ieee definition: fundamental organization of a system embodied in its components, relationships to one another and environment, and principles governing design and evolution. partitioning: 1.system structuring -> 2.control modeling -> 3.modular decomposition. why plan: stakeholder communication, system analysis before code, large-scale reuse, security access boundary enforcement. layered architecture: hierarchical layers where layer n only depends on n-1; pros: replaceable layers if interfaces constant, changes localized to adjacent layers, multi-layer security defense; cons: clean separation hard in practice, performance overhead passing calls through layers. repository: central passive data store accessed and updated by independent active subsystems (example: ide w/ project info and code surrounded by java editor, python editor, code gen, report gen); pros: efficient sharing of large data, independent components; cons: single point of failure and bottleneck, data evolution difficult. client-server: dedicated servers offering services across network to clients (film library: catalogue server, video server, picture server); pros: distributed failure isolation, straightforward scaling; cons: network latency, each server a failure point. pipe & filter: sequential stream transformations (unix pipes, customer invoicing: invoices -> process invoices -> identify payments -> issue receipts); pros: subsystem reuse, intuitive; cons: agreed data format overhead, parsing latency. mvc: controller handles input -> updates model -> view renders display.</div>
                 <div class="hw-blob hw-b-5">system control models: centralized call-return model = top-down subroutine call tree for sequential code (main -> subsystems -> methods). centralized manager model = single process controls stopping, starting, and coordination of concurrent processes (controller coordinating sensors, actuators, computation, fault handler, ui). decentralized broadcast model = events published to common message bus; registered subsystems handle events (effective for distributed systems, but sender does not know if or when event handled). decentralized interrupt-driven model = hardware interrupt array mapped to specific memory locations; dedicated handlers watch address and coordinate response (temperature, radiation, fire alarm, fuel handlers; used for fast real-time response, but complex to program and hard to validate).</div>
               </div>
 
-              <!-- Column 3 -->
+              <!-- Column 3: Mentcare & ATM Architectures, UML Class Diagrams -->
               <div>
-                <div class="hw-blob hw-b-6">software testing fundamentals: verification = "are we building the product right?" (conformance to specification). validation = "are we building the right product?" (satisfies customer operational needs). dijkstra's axiom: "program testing can be used to show the presence of bugs, but never to show their absence!" defect testing exposes flaws; validation testing demonstrates system meets user requirements. v-model lifecycle pairings: requirements engineering <-> acceptance testing (alpha and beta); system specification <-> system testing; architectural design <-> subsystem and integration testing; detailed module design <-> unit testing.</div>
-                <div class="hw-blob hw-b-7">test scaffolding & junit: test driver = software module that invokes unit under test and passes simulated inputs. test stub / mock = dummy module called by unit under test that returns synthetic values. test harness = framework automating execution of test suites (example: junit). test oracle = mechanism determining if actual output matches expected output. junit annotations: @Test = marks executable test method; @Before / @BeforeEach = executes before every individual test method (fixture init); @After / @AfterEach = executes after every test method (fixture teardown); @BeforeClass / @BeforeAll = static, executes once before all tests in class (opens db/sockets); @AfterClass / @AfterAll = static, executes once after all tests finish (closes db/sockets).</div>
                 <div class="hw-blob hw-b-8">mentcare & atm architecture: mentcare 4-layer system: layer 1 is web browser; layer 2 is user communications (login, role checking, form & menu manager, data validation); layer 3 is information retrieval and modification (security management, patient info manager, data import/export, report generation); layer 4 is transaction management and patient database. atm 4-tier pipeline: i/o processing <-> application logic <-> transaction manager <-> database. atm 3-phase flow: input (get account id, validate card, select service) -> process (query account, update account) -> output (print details, return card, dispense cash).</div>
+                <div class="hw-blob hw-b-9">uml class diagrams: strict 3-compartment rule: every class box must show all 3 compartments: 1.class name 2.attributes 3.operations (even if attributes or operations are empty, draw the 3rd compartment box line!). class discovery: nouns become classes, noun phrases become attributes, verbs become operations. abstract class: render name in italic font style or tag with <<abstract>>. visibility symbols: + is public, - is private, # is protected, - is package-private. attribute format: visibility name : type = default-val. operation format: visibility name(parameter : type) : returnType. association: solid line without arrows or with open navigation arrow; multiplicity placed at both ends (1, 0..1, 1..*, *). aggregation (<>--): open hollow diamond at whole end ("has-a", weak containment, part can exist independently of whole: department <>-- doctor). composition (<*>--): solid filled diamond at whole end ("part-of", strong containment, part lifetime bound to whole; destroyed when whole deleted: department <*>-- labtest, customer <*>-- address). generalization (--/->): solid line with hollow triangular arrowhead pointing to parent ("is-a", inheritance: medicalrecord --/-> surgicalrecord, bankaccount --/-> checkingaccount). realization (../->): dashed line with hollow triangular arrowhead pointing to interface (savingsaccount ../-> interestbearing). dependency (..>): dashed line with open arrow ("uses").</div>
               </div>
 
             </div>
@@ -616,24 +616,24 @@ template = """<!DOCTYPE html>
             <!-- Dense Organic Unstructured Cram Streams -->
             <div class="hw-stream-side2">
               
-              <!-- Column 1 -->
+              <!-- Column 1: Sequence Diagrams, Activity & Statechart Diagrams, Black-box Testing -->
               <div>
-                <div class="hw-blob hw-b-9">uml class diagrams: strict 3-compartment rule: every class box must show all 3 compartments: 1.class name 2.attributes 3.operations (even if attributes or operations are empty, draw the 3rd compartment box line!). class discovery: nouns become classes, noun phrases become attributes, verbs become operations. abstract class: render name in italic font style or tag with <<abstract>>. visibility symbols: + is public, - is private, # is protected, - is package-private. attribute format: visibility name : type = default-val. operation format: visibility name(parameter : type) : returnType. association: solid line without arrows or with open navigation arrow; multiplicity placed at both ends (1, 0..1, 1..*, *). aggregation (<>--): open hollow diamond at whole end ("has-a", weak containment, part can exist independently of whole: department <>-- doctor). composition (<*>--): solid filled diamond at whole end ("part-of", strong containment, part lifetime bound to whole; destroyed when whole deleted: department <*>-- labtest, customer <*>-- address). generalization (--/->): solid line with hollow triangular arrowhead pointing to parent ("is-a", inheritance: medicalrecord --/-> surgicalrecord, bankaccount --/-> checkingaccount). realization (../->): dashed line with hollow triangular arrowhead pointing to interface (savingsaccount ../-> interestbearing). dependency (..>): dashed line with open arrow ("uses").</div>
-                <div class="hw-blob hw-b-10">adapter pattern: client calls methods on target interface; target = abstract interface expected by client; adapter = implements target interface (../-> target) and holds private reference to adaptee instance (adapter calls adaptee.specificRequest()); adaptee = existing legacy class with incompatible interface that client cannot call directly.</div>
                 <div class="hw-blob hw-b-11">sequence diagrams: lifeline = vertical dashed line extending downward from object box; activation bar = thin vertical rectangle on lifeline indicating execution control; synchronous call = solid line with filled arrowhead (----->); sender halts until reply; asynchronous call = solid line with stick open arrowhead (--->); sender continues without waiting; reply / return message = dashed line with stick open arrow (<---); object creation = message labeled <<create>> points directly to object box; object destruction = an x placed at base of an activation lifeline. combined fragments: alt = mutually exclusive if-then-else separated by dashed line with [guard]; opt = optional conditional execution if only; loop [min, max] = repetition over elements; par = concurrent parallel sub-sequences.</div>
-              </div>
-
-              <!-- Column 2 -->
-              <div>
                 <div class="hw-blob hw-b-12">activity & statechart diagrams: activity elements: initial node = solid filled circle; activity state = rounded rectangle; decision and merge = diamond symbols with [guard]; fork bar = thick black synchronization bar splitting 1 incoming flow into 2 or more concurrent parallel flows; join bar = thick black synchronization bar waiting for multiple concurrent flows to finish before 1 outgoing flow proceeds; final node = bullseye (solid circle inside outer circle); swimlanes (partitions) = indicate which role or subsystem performs each activity. insulin pump flow: sensor measures blood sugar -> fork bar splits into: (1) calculate required insulin dosage, and (2) log sensor reading -> join bar synchronizes both -> decision diamond [sugar > target] -> inject insulin. state machine: states = rounded rectangles (waiting, half power, full power, operation, disabled); initial state = solid black circle; final state = bullseye; transition label syntax: event [guard] / action (example: start [door-closed] / run-generator(300w); door-open / stop-generator(), turn-lamp-on() -> state disabled).</div>
-                <div class="hw-blob hw-b-13">white-box structural testing: statement coverage (c0) = percentage of executable statements traversed by test cases (statements executed / total statements * 100%; weakest metric! cannot detect missing false branches in single if). branch coverage (c1) = requires every decision branch (both true and false edges in control flow graph) traversed at least once. subsumption rule: branch coverage subsumes statement coverage (100% branch implies 100% statement, but not vice-versa!). condition coverage = requires each individual boolean sub-condition in composite expression to evaluate to true and false at least once. mc/dc (modified condition/decision coverage) = required by do-178c avionics safety standard: each condition must be shown to independently affect overall decision outcome while holding all other conditions fixed; for n conditions, requires n + 1 test cases (compared to 2**n for multiple condition coverage). path coverage = every possible execution path from entry to exit tested (often infinite or intractable due to loops). loop boundary = test 0 iterations, 1 iteration, typical iterations, max-1 iterations, max iterations.</div>
+                <div class="hw-blob hw-b-14">black-box testing (ep & bva): equivalence partitioning (ep) = divide input domain into valid and invalid equivalence classes; select 1 representative test input per class. boundary value analysis (bva) = test values immediately at, below, and above boundary edges: min-1, min, min+1, nominal, max-1, max, max+1. pin [0000..9999]: valid class = 1234; invalid classes = negative numbers (-1), numbers > 9999 (10000), non-digits ("abcd"), 3 digits, 5 digits.</div>
               </div>
 
-              <!-- Column 3 -->
+              <!-- Column 2: Testing Fundamentals, Test Scaffolding & JUnit, Relational DB Normalization -->
               <div>
-                <div class="hw-blob hw-b-14">black-box testing (ep & bva): equivalence partitioning (ep) = divide input domain into valid and invalid equivalence classes; select 1 representative test input per class. boundary value analysis (bva) = test values immediately at, below, and above boundary edges: min-1, min, min+1, nominal, max-1, max, max+1. pin [0000..9999]: valid class = 1234; invalid classes = negative numbers (-1), numbers > 9999 (10000), non-digits ("abcd"), 3 digits, 5 digits.</div>
-                <div class="hw-blob hw-b-15">5 test cases structure & rubric: format: [tc id, objective, pre-conditions, test steps/inputs, expected result, pass/fail criteria]. tc-01 (valid ep registration): pre: user logged in; inputs: valid name, dob, ssn; expected: patient record created in db, unique id assigned, http 201 toast; criteria: record persists in db. tc-02 (min boundary value): inputs: age = 0 (minimum valid age); expected: form accepted, classified as infant; criteria: profile created with infant tag. tc-03 (negative boundary value): inputs: age = -1; expected: submission blocked, error message "age must be >= 0" displayed; criteria: no db write, form retains input. tc-04 (concurrency / double withdrawal): pre: balance = $100; inputs: simultaneous atm and mobile app withdrawals of $100 within 10 ms; expected: 1st transaction succeeds, 2nd rejected for insufficient funds; criteria: balance never negative ($0 balance). tc-05 (exception / null pointer): inputs: doctorid = null on prescription request; expected: system rejects with http 400 bad request, logs missing doctor reference safely; criteria: no unhandled 500 crash or stack trace shown.</div>
+                <div class="hw-blob hw-b-6">software testing fundamentals: verification = "are we building the product right?" (conformance to specification). validation = "are we building the right product?" (satisfies customer operational needs). dijkstra's axiom: "program testing can be used to show the presence of bugs, but never to show their absence!" defect testing exposes flaws; validation testing demonstrates system meets user requirements. v-model lifecycle pairings: requirements engineering <-> acceptance testing (alpha and beta); system specification <-> system testing; architectural design <-> subsystem and integration testing; detailed module design <-> unit testing.</div>
+                <div class="hw-blob hw-b-7">test scaffolding & junit: test driver = software module that invokes unit under test and passes simulated inputs. test stub / mock = dummy module called by unit under test that returns synthetic values. test harness = framework automating execution of test suites (example: junit). test oracle = mechanism determining if actual output matches expected output. junit annotations: @Test = marks executable test method; @Before / @BeforeEach = executes before every individual test method (fixture init); @After / @AfterEach = executes after every test method (fixture teardown); @BeforeClass / @BeforeAll = static, executes once before all tests in class (opens db/sockets); @AfterClass / @AfterAll = static, executes once after all tests finish (closes db/sockets).</div>
                 <div class="hw-blob hw-b-16">relational database & normalization: entity integrity: primary key (pk) column cannot be null and must be unique. referential integrity: foreign key (fk) column must match an existing valid pk value in parent table or be null. 1nf (first normal form): all column values must be atomic (no repeating groups, multi-valued attributes, or composite values). 2nf (second normal form): table is in 1nf and every non-key attribute is fully functionally dependent on the entire composite primary key (no partial key dependencies). 3nf (third normal form): table is in 2nf and no non-key attribute depends on another non-key attribute (no transitive dependencies). canonical rule: "every attribute must depend on the key, the whole key, and nothing but the key!"</div>
+              </div>
+
+              <!-- Column 3: White-box Structural Testing, 5 Comprehensive Test Cases -->
+              <div>
+                <div class="hw-blob hw-b-13">white-box structural testing: statement coverage (c0) = percentage of executable statements traversed by test cases (statements executed / total statements * 100%; weakest metric! cannot detect missing false branches in single if). branch coverage (c1) = requires every decision branch (both true and false edges in control flow graph) traversed at least once. subsumption rule: branch coverage subsumes statement coverage (100% branch implies 100% statement, but not vice-versa!). condition coverage = requires each individual boolean sub-condition in composite expression to evaluate to true and false at least once. mc/dc (modified condition/decision coverage) = required by do-178c avionics safety standard: each condition must be shown to independently affect overall decision outcome while holding all other conditions fixed; for n conditions, requires n + 1 test cases (compared to 2**n for multiple condition coverage). path coverage = every possible execution path from entry to exit tested (often infinite or intractable due to loops). loop boundary = test 0 iterations, 1 iteration, typical iterations, max-1 iterations, max iterations.</div>
+                <div class="hw-blob hw-b-15">5 test cases structure & rubric: format: [tc id, objective, pre-conditions, test steps/inputs, expected result, pass/fail criteria]. tc-01 (valid ep registration): pre: user logged in; inputs: valid name, dob, ssn; expected: patient record created in db, unique id assigned, http 201 toast; criteria: record persists in db. tc-02 (min boundary value): inputs: age = 0 (minimum valid age); expected: form accepted, classified as infant; criteria: profile created with infant tag. tc-03 (negative boundary value): inputs: age = -1; expected: submission blocked, error message "age must be >= 0" displayed; criteria: no db write, form retains input. tc-04 (concurrency / double withdrawal): pre: balance = $100; inputs: simultaneous atm and mobile app withdrawals of $100 within 10 ms; expected: 1st transaction succeeds, 2nd rejected for insufficient funds; criteria: balance never negative ($0 balance). tc-05 (exception / null pointer): inputs: doctorid = null on prescription request; expected: system rejects with http 400 bad request, logs missing doctor reference safely; criteria: no unhandled 500 crash or stack trace shown.</div>
               </div>
 
             </div>
@@ -643,7 +643,7 @@ template = """<!DOCTYPE html>
       </div>
     </div>
 
-  </main>
+</main>
 
   <!-- Footer -->
   <footer class="bg-slate-900 text-slate-400 text-xs py-4 text-center border-t border-slate-800 no-print">
