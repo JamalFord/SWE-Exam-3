@@ -3,26 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SWE Exam 3 Mastery Suite | CSC 4350 / 6350</title>
+  <title>SWE Exam 3 Interactive Trainer | CSC 4350 / 6350</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Google Fonts: Authentic Handwritten Fonts -->
+  <!-- Google Fonts: Handwritten Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
   
   <style>
-    /* Handwritten Font Styling */
-    .font-handwriting {
+    /* Handwritten Font Family */
+    .font-notes {
       font-family: 'Kalam', 'Patrick Hand', 'Caveat', cursive;
+      color: #1e293b;
     }
     .font-caveat {
       font-family: 'Caveat', cursive;
     }
 
-    /* Print Specific Rules */
+    /* Print Specific Rules: Strict 2-Page Double Sided Sheet */
     @media print {
       body * { visibility: hidden; }
       #cheat-sheet-print-area, #cheat-sheet-print-area * { visibility: visible; }
@@ -33,37 +34,46 @@
         width: 100%;
         margin: 0;
         padding: 0.15in;
-        font-size: 8.5pt;
-        line-height: 1.12;
-        color: #1e293b;
+        font-size: 8pt;
+        line-height: 1.14;
+        color: #0f172a !important;
       }
       .page-break { page-break-before: always; }
       .no-print { display: none !important; }
       @page {
         size: letter portrait;
-        margin: 0.2in;
+        margin: 0.15in;
       }
     }
 
-    .handwritten-title {
-      font-family: 'Permanent Marker', cursive;
-      letter-spacing: 0.5px;
+    /* Informal Handwritten Styling for Cheat Sheet */
+    .hand-header {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 1.15rem;
+      border-bottom: 1.5px dashed #64748b;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+      color: #0f172a;
+    }
+    .hand-sub {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #1e3a8a;
+    }
+    .highlighter {
+      background-color: #fef08a;
+      padding: 0 3px;
+      border-radius: 2px;
+    }
+    .highlighter-blue {
+      background-color: #e0e7ff;
+      padding: 0 3px;
+      border-radius: 2px;
     }
 
-    /* UML & Architecture Diagram styling */
-    .arch-box {
-      border: 2px solid #334155;
-      border-radius: 6px;
-      background: #ffffff;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    }
-    .arch-header {
-      background: #f8fafc;
-      border-bottom: 2px solid #334155;
-      padding: 6px;
-      font-weight: bold;
-      text-align: center;
-    }
+    /* Interactive diagram boxes */
     .uml-box { border: 2px solid #334155; border-radius: 4px; background: #ffffff; }
     .uml-header { background: #f1f5f9; border-bottom: 2px solid #334155; padding: 6px; font-weight: bold; text-align: center; }
     .uml-section { border-bottom: 1px solid #94a3b8; padding: 6px 10px; font-family: monospace; font-size: 12px; min-height: 44px; }
@@ -78,7 +88,7 @@
       <div class="flex items-center space-x-3">
         <i data-lucide="graduation-cap" class="w-8 h-8 text-amber-400"></i>
         <div>
-          <h1 class="text-xl font-bold tracking-tight">SWE Exam 3 Interactive Trainer & Architecture Lab</h1>
+          <h1 class="text-xl font-bold tracking-tight">SWE Exam 3 Practice Suite</h1>
           <p class="text-xs text-indigo-200">GSU CSC 4350 / 6350 • Dr. Tushara Sadasivuni • Exam: Nov 19</p>
         </div>
       </div>
@@ -87,11 +97,11 @@
         <button onclick="switchTab('quiz')" id="tab-btn-quiz" class="tab-btn px-3 py-1.5 rounded-lg transition-colors bg-indigo-600 text-white flex items-center gap-1.5">
           <i data-lucide="help-circle" class="w-4 h-4"></i> Section A: MCQs
         </button>
-        <button onclick="switchTab('architecture')" id="tab-btn-architecture" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-indigo-200 hover:text-white flex items-center gap-1.5">
-          <i data-lucide="network" class="w-4 h-4"></i> Architecture Diagrams (8 Drills)
-        </button>
         <button onclick="switchTab('uml')" id="tab-btn-uml" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-indigo-200 hover:text-white flex items-center gap-1.5">
-          <i data-lucide="layout-grid" class="w-4 h-4"></i> Section B: UML Drills
+          <i data-lucide="layout-grid" class="w-4 h-4"></i> 8 In-Class UML Diagrams
+        </button>
+        <button onclick="switchTab('architecture')" id="tab-btn-architecture" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-indigo-200 hover:text-white flex items-center gap-1.5">
+          <i data-lucide="network" class="w-4 h-4"></i> Architecture Models
         </button>
         <button onclick="switchTab('testcases')" id="tab-btn-testcases" class="tab-btn px-3 py-1.5 rounded-lg transition-colors text-indigo-200 hover:text-white flex items-center gap-1.5">
           <i data-lucide="check-square" class="w-4 h-4"></i> 5 Test Cases Builder
@@ -134,340 +144,311 @@
       </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- TAB 2: ARCHITECTURE DESIGN DIAGRAMS (8)    -->
-    <!-- ========================================== -->
-    <div id="tab-architecture" class="tab-content hidden">
+    <!-- ==================================================== -->
+    <!-- TAB 2: 8 IN-CLASS UML DIAGRAMS INTERACTIVE DRILLS     -->
+    <!-- ==================================================== -->
+    <div id="tab-uml" class="tab-content hidden">
       <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
         <div class="border-b border-slate-100 pb-4 mb-6">
           <div class="flex items-center justify-between">
             <div>
-              <h2 class="text-2xl font-bold text-slate-900">Architecture Design Diagrams (7-8 Core Slides)</h2>
-              <p class="text-sm text-slate-500">Practice drawing and filling in the exact system architecture models from Dr. Sadasivuni's slides.</p>
+              <h2 class="text-2xl font-bold text-slate-900">The 8 In-Class UML Diagrams</h2>
+              <p class="text-sm text-slate-500">Practice constructing the exact UML diagrams covered during lectures and in-class activities.</p>
             </div>
-            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full border border-purple-200">
-              High Probability on Exam!
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full border border-indigo-200">
+              Exam Section B Focus
             </span>
           </div>
         </div>
 
-        <!-- Arch Drill Selector -->
+        <!-- UML Drill Selector (8 In-Class Diagrams) -->
         <div class="flex flex-wrap gap-2 mb-6">
-          <button onclick="showArchDrill('mentcare')" id="btn-arch-mentcare" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-indigo-600 text-white">
-            1. Mentcare 4-Layer Architecture
+          <button onclick="showUmlDrill('hospital')" id="btn-drill-hospital" class="uml-drill-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white">
+            1. Hospital Class Diagram (3 Compartments)
           </button>
-          <button onclick="showArchDrill('repository')" id="btn-arch-repository" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
-            2. IDE Repository Model
+          <button onclick="showUmlDrill('bank')" id="btn-drill-bank" class="uml-drill-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            2. Bank Account & Realization
           </button>
-          <button onclick="showArchDrill('clientserver')" id="btn-arch-clientserver" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
-            3. Film Library Client-Server
+          <button onclick="showUmlDrill('adapter')" id="btn-drill-adapter" class="uml-drill-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            3. Adapter Pattern Class Diagram
           </button>
-          <button onclick="showArchDrill('pipefilter')" id="btn-arch-pipefilter" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
-            4. Invoicing Pipe & Filter
+          <button onclick="showUmlDrill('seqdoc')" id="btn-drill-seqdoc" class="uml-drill-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            4. Doctor Record Sequence (Alt & Loop)
           </button>
-          <button onclick="showArchDrill('atm')" id="btn-arch-atm" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
-            5. ATM Transaction Architecture
+          <button onclick="showUmlDrill('seqmentcare')" id="btn-drill-seqmentcare" class="uml-drill-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            5. Mentcare View Info Sequence
           </button>
-          <button onclick="showArchDrill('callreturn')" id="btn-arch-callreturn" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
-            6. Call-Return vs Manager Control
+          <button onclick="showUmlDrill('insulin')" id="btn-drill-insulin" class="uml-drill-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            6. Insulin Pump Activity (Fork & Join)
           </button>
-          <button onclick="showArchDrill('interrupt')" id="btn-arch-interrupt" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
-            7. Interrupt-Driven Control Model
+          <button onclick="showUmlDrill('swimlanes')" id="btn-drill-swimlanes" class="uml-drill-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            7. Activity Diagram with Swimlanes
           </button>
-          <button onclick="showArchDrill('compiler')" id="btn-arch-compiler" class="arch-drill-btn px-3 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
-            8. Language Processing Architecture
+          <button onclick="showUmlDrill('microwave')" id="btn-drill-microwave" class="uml-drill-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            8. Microwave Oven State Machine
+          </button>
+          <button onclick="showUmlDrill('usecase')" id="btn-drill-usecase" class="uml-drill-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
+            9. Use Case Diagram (Include vs Extend)
           </button>
         </div>
 
-        <!-- DRILL A1: MENTCARE LAYERED -->
-        <div id="arch-mentcare" class="arch-drill-view block">
-          <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mb-6">
-            <h3 class="font-bold text-blue-900 text-sm">Slide 54: The Mentcare Layered System Implementation</h3>
-            <p class="text-xs text-blue-800 mt-1">
-              In a layered architecture, each layer only depends on the services provided by the layer immediately below it. Fill in the 4 canonical layers and their components:
+        <!-- DRILL 1: HOSPITAL CLASS DIAGRAM -->
+        <div id="drill-hospital" class="uml-drill-view block">
+          <div class="bg-slate-50 border-l-4 border-indigo-600 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-slate-900 text-sm">Diagram 1: Hospital Management Class Diagram</h3>
+            <p class="text-xs text-slate-600 mt-1">
+              <strong>Rules:</strong> Always draw 3 compartments (Name, Attributes, Operations). Nouns = Classes, Noun phrases = Attributes, Verbs = Operations.<br>
+              <strong>Scenario:</strong> Hospital has Departments. Department employs Doctors and maintains LabTests. If a Department closes, LabTests are destroyed, but Doctors keep their licenses and survive. MedicalRecord specializes into SurgicalRecord and OfficeVisitRecord.
             </p>
           </div>
 
-          <div class="max-w-2xl mx-auto space-y-3 font-mono text-xs">
-            <!-- Layer 1 -->
-            <div class="p-4 border-2 border-slate-700 rounded-lg bg-sky-50 text-center">
-              <span class="text-xs font-bold text-slate-500 uppercase block mb-1">Layer 1 (Top Layer): User Interface</span>
-              <select id="m-layer-1" class="w-full p-2 border rounded bg-white font-bold text-slate-800">
-                <option value="">-- Select Component --</option>
-                <option value="correct">Web browser</option>
-                <option value="wrong1">Security Management & DB</option>
-                <option value="wrong2">Login & Role checking</option>
-              </select>
-            </div>
-            <div class="text-center text-slate-400 font-bold">&uarr; &darr; (depends only on layer below)</div>
-
-            <!-- Layer 2 -->
-            <div class="p-4 border-2 border-slate-700 rounded-lg bg-indigo-50 text-center">
-              <span class="text-xs font-bold text-slate-500 uppercase block mb-1">Layer 2: User Communications & Authentication</span>
-              <select id="m-layer-2" class="w-full p-2 border rounded bg-white font-bold text-slate-800">
-                <option value="">-- Select Components --</option>
-                <option value="wrong1">Patient Database & Transaction Manager</option>
-                <option value="correct">Login, Role checking, Form & menu manager, Data validation</option>
-                <option value="wrong2">Search Index & Document Retrieval</option>
-              </select>
-            </div>
-            <div class="text-center text-slate-400 font-bold">&uarr; &darr; (depends only on layer below)</div>
-
-            <!-- Layer 3 -->
-            <div class="p-4 border-2 border-slate-700 rounded-lg bg-purple-50 text-center">
-              <span class="text-xs font-bold text-slate-500 uppercase block mb-1">Layer 3: Information Retrieval & Modification (Core Business Logic)</span>
-              <select id="m-layer-3" class="w-full p-2 border rounded bg-white font-bold text-slate-800">
-                <option value="">-- Select Components --</option>
-                <option value="correct">Security management, Patient info manager, Data import/export, Report generation</option>
-                <option value="wrong1">Web browser, HTML, CSS</option>
-                <option value="wrong2">SQL Database & Hardware drivers</option>
-              </select>
-            </div>
-            <div class="text-center text-slate-400 font-bold">&uarr; &darr; (depends only on layer below)</div>
-
-            <!-- Layer 4 -->
-            <div class="p-4 border-2 border-slate-700 rounded-lg bg-emerald-50 text-center">
-              <span class="text-xs font-bold text-slate-500 uppercase block mb-1">Layer 4 (Bottom Layer): System Support & Persistence</span>
-              <select id="m-layer-4" class="w-full p-2 border rounded bg-white font-bold text-slate-800">
-                <option value="">-- Select Components --</option>
-                <option value="wrong1">Web browser</option>
-                <option value="correct">Transaction management, Patient database</option>
-                <option value="wrong2">Role checking & form manager</option>
-              </select>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="uml-box shadow-sm">
+              <div class="uml-header text-indigo-950 font-bold">Department</div>
+              <div class="uml-section">- deptId: String<br>- name: String</div>
+              <div class="uml-section">+ getDoctors(): List&lt;Doctor&gt;<br>+ scheduleTest(t: LabTest)</div>
             </div>
 
-            <div class="pt-3 text-center">
-              <button onclick="checkMentcareDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-6 py-2.5 rounded-lg shadow transition">
-                Check Layered Model Answers
-              </button>
-              <div id="mentcare-fb" class="mt-3 text-xs font-semibold"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- DRILL A2: REPOSITORY MODEL -->
-        <div id="arch-repository" class="arch-drill-view hidden">
-          <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg mb-6">
-            <h3 class="font-bold text-amber-900 text-sm">Slide 31: IDE Shared Repository Model</h3>
-            <p class="text-xs text-amber-800 mt-1">
-              In a Repository Model, all data is held centrally and accessed by independent active subsystems. Identify the center and surrounding components:
-            </p>
-          </div>
-          <div class="max-w-2xl mx-auto space-y-4 text-xs">
-            <div class="p-4 border rounded bg-slate-50">
-              <label class="font-bold block mb-1">1. What is placed in the CENTRAL box of an IDE repository architecture?</label>
-              <select id="repo-q1" class="w-full p-2 border rounded bg-white">
-                <option value="">-- Select Central Component --</option>
-                <option value="correct">Project Information and Code (passive central data store)</option>
-                <option value="wrong1">Java Editor</option>
-                <option value="wrong2">The Operating System Kernel</option>
-              </select>
-            </div>
-            <div class="p-4 border rounded bg-slate-50">
-              <label class="font-bold block mb-1">2. Which tools surround and interact with the central Project Information and Code?</label>
-              <select id="repo-q2" class="w-full p-2 border rounded bg-white">
-                <option value="">-- Select Surrounding Components --</option>
-                <option value="correct">Model Editor, Code Generator, Java Editor, Python Editor, Report Generator, Design Analyzer, Design Translator</option>
-                <option value="wrong1">Web browser, Apache Server, MySQL client</option>
-                <option value="wrong2">Invoices, Receipts, Payment reminders</option>
-              </select>
-            </div>
-            <div class="p-4 border rounded bg-slate-50">
-              <label class="font-bold block mb-1">3. What is the #1 architectural risk of this model according to Dr. Sadasivuni?</label>
-              <select id="repo-q3" class="w-full p-2 border rounded bg-white">
-                <option value="">-- Select Disadvantage --</option>
-                <option value="correct">Single point of failure: if repository fails, all subsystems fail; communication bottleneck.</option>
-                <option value="wrong1">Components cannot share large datasets.</option>
-                <option value="wrong2">Requires network connection across the internet.</option>
-              </select>
-            </div>
-            <button onclick="checkRepoDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-lg text-xs">Verify Repository Drill</button>
-            <div id="repo-fb" class="mt-2 text-xs font-semibold"></div>
-          </div>
-        </div>
-
-        <!-- DRILL A3: FILM LIBRARY CLIENT-SERVER -->
-        <div id="arch-clientserver" class="arch-drill-view hidden">
-          <div class="bg-teal-50 border-l-4 border-teal-500 p-4 rounded-r-lg mb-6">
-            <h3 class="font-bold text-teal-900 text-sm">Slide 34: Film Library Client-Server Architecture</h3>
-            <p class="text-xs text-teal-800 mt-1">
-              Functionality is distributed across distinct servers offering services to multiple clients across a wide-bandwidth network.
-            </p>
-          </div>
-          <div class="max-w-2xl mx-auto space-y-4 text-xs">
-            <div class="p-4 border rounded bg-slate-50">
-              <label class="font-bold block mb-1">1. What connects Client 1, 2, 3, 4 to the specialized backend servers?</label>
-              <input id="cs-q1" placeholder="Name of network connection layer? (Slide 34)" class="w-full p-2 border rounded bg-white">
-            </div>
-            <div class="p-4 border rounded bg-slate-50">
-              <label class="font-bold block mb-1">2. Name the 4 specialized servers in the Film Library example:</label>
-              <select id="cs-q2" class="w-full p-2 border rounded bg-white">
-                <option value="">-- Select the 4 Servers --</option>
-                <option value="correct">Catalogue server, Video server, Picture server, Hypertext server</option>
-                <option value="wrong1">Web server, DNS server, DHCP server, Mail server</option>
-                <option value="wrong2">Login server, DB server, Auth server, Print server</option>
-              </select>
-            </div>
-            <div class="p-4 border rounded bg-slate-50">
-              <label class="font-bold block mb-1">3. What is the key advantage of Client-Server over Centralized Repository?</label>
-              <select id="cs-q3" class="w-full p-2 border rounded bg-white">
-                <option value="">-- Select Advantage --</option>
-                <option value="correct">Distributed architecture: Failure in one server does not impact others; easy to scale/upgrade servers independently.</option>
-                <option value="wrong1">Guaranteed predictable network performance with zero latency.</option>
-                <option value="wrong2">No data format agreement required.</option>
-              </select>
-            </div>
-            <button onclick="checkClientServerDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-lg text-xs">Verify Client-Server Drill</button>
-            <div id="cs-fb" class="mt-2 text-xs font-semibold"></div>
-          </div>
-        </div>
-
-        <!-- DRILL A4: INVOICING PIPE & FILTER -->
-        <div id="arch-pipefilter" class="arch-drill-view hidden">
-          <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg mb-6">
-            <h3 class="font-bold text-indigo-900 text-sm">Slide 38: Customer Invoicing Pipe and Filter Architecture</h3>
-            <p class="text-xs text-indigo-800 mt-1">
-              Transformations take input streams and pass transformed output downstream through pipes. Recreate the flow from invoices & payments:
-            </p>
-          </div>
-          <div class="max-w-2xl mx-auto space-y-4 text-xs font-mono">
-            <div class="p-4 border rounded bg-white space-y-2">
-              <p class="font-bold text-slate-800">Order the Transformation Filters:</p>
-              <p>Step 1: <code>Invoices</code> &rarr; Filter: <input id="pf-s1" placeholder="Filter 1?" class="p-1 border rounded w-48 text-xs font-bold text-indigo-700"></p>
-              <p>Step 2: Adds <code>Payments</code> &rarr; Filter: <input id="pf-s2" placeholder="Filter 2?" class="p-1 border rounded w-48 text-xs font-bold text-indigo-700"></p>
-              <p>Branch A: &rarr; Filter: <code>Issue Receipts</code> &rarr; Target Data: <input id="pf-s3" placeholder="Target Data A?" class="p-1 border rounded w-48 text-xs font-bold text-indigo-700"></p>
-              <p>Branch B: &rarr; Filter: <code>Find Payments Due</code> &rarr; Filter: <code>Issue Payment Reminder</code> &rarr; Target: <input id="pf-s4" placeholder="Target Data B?" class="p-1 border rounded w-48 text-xs font-bold text-indigo-700"></p>
-            </div>
-            <button onclick="checkPipeFilterDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-lg text-xs">Check Pipe & Filter Answers</button>
-            <div id="pf-fb" class="mt-2 text-xs font-semibold"></div>
-          </div>
-        </div>
-
-        <!-- DRILL A5: ATM TRANSACTION ARCHITECTURE -->
-        <div id="arch-atm" class="arch-drill-view hidden">
-          <div class="bg-rose-50 border-l-4 border-rose-500 p-4 rounded-r-lg mb-6">
-            <h3 class="font-bold text-rose-900 text-sm">Slide 53: ATM System Transaction Processing Pipeline</h3>
-            <p class="text-xs text-rose-800 mt-1">
-              Transaction processing systems are data-centered systems that process user requests in real time and update a database.
-            </p>
-          </div>
-          <div class="max-w-2xl mx-auto space-y-4 text-xs">
-            <div class="p-4 border rounded bg-slate-50">
-              <p class="font-bold text-slate-800 mb-2">1. The 4-Tier Transaction Processing Pipeline (Slide 53 Bottom):</p>
-              <div class="grid grid-cols-4 gap-2 text-center font-mono">
-                <div class="p-2 border bg-white rounded font-bold">I/O Processing</div>
-                <div class="p-2 border bg-indigo-50 rounded">
-                  <input id="atm-tier2" placeholder="Tier 2?" class="w-full text-center p-1 border rounded font-bold text-indigo-700">
-                </div>
-                <div class="p-2 border bg-indigo-50 rounded">
-                  <input id="atm-tier3" placeholder="Tier 3?" class="w-full text-center p-1 border rounded font-bold text-indigo-700">
-                </div>
-                <div class="p-2 border bg-white rounded font-bold">Database</div>
+            <div class="uml-box shadow-md border-indigo-400 bg-indigo-50/20">
+              <div class="uml-header bg-indigo-100 text-indigo-950 font-bold">
+                <input id="u1-name" placeholder="Class Name? (e.g. Doctor)" class="w-full text-center font-bold bg-white border border-slate-300 rounded px-1 text-xs">
+              </div>
+              <div class="uml-section">
+                <textarea id="u1-attr" placeholder="- doctorId: String&#10;- specialty: String" rows="2" class="w-full text-xs font-mono p-1 border border-slate-300 rounded"></textarea>
+              </div>
+              <div class="uml-section">
+                <textarea id="u1-ops" placeholder="+ examinePatient()&#10;+ prescribeMedication()" rows="2" class="w-full text-xs font-mono p-1 border border-slate-300 rounded"></textarea>
               </div>
             </div>
 
-            <div class="p-4 border rounded bg-slate-50">
-              <p class="font-bold text-slate-800 mb-2">2. ATM 3-Phase Flow (Input &rarr; Process &rarr; Output):</p>
-              <ul class="space-y-1">
-                <li>&bull; <strong>Input (ATM):</strong> Get customer account ID, Validate card, Select service</li>
-                <li>&bull; <strong>Process (Database):</strong> Query account, Update account</li>
-                <li>&bull; <strong>Output (ATM):</strong> Print details, Return card, Dispense cash</li>
-              </ul>
+            <div class="uml-box shadow-sm">
+              <div class="uml-header text-indigo-950 font-bold">LabTest</div>
+              <div class="uml-section">- testId: String<br>- resultData: String</div>
+              <div class="uml-section">+ runAnalysis(): void<br>+ sendReport(): void</div>
             </div>
-            <button onclick="checkAtmDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-lg text-xs">Verify ATM Drill</button>
-            <div id="atm-fb" class="mt-2 text-xs font-semibold"></div>
           </div>
-        </div>
 
-        <!-- DRILL A6: CALL-RETURN VS MANAGER CONTROL -->
-        <div id="arch-callreturn" class="arch-drill-view hidden">
-          <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg mb-6">
-            <h3 class="font-bold text-purple-900 text-sm">Slides 41-43: Centralized Control Models (Call-Return vs. Manager)</h3>
-            <p class="text-xs text-purple-800 mt-1">
-              One subsystem has overall responsibility for control and stopping/starting other subsystems.
-            </p>
-          </div>
-          <div class="max-w-2xl mx-auto space-y-4 text-xs">
-            <div class="p-4 border rounded bg-slate-50">
-              <label class="font-bold block mb-1">1. When is the Call-Return model applicable vs. the Manager model?</label>
-              <select id="ctrl-q1" class="w-full p-2 border rounded bg-white">
-                <option value="">-- Select Answer --</option>
-                <option value="correct">Call-Return is for SEQUENTIAL systems (top-down subroutine tree); Manager model is for CONCURRENT systems.</option>
-                <option value="wrong1">Call-Return is for real-time avionics; Manager is for batch processing.</option>
-                <option value="wrong2">They are completely interchangeable.</option>
-              </select>
-            </div>
-            <div class="p-4 border rounded bg-slate-50">
-              <label class="font-bold block mb-1">2. In the Manager Model (Slide 43), what does the central System Controller coordinate?</label>
-              <select id="ctrl-q2" class="w-full p-2 border rounded bg-white">
-                <option value="">-- Select Components --</option>
-                <option value="correct">Sensor Processes, Actuator Processes, Computation Processes, Fault Handler, User Interface</option>
-                <option value="wrong1">Only CPU registers and L1 cache</option>
-                <option value="wrong2">Main program and Methods 1.1, 1.2, 2.1, 2.2</option>
-              </select>
-            </div>
-            <button onclick="checkControlDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-lg text-xs">Verify Control Models Drill</button>
-            <div id="ctrl-fb" class="mt-2 text-xs font-semibold"></div>
-          </div>
-        </div>
-
-        <!-- DRILL A7: INTERRUPT-DRIVEN CONTROL -->
-        <div id="arch-interrupt" class="arch-drill-view hidden">
-          <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg mb-6">
-            <h3 class="font-bold text-amber-900 text-sm">Slide 46: Interrupt-Driven Control Model</h3>
-            <p class="text-xs text-amber-800 mt-1">
-              Decentralized control driven by externally-generated events where timing is unpredictable.
-            </p>
-          </div>
-          <div class="max-w-2xl mx-auto space-y-4 text-xs">
-            <div class="p-4 border rounded bg-slate-50">
-              <p class="font-bold text-slate-800 mb-2">1. How does the Interrupt-Driven Model ensure fast response?</p>
-              <select id="int-q1" class="w-full p-2 border rounded bg-white">
-                <option value="">-- Select Answer --</option>
-                <option value="correct">Each interrupt type is associated with a memory location; dedicated handlers watch that address and coordinate response.</option>
-                <option value="wrong1">By broadcasting events over an HTTP REST API.</option>
-                <option value="wrong2">By caching all requests in a single database table.</option>
-              </select>
-            </div>
-            <div class="p-4 border rounded bg-slate-50">
-              <p class="font-bold text-slate-800 mb-2">2. What are the 4 specialized handlers in Slide 46?</p>
-              <div class="font-mono text-xs text-indigo-700 font-bold p-2 bg-white border rounded">
-                Temperature Event Handler, Radiation Event Handler, Fire Alarm Event Handler, Fuel Event Handler
+          <!-- Relationship Choices -->
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="font-semibold block mb-1">Department to Doctor Relationship:</label>
+                <select id="rel-dept-doc" class="w-full p-2 border rounded bg-white">
+                  <option value="">-- Choose Relationship --</option>
+                  <option value="aggregation">Aggregation (&lt;&gt;-- open diamond at Department) - Doctor outlives Dept</option>
+                  <option value="composition">Composition (&lt;*&gt;-- solid diamond at Department)</option>
+                  <option value="generalization">Generalization (--|&gt; hollow triangle)</option>
+                </select>
+              </div>
+              <div>
+                <label class="font-semibold block mb-1">Department to LabTest Relationship:</label>
+                <select id="rel-dept-lab" class="w-full p-2 border rounded bg-white">
+                  <option value="">-- Choose Relationship --</option>
+                  <option value="composition">Composition (&lt;*&gt;-- solid diamond at Department) - Tests destroyed with Dept</option>
+                  <option value="aggregation">Aggregation (&lt;&gt;-- open diamond at Department)</option>
+                  <option value="association">Simple Association (---)</option>
+                </select>
+              </div>
+              <div>
+                <label class="font-semibold block mb-1">MedicalRecord to SurgicalRecord:</label>
+                <select id="rel-med-surg" class="w-full p-2 border rounded bg-white">
+                  <option value="">-- Choose Relationship --</option>
+                  <option value="generalization">Generalization (--|&gt; solid line with hollow triangle at MedicalRecord)</option>
+                  <option value="realization">Realization (..|&gt; dashed line with hollow triangle)</option>
+                  <option value="composition">Composition (&lt;*&gt;--)</option>
+                </select>
+              </div>
+              <div>
+                <label class="font-semibold block mb-1">Rule for classes with no methods:</label>
+                <select id="rel-compartments" class="w-full p-2 border rounded bg-white">
+                  <option value="">-- Choose Answer --</option>
+                  <option value="three">Must always draw all 3 compartments, leaving the 3rd compartment empty</option>
+                  <option value="two">Draw only 2 compartments</option>
+                </select>
               </div>
             </div>
-            <div class="p-4 border rounded bg-slate-50">
-              <p class="font-bold text-slate-800 mb-2">3. What is the major drawback of the Interrupt-Driven Model?</p>
-              <select id="int-q3" class="w-full p-2 border rounded bg-white">
-                <option value="">-- Select Disadvantage --</option>
-                <option value="correct">Complex to program and very hard to validate/test due to non-deterministic concurrency and timing.</option>
-                <option value="wrong1">Too slow for real-time systems.</option>
-                <option value="wrong2">Cannot handle hardware events.</option>
-              </select>
-            </div>
-            <button onclick="checkInterruptDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-lg text-xs">Verify Interrupt Drill</button>
-            <div id="int-fb" class="mt-2 text-xs font-semibold"></div>
+            <button onclick="checkHospitalDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2 rounded-lg text-xs">Verify Diagram 1</button>
+            <div id="hospital-feedback" class="mt-2 text-xs font-semibold"></div>
           </div>
         </div>
 
-        <!-- DRILL A8: COMPILER REPOSITORY VS PIPE & FILTER -->
-        <div id="arch-compiler" class="arch-drill-view hidden">
-          <div class="bg-cyan-50 border-l-4 border-cyan-500 p-4 rounded-r-lg mb-6">
-            <h3 class="font-bold text-cyan-900 text-sm">Slides 56 & 57: Language Processing Architectures (Repository vs. Pipe & Filter)</h3>
-            <p class="text-xs text-cyan-800 mt-1">
-              Comparing how a Compiler is structured as a Repository vs. as a Pipe & Filter pipeline.
+        <!-- DRILL 2: BANK ACCOUNT & REALIZATION -->
+        <div id="drill-bank" class="uml-drill-view hidden">
+          <div class="bg-slate-50 border-l-4 border-blue-600 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-slate-900 text-sm">Diagram 2: Bank Account Hierarchy & Interface Realization</h3>
+            <p class="text-xs text-slate-600 mt-1">
+              <code>BankAccount</code> is an abstract parent class. <code>SavingsAccount</code> implements the <code>InterestBearing</code> interface. <code>Customer</code> owns an <code>Address</code>.
             </p>
           </div>
-          <div class="max-w-2xl mx-auto space-y-4 text-xs font-mono">
-            <div class="p-4 border rounded bg-slate-50">
-              <p class="font-bold text-slate-800 mb-2">Pipe & Filter Compiler Pipeline Sequence (Slide 57):</p>
-              <p>Step 1: <input id="comp-s1" placeholder="1st Stage" class="p-1 border rounded w-44 font-bold text-indigo-700"> (Source Program &rarr; Tokens)</p>
-              <p>Step 2: <input id="comp-s2" placeholder="2nd Stage" class="p-1 border rounded w-44 font-bold text-indigo-700"> (Tokens &rarr; Parse Tree)</p>
-              <p>Step 3: <input id="comp-s3" placeholder="3rd Stage" class="p-1 border rounded w-44 font-bold text-indigo-700"> (Type checking & decoration)</p>
-              <p>Step 4: <input id="comp-s4" placeholder="4th Stage" class="p-1 border rounded w-44 font-bold text-indigo-700"> (&rarr; Object Code)</p>
-              <p class="text-slate-500 text-[11px] mt-1">Shared structures accessed: <code>Symbol table</code> & <code>Syntax tree</code></p>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-3 text-xs">
+            <div>
+              <p class="font-bold text-slate-800 mb-1">1. How is an abstract class name denoted in UML?</p>
+              <label class="block"><input type="radio" name="bank-q1" value="italic"> Italic font style or tagged with &laquo;abstract&raquo;</label>
+              <label class="block"><input type="radio" name="bank-q1" value="bold"> Bold underlined font</label>
             </div>
-            <button onclick="checkCompilerDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-lg text-xs">Verify Compiler Pipeline</button>
-            <div id="comp-fb" class="mt-2 text-xs font-semibold"></div>
+            <div>
+              <p class="font-bold text-slate-800 mb-1">2. Which connector denotes Realization (implements interface)?</p>
+              <label class="block"><input type="radio" name="bank-q2" value="realization"> Dashed line with hollow triangle pointing to Interface (<code>..|&gt;</code>)</label>
+              <label class="block"><input type="radio" name="bank-q2" value="generalization"> Solid line with hollow triangle pointing to parent (<code>--|&gt;</code>)</label>
+            </div>
+            <div>
+              <p class="font-bold text-slate-800 mb-1">3. Customer to Address relationship:</p>
+              <label class="block"><input type="radio" name="bank-q3" value="composition"> Composition (&lt;*&gt; solid diamond at Customer - Address lifecycle bound)</label>
+              <label class="block"><input type="radio" name="bank-q3" value="aggregation"> Aggregation (&lt;&gt; hollow diamond)</label>
+            </div>
+            <button onclick="checkBankDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2 rounded-lg text-xs">Verify Diagram 2</button>
+            <div id="bank-feedback" class="mt-2 text-xs font-semibold"></div>
+          </div>
+        </div>
+
+        <!-- DRILL 3: ADAPTER PATTERN CLASS DIAGRAM -->
+        <div id="drill-adapter" class="uml-drill-view hidden">
+          <div class="bg-slate-50 border-l-4 border-emerald-600 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-slate-900 text-sm">Diagram 3: Adapter Design Pattern Class Diagram (In-Class Activity)</h3>
+            <p class="text-xs text-slate-600 mt-1">
+              Converts the interface of a class (Adaptee) into another interface that clients expect.
+            </p>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-3 text-xs">
+            <div>
+              <p class="font-bold text-slate-800 mb-1">1. In the Object Adapter pattern, what connects the `Adapter` to the `Adaptee`?</p>
+              <select id="ad-q1" class="w-full p-2 border rounded bg-white">
+                <option value="">-- Choose Relationship --</option>
+                <option value="correct">Association / Composition: Adapter holds a private reference to the Adaptee instance (adaptee.specificRequest())</option>
+                <option value="wrong1">Inheritance only</option>
+                <option value="wrong2">Dependency injection without reference</option>
+              </select>
+            </div>
+            <div>
+              <p class="font-bold text-slate-800 mb-1">2. What connects `Adapter` to the `Target` interface?</p>
+              <select id="ad-q2" class="w-full p-2 border rounded bg-white">
+                <option value="">-- Choose Relationship --</option>
+                <option value="correct">Realization: Adapter implements the Target interface (`..|> Target`)</option>
+                <option value="wrong1">Generalization from abstract class only</option>
+              </select>
+            </div>
+            <div>
+              <p class="font-bold text-slate-800 mb-1">3. What does `Client` interact with?</p>
+              <select id="ad-q3" class="w-full p-2 border rounded bg-white">
+                <option value="">-- Choose Target --</option>
+                <option value="correct">The Target interface directly (remains decoupled from Adaptee implementation)</option>
+                <option value="wrong1">The Adaptee directly</option>
+              </select>
+            </div>
+            <button onclick="checkAdapterDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2 rounded-lg text-xs">Verify Diagram 3</button>
+            <div id="ad-fb" class="mt-2 text-xs font-semibold"></div>
+          </div>
+        </div>
+
+        <!-- DRILL 4: SEQUENCE DIAGRAM (ALT & LOOP) -->
+        <div id="drill-seqdoc" class="uml-drill-view hidden">
+          <div class="bg-slate-50 border-l-4 border-purple-600 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-slate-900 text-sm">Diagram 4: Doctor Viewing Record Sequence Diagram (Fragments: Alt & Loop)</h3>
+            <p class="text-xs text-slate-600 mt-1">
+              Doctor queries patient surgical record. If authorized (`[isAuthorized]`), loop over lab tests and return results; else return error.
+            </p>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-3 text-xs">
+            <div class="space-y-2">
+              <p><strong>Combined Fragment Matching:</strong></p>
+              <div class="p-2 border bg-white rounded">
+                <b>alt fragment:</b> Represents <code>if-then-else</code> alternatives. Separated by a dashed horizontal line with boolean guards in square brackets <code>[authorized]</code> and <code>[else]</code>.
+              </div>
+              <div class="p-2 border bg-white rounded">
+                <b>loop fragment:</b> Represents repeated execution (e.g. iterating over test records) with guard condition <code>[hasMoreTests]</code> or range <code>[1, *]</code>.
+              </div>
+              <div class="p-2 border bg-white rounded">
+                <b>Arrowhead Types:</b> Synchronous calls use a <u>solid line with filled arrowhead</u> (<code>&mdash;&mdash;&blacktriangleright;</code>). Return messages use a <u>dashed line with stick arrowhead</u> (<code>&lt;- - -</code>).
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DRILL 5: MENTCARE VIEW INFO SEQUENCE -->
+        <div id="drill-seqmentcare" class="uml-drill-view hidden">
+          <div class="bg-slate-50 border-l-4 border-sky-600 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-slate-900 text-sm">Diagram 5: Mentcare View Patient Info Sequence Diagram</h3>
+            <p class="text-xs text-slate-600 mt-1">
+              Actor &rarr; UI/Boundary &rarr; Controller &rarr; Entity/Database.
+            </p>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-3 text-xs">
+            <p class="font-bold text-slate-800">Identify the correct message sequence from lecture:</p>
+            <div class="space-y-1 font-mono text-[11px] bg-white p-3 border rounded">
+              1. Receptionist &mdash;&mdash;&blacktriangleright; :PatientUI : viewInfo(patientId)<br>
+              2. :PatientUI &mdash;&mdash;&blacktriangleright; :PatientController : getDetails(patientId)<br>
+              3. :PatientController &mdash;&mdash;&blacktriangleright; :PatientDatabase : query(patientId)<br>
+              4. :PatientDatabase &lt;- - - :PatientController : return record<br>
+              5. :PatientUI &lt;- - - :Receptionist : display patient details
+            </div>
+          </div>
+        </div>
+
+        <!-- DRILL 6: INSULIN PUMP ACTIVITY -->
+        <div id="drill-insulin" class="uml-drill-view hidden">
+          <div class="bg-slate-50 border-l-4 border-amber-600 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-slate-900 text-sm">Diagram 6: Insulin Pump Activity Diagram (Fork & Join)</h3>
+            <p class="text-xs text-slate-600 mt-1">
+              A <strong>Fork bar</strong> splits 1 incoming flow into multiple concurrent parallel flows. A <strong>Join bar</strong> synchronizes concurrent parallel flows into 1 outgoing flow.
+            </p>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-2 text-xs">
+            <div class="p-3 bg-white border rounded">
+              &bull; <b>Fork:</b> After sensor measures blood sugar, execution splits into: (1) Compute required insulin dosage, and (2) Log sensor timestamp.<br>
+              &bull; <b>Join:</b> Both the dosage calculation and logging must complete before advancing to Inject Insulin.<br>
+              &bull; <b>Decision Diamond:</b> <code>[sugarLevel &gt; safeRange]</code> &rarr; Inject Insulin; <code>[sugarLevel &le; safeRange]</code> &rarr; Sleep 10 min.
+            </div>
+          </div>
+        </div>
+
+        <!-- DRILL 7: SWIMLANES ACTIVITY -->
+        <div id="drill-swimlanes" class="uml-drill-view hidden">
+          <div class="bg-slate-50 border-l-4 border-teal-600 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-slate-900 text-sm">Diagram 7: Activity Diagram with Swimlanes (Partitions)</h3>
+            <p class="text-xs text-slate-600 mt-1">
+              Partitions (swimlanes) designate which organizational role or system component is responsible for executing each activity.
+            </p>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-2 text-xs">
+            <div class="p-3 bg-white border rounded">
+              &bull; <b>Lane 1 (Patient/User):</b> Submit appointment request, Provide insurance card.<br>
+              &bull; <b>Lane 2 (Receptionist):</b> Verify identity, Check doctor schedule, Confirm slot.<br>
+              &bull; <b>Lane 3 (Medical Records Subsystem):</b> Generate appointment record, update patient history.<br>
+              &bull; <b>Transitions crossing lanes:</b> Indicate handoff of responsibility between actors/systems.
+            </div>
+          </div>
+        </div>
+
+        <!-- DRILL 8: MICROWAVE STATE MACHINE -->
+        <div id="drill-microwave" class="uml-drill-view hidden">
+          <div class="bg-slate-50 border-l-4 border-rose-600 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-slate-900 text-sm">Diagram 8: Microwave Oven State Machine Diagram</h3>
+            <p class="text-xs text-slate-600 mt-1">
+              UML State Transition Syntax: <code>Event [Guard] / Action</code>
+            </p>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-2 text-xs">
+            <div class="p-3 bg-white border rounded">
+              &bull; <b>States:</b> Waiting, Half power, Full power, Set time, Operation, Disabled.<br>
+              &bull; <b>Transition example:</b> <code>start [door_closed] / run_generator(300W)</code><br>
+              &bull; <b>Door open event:</b> From state <em>Operation</em> &rarr; <code>door_open / stop_generator(), turn_lamp_on()</code> &rarr; state <em>Disabled</em>.
+            </div>
+          </div>
+        </div>
+
+        <!-- DRILL 9: USE CASE DIAGRAM -->
+        <div id="drill-usecase" class="uml-drill-view hidden">
+          <div class="bg-slate-50 border-l-4 border-indigo-600 p-4 rounded-r-lg mb-6">
+            <h3 class="font-bold text-slate-900 text-sm">Diagram 9: Use Case Diagram (Include vs Extend)</h3>
+            <p class="text-xs text-slate-600 mt-1">
+              Differentiating mandatory sub-tasks from optional extension points.
+            </p>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-2 text-xs">
+            <div class="p-3 bg-white border rounded">
+              &bull; <b>&laquo;include&raquo;:</b> Mandatory sub-routine. Base use case is incomplete without it. Dashed arrow points from base use case to included use case. (E.g. <code>View Record --&gt; &laquo;include&raquo; --&gt; Authenticate User</code>).<br>
+              &bull; <b>&laquo;extend&raquo;:</b> Optional behavior triggered under specific conditions at an extension point. Base is complete on its own. Dashed arrow points from extending use case to base use case. (E.g. <code>Print Hardcopy --&gt; &laquo;extend&raquo; --&gt; View Record</code>).
+            </div>
           </div>
         </div>
 
@@ -475,234 +456,36 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- TAB 3: UML FILL-IN-THE-BLANK & DIAGRAMS   -->
+    <!-- TAB 3: ARCHITECTURE MODELS                -->
     <!-- ========================================== -->
-    <div id="tab-uml" class="tab-content hidden">
+    <div id="tab-architecture" class="tab-content hidden">
       <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
-        <div class="border-b border-slate-100 pb-4 mb-6">
-          <h2 class="text-2xl font-bold text-slate-900">Section B: UML Diagram Fill-in-the-Blank</h2>
-          <p class="text-sm text-slate-500">Master the exact lecture scenarios: Class Diagrams (3-compartment rule), Aggregation vs Composition, Sequence Fragments, and Activity Forks/Joins.</p>
+        <div class="border-b border-slate-100 pb-4 mb-4">
+          <h2 class="text-2xl font-bold text-slate-900">Architecture Design Models</h2>
+          <p class="text-sm text-slate-500">Core architectural patterns: Layered, Repository, Client-Server, Pipe & Filter, and Control Models.</p>
         </div>
-
-        <!-- Drill Selector -->
-        <div class="flex flex-wrap gap-2 mb-6">
-          <button onclick="showUmlDrill('hospital')" id="btn-drill-hospital" class="uml-drill-btn px-4 py-2 rounded-lg text-sm font-semibold bg-indigo-600 text-white">
-            1. Hospital Scenario (Class Diagram)
-          </button>
-          <button onclick="showUmlDrill('bank')" id="btn-drill-bank" class="uml-drill-btn px-4 py-2 rounded-lg text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
-            2. Bank Account (Generalization & Realization)
-          </button>
-          <button onclick="showUmlDrill('sequence')" id="btn-drill-sequence" class="uml-drill-btn px-4 py-2 rounded-lg text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
-            3. Sequence Diagram (Alt / Opt / Loop)
-          </button>
-          <button onclick="showUmlDrill('insulin')" id="btn-drill-insulin" class="uml-drill-btn px-4 py-2 rounded-lg text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
-            4. Insulin Pump (Activity Fork & Join)
-          </button>
-          <button onclick="showUmlDrill('microwave')" id="btn-drill-microwave" class="uml-drill-btn px-4 py-2 rounded-lg text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
-            5. Microwave Oven (State Machine)
-          </button>
-        </div>
-
-        <!-- DRILL U1: HOSPITAL -->
-        <div id="drill-hospital" class="uml-drill-view block">
-          <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg mb-6">
-            <h3 class="font-bold text-amber-900 text-sm">Professor's Strict Rule & Scenario:</h3>
-            <p class="text-xs text-amber-800 mt-1">
-              "Any class with 2 modules is WRONG! Must always draw all 3 compartments."<br>
-              <strong>Scenario:</strong> A Hospital has Departments. Departments employ Doctors and maintain Lab Tests. If a Department closes, its Lab Tests are destroyed, but Doctors retain their licenses and can practice elsewhere. A Medical Record specializes into Surgical Record and Office Visit Record.
-            </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 border rounded-lg bg-slate-50">
+            <h3 class="font-bold text-slate-800 text-sm mb-1">1. Mentcare Layered System (Slide 54)</h3>
+            <p>Layer 1: Web browser</p>
+            <p>Layer 2: Login, Role checking, Form & menu manager, Data validation</p>
+            <p>Layer 3: Security mgmt, Patient info manager, Data import/export, Report generation</p>
+            <p>Layer 4: Transaction management, Patient database</p>
           </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <!-- Box 1 -->
-            <div class="uml-box shadow-sm">
-              <div class="uml-header text-indigo-900">Department</div>
-              <div class="uml-section">
-                <span class="text-xs text-slate-400 block mb-1">Attributes:</span>
-                - deptId: String<br>- name: String
-              </div>
-              <div class="uml-section">
-                <span class="text-xs text-slate-400 block mb-1">Operations:</span>
-                + getDoctors(): List&lt;Doctor&gt;<br>+ scheduleTest(t: LabTest)
-              </div>
-            </div>
-
-            <!-- Box 2 (Interactive) -->
-            <div class="uml-box shadow-md border-indigo-400 bg-indigo-50/20">
-              <div class="uml-header bg-indigo-100 text-indigo-900">
-                <input id="u1-name" placeholder="Class Name? (e.g. Doctor)" class="w-full text-center font-bold bg-white border border-slate-300 rounded px-1 text-sm">
-              </div>
-              <div class="uml-section">
-                <span class="text-xs text-slate-400 block mb-1">Compartment 2 (Attributes):</span>
-                <textarea id="u1-attr" placeholder="- doctorId: String&#10;- specialty: String" rows="2" class="w-full text-xs font-mono p-1 border border-slate-300 rounded"></textarea>
-              </div>
-              <div class="uml-section">
-                <span class="text-xs text-slate-400 block mb-1">Compartment 3 (Operations):</span>
-                <textarea id="u1-ops" placeholder="+ examinePatient()&#10;+ prescribeMedication()" rows="2" class="w-full text-xs font-mono p-1 border border-slate-300 rounded"></textarea>
-              </div>
-            </div>
-
-            <!-- Box 3 -->
-            <div class="uml-box shadow-sm">
-              <div class="uml-header text-indigo-900">LabTest</div>
-              <div class="uml-section">
-                <span class="text-xs text-slate-400 block mb-1">Attributes:</span>
-                - testId: String<br>- resultData: String
-              </div>
-              <div class="uml-section">
-                <span class="text-xs text-slate-400 block mb-1">Operations:</span>
-                + runAnalysis(): void<br>+ sendReport(): void
-              </div>
-            </div>
+          <div class="p-4 border rounded-lg bg-slate-50">
+            <h3 class="font-bold text-slate-800 text-sm mb-1">2. IDE Repository Model (Slide 31)</h3>
+            <p>Center: Project Information & Code</p>
+            <p>Surrounding: Model Editor, Code Generator, Java Editor, Python Editor, Report Generator, Design Analyzer, Design Translator</p>
           </div>
-
-          <!-- Relationship Questions -->
-          <div class="bg-slate-50 border border-slate-200 rounded-lg p-5 space-y-4">
-            <h4 class="font-bold text-slate-900 text-sm">Identify the Exact Relationship & Multiplicity:</h4>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              <div>
-                <label class="font-semibold text-slate-700 block mb-1">1. Department to Doctor:</label>
-                <select id="rel-dept-doc" class="w-full p-2 border border-slate-300 rounded bg-white font-mono">
-                  <option value="">-- Select UML Relationship --</option>
-                  <option value="aggregation">Aggregation (Open diamond &lt;&gt;-- at Department) - Doctor outlives Dept</option>
-                  <option value="composition">Composition (Filled diamond &lt;*&gt;-- at Department)</option>
-                  <option value="generalization">Generalization (--|&gt; hollow triangle)</option>
-                  <option value="dependency">Dependency (..&gt; dashed arrow)</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="font-semibold text-slate-700 block mb-1">2. Department to LabTest:</label>
-                <select id="rel-dept-lab" class="w-full p-2 border border-slate-300 rounded bg-white font-mono">
-                  <option value="">-- Select UML Relationship --</option>
-                  <option value="composition">Composition (Filled diamond &lt;*&gt;-- at Department) - Tests destroyed with Dept</option>
-                  <option value="aggregation">Aggregation (Open diamond &lt;&gt;-- at Department)</option>
-                  <option value="realization">Realization (..|&gt; dashed with hollow triangle)</option>
-                  <option value="association">Simple Association (---)</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="font-semibold text-slate-700 block mb-1">3. MedicalRecord to SurgicalRecord:</label>
-                <select id="rel-med-surg" class="w-full p-2 border border-slate-300 rounded bg-white font-mono">
-                  <option value="">-- Select UML Relationship --</option>
-                  <option value="generalization">Generalization (--|&gt; hollow triangle at MedicalRecord)</option>
-                  <option value="realization">Realization (..|&gt; dashed hollow triangle)</option>
-                  <option value="composition">Composition (&lt;*&gt;--)</option>
-                  <option value="dependency">Dependency (..&gt;)</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="font-semibold text-slate-700 block mb-1">4. Golden Rule Check: What if a class has no operations?</label>
-                <select id="rel-compartments" class="w-full p-2 border border-slate-300 rounded bg-white font-mono">
-                  <option value="">-- Select Answer --</option>
-                  <option value="three">MUST still draw 3 compartments (leave the 3rd compartment empty)</option>
-                  <option value="two">Draw only 2 compartments</option>
-                  <option value="one">Draw a simple single box</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="pt-2">
-              <button onclick="checkHospitalDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs px-4 py-2 rounded-lg transition">
-                Check Hospital Scenario Answers
-              </button>
-              <div id="hospital-feedback" class="mt-3 text-xs font-medium"></div>
-            </div>
+          <div class="p-4 border rounded-lg bg-slate-50">
+            <h3 class="font-bold text-slate-800 text-sm mb-1">3. Film Library Client-Server (Slide 34)</h3>
+            <p>Clients 1-4 &harr; Wide-bandwidth network &harr; Catalogue, Video, Picture, Hypertext servers</p>
+          </div>
+          <div class="p-4 border rounded-lg bg-slate-50">
+            <h3 class="font-bold text-slate-800 text-sm mb-1">4. Customer Invoicing Pipe & Filter (Slide 38)</h3>
+            <p>Invoices &rarr; [Process Invoices] &rarr; [Identify Payments] &rarr; [Issue Receipts] (Receipts) & [Find Payments Due] &rarr; [Issue Reminder] (Reminders)</p>
           </div>
         </div>
-
-        <!-- DRILL U2: BANK ACCOUNT -->
-        <div id="drill-bank" class="uml-drill-view hidden">
-          <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-6">
-            <h3 class="font-bold text-blue-900 text-sm">Bank Account Hierarchy:</h3>
-            <p class="text-xs text-blue-800 mt-1">
-              <code>BankAccount</code> is an abstract parent class with subclasses <code>CheckingAccount</code> and <code>SavingsAccount</code>. 
-              <code>InterestBearing</code> is an Interface implemented by <code>SavingsAccount</code>. A <code>Customer</code> has an <code>Address</code> (if customer is deleted, address is deleted).
-            </p>
-          </div>
-          <div class="bg-slate-50 border border-slate-200 rounded-lg p-5 space-y-4 text-xs">
-            <div>
-              <p class="font-bold text-slate-800 mb-1">Q1: How should the class name `BankAccount` be rendered if it is abstract?</p>
-              <label class="block"><input type="radio" name="bank-q1" value="italic"> <em>Italicized text</em> or tagged with &laquo;abstract&raquo;</label>
-              <label class="block"><input type="radio" name="bank-q1" value="bold"> Bold underline only</label>
-            </div>
-            <div>
-              <p class="font-bold text-slate-800 mb-1">Q2: Which arrow connects `SavingsAccount` to the `InterestBearing` interface?</p>
-              <label class="block"><input type="radio" name="bank-q2" value="realization"> Dashed line with hollow triangle pointing to Interface (Realization <code>..|&gt;</code>)</label>
-              <label class="block"><input type="radio" name="bank-q2" value="generalization"> Solid line with hollow triangle pointing to Interface (Generalization <code>--|&gt;</code>)</label>
-              <label class="block"><input type="radio" name="bank-q2" value="dependency"> Dashed arrow with open head (<code>..&gt;</code>)</label>
-            </div>
-            <div>
-              <p class="font-bold text-slate-800 mb-1">Q3: Relationship between `Customer` and `Address`:</p>
-              <label class="block"><input type="radio" name="bank-q3" value="composition"> Composition (Solid black diamond &lt;*&gt; at Customer - Address lifecycle bound)</label>
-              <label class="block"><input type="radio" name="bank-q3" value="aggregation"> Aggregation (Hollow diamond &lt;&gt; at Customer)</label>
-            </div>
-            <button onclick="checkBankDrill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2 rounded-lg transition">Check Bank Answers</button>
-            <div id="bank-feedback" class="mt-2 font-medium"></div>
-          </div>
-        </div>
-
-        <!-- DRILL U3: SEQUENCE ALT/LOOP -->
-        <div id="drill-sequence" class="uml-drill-view hidden">
-          <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-lg mb-6">
-            <h3 class="font-bold text-emerald-900 text-sm">Sequence Diagram Combined Fragments:</h3>
-            <p class="text-xs text-emerald-800 mt-1">
-              Match the UML Combined Fragment operator to its exact meaning from lecture:
-            </p>
-          </div>
-          <div class="space-y-4 text-xs">
-            <div class="p-3 bg-slate-50 border rounded-lg">
-              <span class="font-bold">alt:</span> Represents mutually exclusive alternative behaviors (similar to <code>if-then-else</code>) separated by a dashed horizontal line with guards <code>[condition]</code>.
-            </div>
-            <div class="p-3 bg-slate-50 border rounded-lg">
-              <span class="font-bold">opt:</span> Optional execution branch (similar to <code>if</code> without an else); executes only if guard is true.
-            </div>
-            <div class="p-3 bg-slate-50 border rounded-lg">
-              <span class="font-bold">loop:</span> Repeated execution sequence with condition or bounds <code>[min, max]</code>.
-            </div>
-            <div class="p-3 bg-slate-50 border rounded-lg">
-              <span class="font-bold">par:</span> Concurrent / parallel execution of sub-sequences.
-            </div>
-          </div>
-        </div>
-
-        <!-- DRILL U4: INSULIN PUMP ACTIVITY -->
-        <div id="drill-insulin" class="uml-drill-view hidden">
-          <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg mb-6">
-            <h3 class="font-bold text-purple-900 text-sm">Insulin Pump Activity Diagram Synchronization:</h3>
-            <p class="text-xs text-purple-800 mt-1">
-              Fork vs Join Bar: A <strong>Fork</strong> has 1 incoming flow and &ge; 2 outgoing parallel flows. A <strong>Join</strong> has &ge; 2 incoming concurrent flows and synchronizes them into 1 outgoing flow.
-            </p>
-          </div>
-          <div class="p-4 bg-slate-50 border rounded-lg text-xs space-y-3">
-            <p class="font-bold text-slate-800">Identify the correct notation:</p>
-            <p>1. Start State = Solid black filled circle.</p>
-            <p>2. Activity State = Rectangle with rounded corners.</p>
-            <p>3. Decision / Merge = Diamond symbol with guard expressions <code>[guard]</code>.</p>
-            <p>4. End State = Bullseye (Solid circle inside an outer ring).</p>
-          </div>
-        </div>
-
-        <!-- DRILL U5: MICROWAVE STATE MACHINE -->
-        <div id="drill-microwave" class="uml-drill-view hidden">
-          <div class="bg-rose-50 border-l-4 border-rose-500 p-4 rounded-r-lg mb-6">
-            <h3 class="font-bold text-rose-900 text-sm">Microwave Oven State Machine Transition Syntax:</h3>
-            <p class="text-xs text-rose-800 mt-1">
-              Standard UML State Transition Label: <code>Event [Guard] / Action</code>
-            </p>
-          </div>
-          <div class="p-4 bg-slate-50 border rounded-lg text-xs space-y-2">
-            <p><strong>Example:</strong> In state <em>Half power</em>, user presses <code>start</code> button while door is closed, triggering the generator:</p>
-            <div class="p-3 bg-white font-mono border rounded text-indigo-700 font-bold">
-              start [door_closed] / run_generator(300W)
-            </div>
-            <p class="text-slate-500">Notice: <code>Event</code> triggers the transition; <code>[Guard]</code> is the boolean prerequisite; <code>/ Action</code> is the side-effect executed upon transition.</p>
-          </div>
-        </div>
-
       </div>
     </div>
 
@@ -714,7 +497,7 @@
         <div class="border-b border-slate-100 pb-4 mb-4 flex justify-between items-center">
           <div>
             <h2 class="text-2xl font-bold text-slate-900">Section B: 5 Test Cases Practice Matrix</h2>
-            <p class="text-sm text-slate-500">"Write like 5 test cases" — Practice constructing complete, professional test cases with objectives, pre-conditions, inputs, and expected outcomes.</p>
+            <p class="text-sm text-slate-500">Practice constructing complete test cases with objectives, pre-conditions, inputs, expected results, and pass/fail criteria.</p>
           </div>
           <button onclick="fillExampleTestCases()" class="text-xs bg-slate-100 hover:bg-slate-200 font-semibold text-slate-700 px-3 py-1.5 rounded border border-slate-300">
             Load Model Solution
@@ -738,184 +521,152 @@
             </tbody>
           </table>
         </div>
-
-        <div class="mt-4 p-4 bg-indigo-50 border border-indigo-200 rounded-lg text-xs text-indigo-900 space-y-1">
-          <span class="font-bold">Professor Sadasivuni's Grading Rubric for Test Cases:</span>
-          <ul class="list-disc list-inside space-y-0.5 text-indigo-800">
-            <li><strong>Specific Inputs:</strong> Do not write "enter invalid data" — specify <code>"age = -1"</code> or <code>"PIN = 12345"</code>.</li>
-            <li><strong>Unambiguous Expected Result:</strong> Do not write "system fails" — specify <code>"ErrorMessage displayed: 'PIN must be 4 digits'; transaction aborted"</code>.</li>
-            <li><strong>Boundary Values:</strong> Always test boundaries: $min-1, min, max, max+1$.</li>
-          </ul>
-        </div>
       </div>
     </div>
 
     <!-- ============================================================== -->
-    <!-- TAB 5: PRINTABLE HANDWRITTEN CHEAT SHEET (ULTRA DENSE CRAMMED) -->
+    <!-- TAB 5: PRINTABLE CHEAT SHEET (NATURAL HANDWRITTEN STUDENT NOTES) -->
     <!-- ============================================================== -->
     <div id="tab-cheatsheet" class="tab-content hidden">
       <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        
+        <!-- Screen Top Bar -->
         <div class="flex flex-wrap justify-between items-center border-b border-slate-200 pb-4 mb-4 no-print gap-3">
           <div>
             <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
               <i data-lucide="pen-tool" class="w-6 h-6 text-indigo-600"></i>
-              Ultra-Dense Handwritten Cheat Sheet (Front & Back)
+              Handwritten Cheat Sheet (Front & Back)
             </h2>
-            <p class="text-xs text-rose-600 font-bold mt-1">
-              ✓ 100% Professor Compliant: Single 8.5" x 11" Paper • ABSOLUTELY NO DIAGRAMS • Crammed Text, Syntax & Tables
+            <p class="text-xs text-slate-500 mt-0.5">
+              Natural student study notes • Ultra-dense handwritten pen layout • Ready to print or copy onto 8.5" x 11" paper
             </p>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="text-xs bg-amber-100 text-amber-800 px-3 py-1.5 rounded font-semibold border border-amber-300">
-              Styling: Authentic Student Handwritten Pen Ink (Kalam / Caveat)
-            </span>
-            <button onclick="window.print()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition text-xs sm:text-sm">
-              <i data-lucide="printer" class="w-4 h-4"></i> Print Cheat Sheet
-            </button>
-          </div>
+          <button onclick="window.print()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition text-xs sm:text-sm">
+            <i data-lucide="printer" class="w-4 h-4"></i> Print Cheat Sheet
+          </button>
         </div>
 
         <!-- ============================================== -->
-        <!-- PRINT AREA: AUTHENTIC HANDWRITTEN CRAMMED LOOK -->
+        <!-- PRINT AREA: NATURAL UNSTRUCTURED HANDWRITTEN   -->
         <!-- ============================================== -->
-        <div id="cheat-sheet-print-area" class="font-handwriting text-slate-900 leading-tight">
+        <div id="cheat-sheet-print-area" class="font-notes text-slate-900 leading-tight">
           
           <!-- ============================== -->
-          <!-- SIDE 1: FRONT (ARCH + TESTING) -->
+          <!-- SIDE 1: FRONT OF PAGE          -->
           <!-- ============================== -->
-          <div class="border-2 border-slate-700 p-2.5 bg-white rounded mb-6 shadow-sm">
+          <div class="p-2 bg-white mb-6">
             
-            <!-- Header Banner -->
-            <div class="text-center border-b-2 border-slate-800 pb-1 mb-1.5 flex justify-between items-center px-1">
-              <span class="text-[10px] font-bold text-slate-600">SWE Exam 3 • Dr. Sadasivuni</span>
-              <span class="handwritten-title text-sm font-bold text-indigo-950 uppercase tracking-tight">PAGE 1: ARCHITECTURE, SDLC & SOFTWARE TESTING</span>
-              <span class="text-[9px] font-bold text-rose-600 border border-rose-400 px-1 rounded">NO DIAGRAMS • NOTATION & TEXT ONLY</span>
+            <!-- Top informal title -->
+            <div class="border-b border-slate-400 pb-1 mb-2 flex justify-between items-baseline">
+              <span class="font-caveat text-xl font-bold text-slate-900">SWE Exam 3 Study Notes • Side 1: Architecture, SDLC & Testing</span>
+              <span class="text-[9pt] text-slate-500 font-caveat">CSC 4350 / 6350 • Fall 2026</span>
             </div>
 
-            <div class="grid grid-cols-3 gap-2 text-[8.5pt] leading-[1.12]">
+            <!-- Dense 3-Column Organic Flow -->
+            <div class="grid grid-cols-3 gap-3 text-[8pt] leading-[1.14]">
               
-              <!-- Column 1: SDLC + Kruchten 4+1 -->
-              <div class="space-y-1.5 border-r border-slate-300 pr-1.5">
+              <!-- Column 1 -->
+              <div class="space-y-2 pr-1 border-r border-dashed border-slate-300">
                 
-                <!-- SDLC & 4 Ps -->
-                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
-                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
-                    1. SDLC, 4 P's & Ethics
-                  </div>
-                  • <b>SDLC:</b> Req &rarr; Design &rarr; Impl &rarr; Test &rarr; Deploy &rarr; Maint.<br>
-                  • <b>4 P's:</b> People, Product, Process, Project.<br>
-                  • <b>4 Attributes:</b> Maintainability, Dependability/Security, Efficiency, Acceptability.<br>
-                  • <b>Cost:</b> 60% Dev, 40% Test. Evolution cost &gt; Dev cost for custom software.<br>
-                  • <b>Ethics (ACM/IEEE):</b> Public &gt; Client/Employer &gt; Product &gt; Judgment &gt; Management &gt; Profession &gt; Colleagues &gt; Self.
+                <div>
+                  <div class="hand-header">SDLC & Fundamentals</div>
+                  • <span class="highlighter">SDLC stages:</span> Requirements &rarr; Design &rarr; Implementation &rarr; Testing &rarr; Deployment &rarr; Maintenance.<br>
+                  • <b>4 P's of SWE:</b> People, Product, Process, Project.<br>
+                  • <b>4 Good SW Attributes:</b> Maintainability (evolves), Dependability & Security (safe), Efficiency (fast, low RAM), Acceptability (usable).<br>
+                  • <b>Costs:</b> 60% Dev, 40% Testing. For custom systems, evolution &gt; initial dev cost.<br>
+                  • <b>ACM/IEEE Ethics Priority:</b> Public interest &gt; Client & Employer &gt; Product &gt; Judgment &gt; Management &gt; Profession &gt; Colleagues &gt; Self.
                 </div>
 
-                <!-- Kruchten 4+1 View Model -->
-                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
-                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
-                    2. Kruchten 4+1 View Model
-                  </div>
-                  • <b>Logical View:</b> End-user functionality, classes, domain models. (Audience: Devs/Users)<br>
-                  • <b>Process View:</b> Concurrency, threads, runtime performance, scalability. (Audience: Devs)<br>
-                  • <b>Development View:</b> Code artifacts, packages, modules, build hierarchy. (Audience: Devs)<br>
-                  • <b>Physical View:</b> Hardware nodes, networks, servers, deployment. (Audience: Ops)<br>
-                  • <b>+1 Scenarios (Use Cases):</b> Unifies & links all 4 views together!
+                <div>
+                  <div class="hand-header">Requirements Rules</div>
+                  • <b>Functional:</b> What system MUST do (inputs &rarr; outputs, reactions).<br>
+                  • <b>Non-Functional (NFR):</b> Constraints (security, performance, portability).<br>
+                  • <b>Vague words to rewrite:</b> Never use "instantaneously", "user-friendly", "little training" &rarr; Rewrite into measurable numbers (e.g. &le; 200ms latency, &le; 2 errors per 8 hrs).<br>
+                  • <b>Use Case Relations:</b><br>
+                  &nbsp;&nbsp;- <code>&laquo;include&raquo;</code>: mandatory sub-task; base is incomplete without it.<br>
+                  &nbsp;&nbsp;- <code>&laquo;extend&raquo;</code>: optional branch at extension point; base is complete alone.
                 </div>
 
-                <!-- IEEE Architecture Def & Decisions -->
-                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
-                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
-                    3. Architecture Decisions
-                  </div>
-                  • <b>IEEE Def:</b> "Fundamental organization embodied in components, relationships to one another/environment, principles of design & evolution."<br>
-                  • <b>Partitioning 3 steps:</b> 1. System Structuring, 2. Control Modeling, 3. Modular Decomposition.<br>
-                  • <b>Why Plan?</b> Stakeholder communication, pre-code system analysis, large-scale reuse, security control access.
+                <div>
+                  <div class="hand-header">Kruchten 4+1 View Model</div>
+                  • <b>Logical View:</b> Classes, packages, domain objects. Audience: Devs & Users. Concern: Functionality.<br>
+                  • <b>Process View:</b> Concurrency, threads, runtime performance, scalability. Audience: Devs.<br>
+                  • <b>Development View:</b> Software code artifacts, modules, binaries, build hierarchy. Audience: Devs.<br>
+                  • <b>Physical View:</b> Hardware nodes, networks, servers. Audience: Operations.<br>
+                  • <b>+1 Scenarios (Use Cases):</b> Unifies and validates the other 4 views!
                 </div>
 
               </div>
 
-              <!-- Column 2: 4 Architectural Patterns & Control Models -->
-              <div class="space-y-1.5 border-r border-slate-300 pr-1.5">
+              <!-- Column 2 -->
+              <div class="space-y-2 pr-1 border-r border-dashed border-slate-300">
                 
-                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
-                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
-                    4. Four Architectural Patterns
-                  </div>
-                  • <b>1. Layered:</b> Functionality split into levels; layer N only calls layer N-1.<br>
-                  &nbsp;&nbsp;(+) Modular, replaceable layers, security defense-in-depth.<br>
-                  &nbsp;&nbsp;(-) Hard clean separation; perf overhead through calls.<br>
-                  &nbsp;&nbsp;<i>Ex:</i> UI &rarr; Auth/Forms &rarr; Logic &rarr; DB.<br>
-                  • <b>2. Repository (Blackboard):</b> Passive central DB + active tools.<br>
-                  &nbsp;&nbsp;(+) Efficient large data sharing, tool independence.<br>
-                  &nbsp;&nbsp;(-) Single point of failure; data schema compromise.<br>
-                  &nbsp;&nbsp;<i>Ex:</i> IDE (Project Info/Code in center).<br>
-                  • <b>3. Client-Server:</b> Servers provide services; clients call via network.<br>
-                  &nbsp;&nbsp;(+) Distributed, scalable, independent upgrades.<br>
-                  &nbsp;&nbsp;(-) Network latency, each service point of failure.<br>
-                  &nbsp;&nbsp;<i>Ex:</i> Film Library (Video, Catalogue, Picture servers).<br>
-                  • <b>4. Pipe & Filter:</b> Sequential data transformations.<br>
-                  &nbsp;&nbsp;(+) High reuse, easy to add filter, Unix style.<br>
-                  &nbsp;&nbsp;(-) Agreed data format overhead, latency.<br>
-                  &nbsp;&nbsp;<i>Ex:</i> Invoice &rarr; Process &rarr; Payments &rarr; Receipts.
+                <div>
+                  <div class="hand-header">Architecture Patterns</div>
+                  • <b>IEEE Definition:</b> Fundamental organization of a system embodied in components, relationships, environment, and design principles.<br>
+                  • <b>3 Partitioning Steps:</b> (1) System Structuring, (2) Control Modeling, (3) Modular Decomposition.<br>
+                  • <b>1. Layered Pattern:</b> UI &rarr; Interface/Auth &rarr; Logic &rarr; DB.<br>
+                  &nbsp;&nbsp;+ Replaceable layers, defense-in-depth security.<br>
+                  &nbsp;&nbsp;- Performance overhead across layers, hard clean separation.<br>
+                  • <b>2. Repository Pattern (IDE):</b> Passive central DB + active tools.<br>
+                  &nbsp;&nbsp;+ Efficient sharing of large data, tool independence.<br>
+                  &nbsp;&nbsp;- Single point of failure; data schema compromise.<br>
+                  • <b>3. Client-Server Pattern:</b> Distributed servers offer services.<br>
+                  &nbsp;&nbsp;+ Failure in one server doesn't crash others; scalable.<br>
+                  &nbsp;&nbsp;- Network latency, each service point of failure.<br>
+                  • <b>4. Pipe & Filter Pattern:</b> Sequential data transforms.<br>
+                  &nbsp;&nbsp;+ Subsystem reuse, intuitive flow (Unix pipes).<br>
+                  &nbsp;&nbsp;- Agreed data format overhead, high latency.<br>
+                  • <b>MVC:</b> Controller (input) &rarr; Model (data) &rarr; View (output).
                 </div>
 
-                <!-- Control Models -->
-                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
-                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
-                    5. System Control Models
-                  </div>
-                  • <b>Centralized - Call-Return:</b> Top-down subroutine tree for sequential systems (Main &rarr; Subsystems &rarr; Methods).<br>
-                  • <b>Centralized - Manager:</b> One System Controller starts/stops/coordinates concurrent tasks (Sensors, Actuators, Fault Handler, UI).<br>
-                  • <b>Event - Broadcast:</b> Events sent to message bus; registered subsystems handle. (Decentralized, but uncertain handling time).<br>
-                  • <b>Event - Interrupt-Driven:</b> Memory-mapped hardware interrupt array &rarr; handlers. Ultra fast real-time, but hard to validate!
+                <div>
+                  <div class="hand-header">Control Models</div>
+                  • <b>Centralized - Call-Return:</b> Top-down subroutine call tree for sequential systems (Main &rarr; Subsystems &rarr; Methods).<br>
+                  • <b>Centralized - Manager Model:</b> One central System Controller starts/stops/coordinates concurrent tasks (Sensors, Actuators, UI, Fault Handler).<br>
+                  • <b>Event - Broadcast:</b> Events published to bus; registered subsystems handle. Decentralized, but handling timing uncertain.<br>
+                  • <b>Event - Interrupt-Driven:</b> Hardware interrupt array mapped to memory addresses &rarr; handlers. Fast real-time, but hard to validate!
                 </div>
 
               </div>
 
-              <!-- Column 3: Testing Fundamentals, V-Model & Scaffolding -->
-              <div class="space-y-1.5">
+              <!-- Column 3 -->
+              <div class="space-y-2">
                 
-                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
-                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
-                    6. Testing V&V & Scaffolding
-                  </div>
-                  • <b>Verification:</b> "Are we building the product RIGHT?" (conforms to specification).<br>
+                <div>
+                  <div class="hand-header">Testing Fundamentals & V-Model</div>
+                  • <b>Verification:</b> "Are we building the product RIGHT?" (conformance to specification).<br>
                   • <b>Validation:</b> "Are we building the RIGHT product?" (satisfies user needs).<br>
                   • <b>Dijkstra's Axiom:</b> "Testing shows the presence of bugs, NEVER their absence!"<br>
-                  • <b>Defect vs Validation:</b> Defect exposes flaws; Validation demonstrates functionality meets requirements.<br>
-                  • <b>Test Scaffolding:</b><br>
-                  &nbsp;&nbsp;* <i>Driver:</i> Simulates caller module (invokes unit).<br>
-                  &nbsp;&nbsp;* <i>Stub/Mock:</i> Simulates called sub-module (dummy return).<br>
-                  &nbsp;&nbsp;* <i>Harness:</i> Test execution environment (JUnit).<br>
-                  &nbsp;&nbsp;* <i>Oracle:</i> Compares actual vs expected output.
+                  • <b>V-Model Pairs:</b><br>
+                  &nbsp;&nbsp;- Requirements &harr; Acceptance Testing (Alpha/Beta)<br>
+                  &nbsp;&nbsp;- System Spec &harr; System Testing<br>
+                  &nbsp;&nbsp;- Architectural Design &harr; Subsystem / Integration Testing<br>
+                  &nbsp;&nbsp;- Detailed Design &harr; Unit Testing
                 </div>
 
-                <!-- V-Model & JUnit -->
-                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
-                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
-                    7. V-Model & JUnit Lifecycle
-                  </div>
-                  • <b>V-Model Pairs:</b><br>
-                  &nbsp;&nbsp;Req &harr; Acceptance Test (Alpha/Beta)<br>
-                  &nbsp;&nbsp;System Spec &harr; System Testing<br>
-                  &nbsp;&nbsp;Arch Design &harr; Subsystem/Integration Testing<br>
-                  &nbsp;&nbsp;Detailed Design &harr; Unit Testing<br>
-                  • <b>JUnit Annotations:</b><br>
-                  &nbsp;&nbsp;<code>@Test</code>: Defines test method.<br>
+                <div>
+                  <div class="hand-header">Test Scaffolding & JUnit</div>
+                  • <b>Driver:</b> Simulates the calling module (invokes unit).<br>
+                  • <b>Stub / Mock:</b> Simulates a called sub-module (dummy return).<br>
+                  • <b>Harness:</b> Test framework and runner (JUnit).<br>
+                  • <b>Oracle:</b> Mechanism comparing actual vs expected outputs.<br>
+                  • <b>JUnit Lifecycle:</b><br>
+                  &nbsp;&nbsp;<code>@Test</code>: Marks test method.<br>
                   &nbsp;&nbsp;<code>@Before / @BeforeEach</code>: Runs before EVERY test.<br>
                   &nbsp;&nbsp;<code>@After / @AfterEach</code>: Runs after EVERY test.<br>
-                  &nbsp;&nbsp;<code>@BeforeClass / @BeforeAll</code>: Runs ONCE before suite (static, e.g. open DB).<br>
+                  &nbsp;&nbsp;<code>@BeforeClass / @BeforeAll</code>: Runs ONCE before test suite.<br>
                   &nbsp;&nbsp;<code>@AfterClass / @AfterAll</code>: Runs ONCE after suite.
                 </div>
 
-                <!-- Mentcare & ATM Architecture -->
-                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
-                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
-                    8. App Architectures (ATM & Mentcare)
-                  </div>
-                  • <b>ATM 4-Tier Pipeline:</b><br>
-                  &nbsp;&nbsp;I/O Processing &harr; App Logic &harr; Tx Manager &harr; DB<br>
-                  • <b>ATM 3 Phases:</b> Input (Get ID, Validate, Select) &rarr; Process (Query, Update) &rarr; Output (Print, Return card, Dispense cash).<br>
-                  • <b>Mentcare 4 Layers:</b> 1. Web Browser &rarr; 2. Login, Role, Menu, Validation &rarr; 3. Security, Patient Info, Report &rarr; 4. Patient DB.
+                <div>
+                  <div class="hand-header">Mentcare & ATM Architecture</div>
+                  • <b>Mentcare 4 Layers:</b><br>
+                  &nbsp;&nbsp;1. Web browser<br>
+                  &nbsp;&nbsp;2. Login, Role checking, Form & menu mgr, Validation<br>
+                  &nbsp;&nbsp;3. Security, Patient info manager, Report generation<br>
+                  &nbsp;&nbsp;4. Transaction management, Patient database<br>
+                  • <b>ATM 4-Tier Pipeline:</b> I/O Processing &harr; App Logic &harr; Tx Manager &harr; Database.
                 </div>
 
               </div>
@@ -923,143 +674,126 @@
             </div>
           </div>
 
-          <!-- PAGE BREAK FOR DOUBLE-SIDED PRINTING -->
+          <!-- PAGE BREAK FOR DOUBLE SIDED -->
           <div class="page-break"></div>
 
           <!-- ============================== -->
-          <!-- SIDE 2: BACK (UML + WHITE-BOX) -->
+          <!-- SIDE 2: BACK OF PAGE           -->
           <!-- ============================== -->
-          <div class="border-2 border-slate-700 p-2.5 bg-white rounded shadow-sm">
+          <div class="p-2 bg-white">
             
-            <!-- Header Banner -->
-            <div class="text-center border-b-2 border-slate-800 pb-1 mb-1.5 flex justify-between items-center px-1">
-              <span class="text-[10px] font-bold text-slate-600">SWE Exam 3 • Dr. Sadasivuni</span>
-              <span class="handwritten-title text-sm font-bold text-indigo-950 uppercase tracking-tight">PAGE 2: UML STRICT RULES, WHITE-BOX TESTING & DATABASE</span>
-              <span class="text-[9px] font-bold text-rose-600 border border-rose-400 px-1 rounded">NO DIAGRAMS • NOTATION & TEXT ONLY</span>
+            <!-- Top informal title -->
+            <div class="border-b border-slate-400 pb-1 mb-2 flex justify-between items-baseline">
+              <span class="font-caveat text-xl font-bold text-slate-900">SWE Exam 3 Study Notes • Side 2: UML Diagrams, Coverage & DB</span>
+              <span class="text-[9pt] text-slate-500 font-caveat">CSC 4350 / 6350 • Fall 2026</span>
             </div>
 
-            <div class="grid grid-cols-3 gap-2 text-[8.5pt] leading-[1.12]">
+            <!-- Dense 3-Column Organic Flow -->
+            <div class="grid grid-cols-3 gap-3 text-[8pt] leading-[1.14]">
               
-              <!-- Column 1: UML Strict Class Diagram Rules -->
-              <div class="space-y-1.5 border-r border-slate-300 pr-1.5">
+              <!-- Column 1: UML Diagrams -->
+              <div class="space-y-2 pr-1 border-r border-dashed border-slate-300">
                 
-                <div class="p-1 border-2 border-rose-500 rounded bg-rose-50/30">
-                  <div class="font-bold text-rose-950 uppercase text-[9.5pt] border-b border-rose-300 pb-0.5 mb-0.5">
-                    ★ PROFESSOR'S GOLDEN RULE
-                  </div>
-                  <span class="text-rose-800 font-bold">"Any class with 2 compartments is WRONG! Always draw all 3 compartments."</span><br>
-                  • Compartment 1: Class Name (Italic = Abstract)<br>
-                  • Compartment 2: Attributes <code>visibility name: type</code><br>
-                  • Compartment 3: Operations <code>visibility name(args): ret</code><br>
-                  <i>(Even if empty, 3rd box line MUST be drawn!)</i>
-                </div>
-
-                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
-                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
-                    9. UML Notations & Visibility
-                  </div>
+                <div>
+                  <div class="hand-header">UML Class Diagrams Rules</div>
+                  • <b>3 Compartments:</b> Always draw all 3 boxes: (1) Class Name, (2) Attributes, (3) Operations. Even if empty, draw the 3rd box line!<br>
+                  • <b>Class Naming:</b> Noun = Class, Noun Phrase = Attribute, Verb = Operation.<br>
+                  • <b>Abstract Class:</b> Italicized font or <code>&laquo;abstract&raquo;</code>.<br>
                   • <b>Visibility:</b> <code>+</code> Public | <code>-</code> Private | <code>#</code> Protected | <code>~</code> Package<br>
-                  • <b>Finding:</b> Noun = Class, Noun phrase = Attribute, Verb = Method.<br>
-                  • <b>Association:</b> Solid line <code>---</code> with multiplicity (1, 0..1, 1..*, *).<br>
-                  • <b>Aggregation <code>&lt;&gt;--</code> :</b> Open diamond at whole. "has-a", weak ownership. Part outlives whole! E.g. <code>Department &lt;&gt;-- Doctor</code> (doctors retain licenses).<br>
-                  • <b>Composition <code>&lt;*&gt;--</code> :</b> Solid diamond at whole. "part-of", strong ownership. Part destroyed with whole! E.g. <code>Department &lt;*&gt;-- LabTest</code>, <code>Customer &lt;*&gt;-- Address</code>.<br>
-                  • <b>Generalization <code>--|&gt;</code> :</b> Hollow triangle at parent. "is-a" inheritance. E.g. <code>MedicalRecord --|&gt; SurgicalRecord</code>.<br>
-                  • <b>Realization <code>..|&gt;</code> :</b> Dashed line with hollow triangle at Interface. E.g. <code>SavingsAccount ..|&gt; InterestBearing</code>.<br>
+                  • <b>Attribute format:</b> <code>visibility name: type = default</code><br>
+                  • <b>Operation format:</b> <code>visibility name(param: type): returnType</code><br>
+                  • <b>Aggregation <code>&lt;&gt;--</code> :</b> Open diamond at whole. Weak ownership ("has-a"). Part outlives whole! E.g. <code>Department &lt;&gt;-- Doctor</code> (doctors retain licenses).<br>
+                  • <b>Composition <code>&lt;*&gt;--</code> :</b> Solid diamond at whole. Strong ownership ("part-of"). Part destroyed with whole! E.g. <code>Department &lt;*&gt;-- LabTest</code>, <code>Customer &lt;*&gt;-- Address</code>.<br>
+                  • <b>Generalization <code>--|&gt;</code> :</b> Hollow triangle at parent ("is-a"). E.g. <code>MedicalRecord --|&gt; SurgicalRecord</code>.<br>
+                  • <b>Realization <code>..|&gt;</code> :</b> Dashed line with hollow triangle at interface. E.g. <code>SavingsAccount ..|&gt; InterestBearing</code>.<br>
                   • <b>Dependency <code>..&gt;</code> :</b> Dashed line with open arrow ("uses").
                 </div>
 
-                <!-- Sequence Diagram -->
-                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
-                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
-                    10. Sequence Diagram Rules
-                  </div>
-                  • <b>Lifeline:</b> Vertical dashed line under object box.<br>
-                  • <b>Activation:</b> Vertical thin rectangle of execution.<br>
-                  • <b>Sync Message:</b> Solid line + filled arrowhead <code>&mdash;&mdash;&blacktriangleright;</code> (blocking).<br>
-                  • <b>Async Message:</b> Solid line + stick open arrow <code>&mdash;&mdash;&gt;</code> (non-blocking).<br>
+                <div>
+                  <div class="hand-header">Adapter Pattern Class Diagram</div>
+                  • <b>Client:</b> Calls methods on the Target interface.<br>
+                  • <b>Target:</b> Interface expected by Client.<br>
+                  • <b>Adapter:</b> Implements Target (<code>..|&gt;</code>) and wraps Adaptee via private reference (<code>adapter.adaptee.specificRequest()</code>).<br>
+                  • <b>Adaptee:</b> Existing class with incompatible interface.
+                </div>
+
+                <div>
+                  <div class="hand-header">Sequence Diagrams</div>
+                  • <b>Lifeline:</b> Vertical dashed line extending down from box.<br>
+                  • <b>Activation:</b> Vertical thin rectangle of execution control.<br>
+                  • <b>Sync Call:</b> Solid line + filled arrowhead <code>&mdash;&mdash;&blacktriangleright;</code> (sender blocks).<br>
+                  • <b>Async Call:</b> Solid line + stick open arrow <code>&mdash;&mdash;&gt;</code> (non-blocking).<br>
                   • <b>Return:</b> Dashed line + stick arrow <code>&lt;- - -</code><br>
-                  • <b>Fragments:</b> <code>alt</code> (if-else separated by dashed line), <code>opt</code> (if only), <code>loop [min, max]</code>, <code>par</code> (parallel).<br>
-                  • <b>Creation/Destruction:</b> <code>&laquo;create&raquo;</code> message points to box; <code>X</code> marks destruction.
+                  • <b>Creation/Destruction:</b> <code>&laquo;create&raquo;</code> points to box; <code>X</code> at bottom of lifeline destroys object.<br>
+                  • <b>Fragments:</b> <code>alt</code> (if-else separated by dashed line), <code>opt</code> (if only), <code>loop [min, max]</code>, <code>par</code> (parallel).
                 </div>
 
               </div>
 
-              <!-- Column 2: Behavioral UML & White-Box Testing -->
-              <div class="space-y-1.5 border-r border-slate-300 pr-1.5">
+              <!-- Column 2: Activity, Statechart & White-Box Testing -->
+              <div class="space-y-2 pr-1 border-r border-dashed border-slate-300">
                 
-                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
-                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
-                    11. Activity & Statechart UML
-                  </div>
-                  • <b>Activity Diagrams:</b><br>
-                  &nbsp;&nbsp;* Initial Node: Solid black circle.<br>
-                  &nbsp;&nbsp;* Activity: Rounded rectangle.<br>
-                  &nbsp;&nbsp;* Decision / Merge: Diamond with <code>[guard]</code>.<br>
-                  &nbsp;&nbsp;* Fork: 1 incoming &rarr; 2+ concurrent flows (thick bar).<br>
-                  &nbsp;&nbsp;* Join: 2+ concurrent &rarr; 1 outgoing flow (thick bar).<br>
-                  &nbsp;&nbsp;* Final Node: Bullseye (dot in circle).<br>
-                  &nbsp;&nbsp;* Swimlanes: Partitions showing responsible actors.<br>
-                  • <b>State Machine (Microwave):</b><br>
-                  &nbsp;&nbsp;* Transition Syntax: <code>Event [Guard] / Action</code><br>
+                <div>
+                  <div class="hand-header">Activity & Statechart UML</div>
+                  • <b>Activity Diagram Elements:</b><br>
+                  &nbsp;&nbsp;- Start Node: Solid black circle.<br>
+                  &nbsp;&nbsp;- Activity State: Rounded rectangle.<br>
+                  &nbsp;&nbsp;- Decision / Merge: Diamond with <code>[guard]</code>.<br>
+                  &nbsp;&nbsp;- Fork Bar: 1 incoming &rarr; 2+ concurrent parallel flows.<br>
+                  &nbsp;&nbsp;- Join Bar: 2+ concurrent flows synchronized &rarr; 1 outgoing flow.<br>
+                  &nbsp;&nbsp;- Activity Final: Bullseye (dot inside circle).<br>
+                  &nbsp;&nbsp;- Swimlanes: Partitions showing responsible roles/actors.<br>
+                  • <b>State Machine (Microwave Oven):</b><br>
+                  &nbsp;&nbsp;- States: Waiting, Half power, Full power, Operation, Disabled.<br>
+                  &nbsp;&nbsp;- Transition Syntax: <code>Event [Guard] / Action</code><br>
                   &nbsp;&nbsp;<i>Ex:</i> <code>start [door_closed] / run_generator(300W)</code>
                 </div>
 
-                <!-- White-Box & Structural Coverage -->
-                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
-                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
-                    12. Structural Testing & Coverage
-                  </div>
+                <div>
+                  <div class="hand-header">White-Box Structural Testing</div>
                   • <b>Statement Coverage ($C_0$):</b><br>
-                  &nbsp;&nbsp;$\frac{\text{statements executed}}{\text{total statements}} \times 100\%$. Weakest! Misses false branches in single <code>if</code> blocks.<br>
+                  &nbsp;&nbsp;$\frac{\text{statements executed}}{\text{total statements}} \times 100\%$. Weakest metric! Fails to test untaken false branches in single <code>if</code> statements.<br>
                   • <b>Branch Coverage ($C_1$):</b><br>
-                  &nbsp;&nbsp;Every decision edge (True & False) taken &ge; 1.<br>
-                  &nbsp;&nbsp;<b>Subsumption:</b> Branch subsumes Statement ($C_1 \implies C_0$).<br>
-                  • <b>Condition Coverage:</b> Each individual boolean sub-expression evaluates to T & F at least once.<br>
+                  &nbsp;&nbsp;Every decision edge (True & False) traversed at least once.<br>
+                  &nbsp;&nbsp;<b>Subsumption:</b> Branch coverage subsumes Statement coverage!<br>
+                  • <b>Condition Coverage:</b> Each individual boolean condition in a composite expression evaluates to True and False at least once.<br>
                   • <b>MC/DC (Modified Condition/Decision):</b><br>
-                  &nbsp;&nbsp;Avionics DO-178C standard. Each condition shown to independently affect decision outcome with other conditions held fixed.<br>
-                  &nbsp;&nbsp;Test count: <b>$n + 1$</b> tests (vs $2^n$ multiple condition).<br>
-                  • <b>Path Coverage:</b> Every execution path. Often infinite/intractable due to loops.<br>
-                  • <b>Loop Boundary:</b> 0 iterations, 1 iteration, typical, max-1, max iterations.
+                  &nbsp;&nbsp;Avionics DO-178C standard. Each condition shown to independently affect decision outcome while holding others fixed.<br>
+                  &nbsp;&nbsp;Test cases required: <b>$n + 1$</b> (vs $2^n$ full condition).<br>
+                  • <b>Path Coverage:</b> Every execution path. Often infinite due to loops.<br>
+                  • <b>Loop Boundary Coverage:</b> 0 iterations, 1 iteration, typical, max-1, max iterations.
                 </div>
 
               </div>
 
-              <!-- Column 3: Black-Box, 5 Test Cases & Database -->
-              <div class="space-y-1.5">
+              <!-- Column 3: Black-Box, 5 Test Cases & DB -->
+              <div class="space-y-2">
                 
-                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
-                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
-                    13. Black-Box (EP & BVA)
-                  </div>
-                  • <b>Equivalence Partitioning (EP):</b> Partition input into valid & invalid classes. Pick 1 test value per class.<br>
-                  • <b>Boundary Value Analysis (BVA):</b> Test edges of ranges ($min-1, min, min+1, nom, max-1, max, max+1$).<br>
-                  • <b>Example PIN [0000..9999]:</b> Valid: 1234; Invalid: -1, 10000, "ABCD", 3-digits, 5-digits.
+                <div>
+                  <div class="hand-header">Black-Box (EP & BVA)</div>
+                  • <b>Equivalence Partitioning (EP):</b> Partition input into valid and invalid classes; pick 1 representative per class.<br>
+                  • <b>Boundary Value Analysis (BVA):</b> Test edges of ranges: $min-1, min, min+1, nom, max-1, max, max+1$.<br>
+                  • <b>PIN [0000..9999]:</b> Valid: 1234; Invalid: -1, 10000, "ABC", 3 digits, 5 digits.
                 </div>
 
-                <!-- 5 Test Cases Exam Template -->
-                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
-                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
-                    14. 5 Test Cases Structure
-                  </div>
-                  Format: <code>[ID, Objective, Pre-Cond, Steps/Input, Expected Result, Criteria]</code><br>
-                  • <b>TC-1 (Valid Eq):</b> Normal input &rarr; Success HTTP 200/201.<br>
-                  • <b>TC-2 (Min BVA):</b> Input = 0 or min &rarr; Valid boundary accepted.<br>
-                  • <b>TC-3 (Negative BVA):</b> Input = min-1 or max+1 &rarr; Form blocked, specific error message displayed.<br>
-                  • <b>TC-4 (Concurrency):</b> Simultaneous requests &rarr; Balance protected, race condition prevented.<br>
-                  • <b>TC-5 (Exception/Null):</b> Null required field &rarr; HTTP 400 Bad Request, graceful error logging (no 500 crash).
+                <div>
+                  <div class="hand-header">5 Test Cases Template</div>
+                  Columns: <code>[ID, Objective, Pre-Conditions, Steps/Inputs, Expected Result, Pass/Fail]</code><br>
+                  • <b>TC-1 (Valid EP):</b> Normal user registration &rarr; Saved to DB, HTTP 201 Created.<br>
+                  • <b>TC-2 (Min Boundary):</b> Input = 0 (min valid age) &rarr; Accepted as Infant.<br>
+                  • <b>TC-3 (Negative BVA):</b> Input = -1 &rarr; Error "Age must be &ge; 0", form rejected.<br>
+                  • <b>TC-4 (Concurrency):</b> Simultaneous withdrawals of $100 on $100 balance &rarr; 1st succeeds, 2nd rejected, balance never negative.<br>
+                  • <b>TC-5 (Null/Exception):</b> DoctorID = NULL &rarr; HTTP 400 Bad Request, graceful error logging (no 500 crash).
                 </div>
 
-                <!-- Database & Normalization -->
-                <div class="p-1 border border-slate-400 rounded bg-slate-50/50">
-                  <div class="font-bold text-indigo-950 uppercase text-[9.5pt] border-b border-slate-300 pb-0.5 mb-0.5">
-                    15. Database & Normal Forms
-                  </div>
+                <div>
+                  <div class="hand-header">Relational Database & Normal Forms</div>
                   • <b>Entity Integrity:</b> Primary Key (PK) cannot be NULL.<br>
-                  • <b>Referential Integrity:</b> Foreign Key (FK) must match existing PK in referenced table or be NULL.<br>
+                  • <b>Referential Integrity:</b> Foreign Key (FK) must match existing PK in parent table or be NULL.<br>
                   • <b>1NF:</b> Atomic column values, no repeating groups.<br>
                   • <b>2NF:</b> 1NF + no partial functional dependencies (all non-key attributes fully depend on composite PK).<br>
                   • <b>3NF:</b> 2NF + no transitive dependencies (no non-key attribute depends on another non-key attribute).<br>
-                  <i>"Each attribute must depend on the key, the whole key, and nothing but the key!"</i>
+                  <i>"All attributes depend on the key, the whole key, and nothing but the key!"</i>
                 </div>
 
               </div>
@@ -1097,22 +831,6 @@
       lucide.createIcons();
     }
 
-    // Architecture Drill Switching
-    function showArchDrill(drillId) {
-      document.querySelectorAll('.arch-drill-view').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('.arch-drill-btn').forEach(b => {
-        b.classList.remove('bg-indigo-600', 'text-white');
-        b.classList.add('bg-slate-100', 'text-slate-700');
-      });
-
-      document.getElementById('arch-' + drillId).classList.remove('hidden');
-      const activeBtn = document.getElementById('btn-arch-' + drillId);
-      if (activeBtn) {
-        activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
-        activeBtn.classList.add('bg-indigo-600', 'text-white');
-      }
-    }
-
     // UML Drill Sub-views
     function showUmlDrill(drillId) {
       document.querySelectorAll('.uml-drill-view').forEach(el => el.classList.add('hidden'));
@@ -1129,142 +847,7 @@
       }
     }
 
-    // Architecture Verifications
-    function checkMentcareDrill() {
-      const l1 = document.getElementById('m-layer-1').value;
-      const l2 = document.getElementById('m-layer-2').value;
-      const l3 = document.getElementById('m-layer-3').value;
-      const l4 = document.getElementById('m-layer-4').value;
-      const fb = document.getElementById('mentcare-fb');
-
-      if (l1 === 'correct' && l2 === 'correct' && l3 === 'correct' && l4 === 'correct') {
-        fb.className = "mt-3 text-xs font-semibold text-emerald-700 bg-emerald-50 p-2.5 rounded border border-emerald-200";
-        fb.innerHTML = "✅ PERFECT! Layer 1: Web browser &rarr; Layer 2: Login, Role checking, Menu mgr, Validation &rarr; Layer 3: Security, Patient info, Reports &rarr; Layer 4: Transaction mgmt & Patient DB.";
-      } else {
-        fb.className = "mt-3 text-xs font-semibold text-rose-700 bg-rose-50 p-2.5 rounded border border-rose-200";
-        fb.innerHTML = "❌ Check your layers. Top is Web browser; Layer 2 is Auth & Communications; Layer 3 is Business Logic (Patient info & reports); Bottom is Database!";
-      }
-    }
-
-    function checkRepoDrill() {
-      const q1 = document.getElementById('repo-q1').value;
-      const q2 = document.getElementById('repo-q2').value;
-      const q3 = document.getElementById('repo-q3').value;
-      const fb = document.getElementById('repo-fb');
-
-      if (q1 === 'correct' && q2 === 'correct' && q3 === 'correct') {
-        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
-        fb.innerHTML = "✅ Correct! Central store = Project Info/Code; surrounded by editors, generators, translators; weakness = single point of failure.";
-      } else {
-        fb.className = "mt-2 text-xs font-semibold text-rose-700";
-        fb.innerHTML = "❌ Re-check your answers. Look at Slide 31 (IDE Example).";
-      }
-    }
-
-    function checkClientServerDrill() {
-      const q1 = document.getElementById('cs-q1').value.toLowerCase().trim();
-      const q2 = document.getElementById('cs-q2').value;
-      const q3 = document.getElementById('cs-q3').value;
-      const fb = document.getElementById('cs-fb');
-
-      const q1Correct = q1.includes('network') || q1.includes('wide-bandwidth') || q1.includes('bandwidth');
-      if (q1Correct && q2 === 'correct' && q3 === 'correct') {
-        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
-        fb.innerHTML = "✅ Excellent! Connected via Wide-bandwidth network to Catalogue, Video, Picture, Hypertext servers.";
-      } else {
-        fb.className = "mt-2 text-xs font-semibold text-rose-700";
-        fb.innerHTML = "❌ Check: Connecting line is 'Wide-bandwidth network'; servers are Catalogue, Video, Picture, Hypertext.";
-      }
-    }
-
-    function checkPipeFilterDrill() {
-      const s1 = document.getElementById('pf-s1').value.toLowerCase().trim();
-      const s2 = document.getElementById('pf-s2').value.toLowerCase().trim();
-      const s3 = document.getElementById('pf-s3').value.toLowerCase().trim();
-      const s4 = document.getElementById('pf-s4').value.toLowerCase().trim();
-      const fb = document.getElementById('pf-fb');
-
-      const ok1 = s1.includes('process') || s1.includes('invoice');
-      const ok2 = s2.includes('identify') || s2.includes('payment');
-      const ok3 = s3.includes('receipt');
-      const ok4 = s4.includes('reminder');
-
-      if (ok1 && ok2 && ok3 && ok4) {
-        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
-        fb.innerHTML = "✅ Perfect Invoicing Pipeline: Process Invoices &rarr; Identify Payments &rarr; Issue Receipts (Receipts) & Find Payments Due &rarr; Issue Reminders!";
-      } else {
-        fb.className = "mt-2 text-xs font-semibold text-rose-700";
-        fb.innerHTML = "❌ Hints: Filter 1 = 'Process Invoices', Filter 2 = 'Identify Payments', Target A = 'Receipts', Target B = 'Reminders'.";
-      }
-    }
-
-    function checkAtmDrill() {
-      const t2 = document.getElementById('atm-tier2').value.toLowerCase().trim();
-      const t3 = document.getElementById('atm-tier3').value.toLowerCase().trim();
-      const fb = document.getElementById('atm-fb');
-
-      const ok2 = t2.includes('application') || t2.includes('logic');
-      const ok3 = t3.includes('transaction') || t3.includes('manager');
-
-      if (ok2 && ok3) {
-        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
-        fb.innerHTML = "✅ Correct 4-tier pipeline: I/O Processing &harr; Application Logic &harr; Transaction Manager &harr; Database.";
-      } else {
-        fb.className = "mt-2 text-xs font-semibold text-rose-700";
-        fb.innerHTML = "❌ Hint: Tier 2 is 'Application logic'; Tier 3 is 'Transaction manager' (Slide 53).";
-      }
-    }
-
-    function checkControlDrill() {
-      const q1 = document.getElementById('ctrl-q1').value;
-      const q2 = document.getElementById('ctrl-q2').value;
-      const fb = document.getElementById('ctrl-fb');
-
-      if (q1 === 'correct' && q2 === 'correct') {
-        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
-        fb.innerHTML = "✅ Correct! Call-Return = sequential subroutine tree; Manager model = concurrent systems coordinating sensors, actuators, handlers, and UI.";
-      } else {
-        fb.className = "mt-2 text-xs font-semibold text-rose-700";
-        fb.innerHTML = "❌ Check: Call-Return applies to sequential; Manager applies to concurrent.";
-      }
-    }
-
-    function checkInterruptDrill() {
-      const q1 = document.getElementById('int-q1').value;
-      const q3 = document.getElementById('int-q3').value;
-      const fb = document.getElementById('int-fb');
-
-      if (q1 === 'correct' && q3 === 'correct') {
-        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
-        fb.innerHTML = "✅ Correct! Memory-mapped handlers ensure fast response, but concurrent timing makes validation/testing complex.";
-      } else {
-        fb.className = "mt-2 text-xs font-semibold text-rose-700";
-        fb.innerHTML = "❌ Check answers against Slide 46.";
-      }
-    }
-
-    function checkCompilerDrill() {
-      const s1 = document.getElementById('comp-s1').value.toLowerCase().trim();
-      const s2 = document.getElementById('comp-s2').value.toLowerCase().trim();
-      const s3 = document.getElementById('comp-s3').value.toLowerCase().trim();
-      const s4 = document.getElementById('comp-s4').value.toLowerCase().trim();
-      const fb = document.getElementById('comp-fb');
-
-      const ok1 = s1.includes('lexical');
-      const ok2 = s2.includes('syntactic') || s2.includes('syntax');
-      const ok3 = s3.includes('semantic');
-      const ok4 = s4.includes('code');
-
-      if (ok1 && ok2 && ok3 && ok4) {
-        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
-        fb.innerHTML = "✅ 100% Correct Compiler Pipeline: Lexical Analysis &rarr; Syntactic Analysis &rarr; Semantic Analysis &rarr; Code Generation (sharing Symbol table & Syntax tree)!";
-      } else {
-        fb.className = "mt-2 text-xs font-semibold text-rose-700";
-        fb.innerHTML = "❌ Hint: 1. Lexical analysis, 2. Syntactic analysis, 3. Semantic analysis, 4. Code generation (Slide 57).";
-      }
-    }
-
-    // UML Hospital Drill
+    // Verification Logic for UML Drills
     function checkHospitalDrill() {
       const r1 = document.getElementById('rel-dept-doc').value;
       const r2 = document.getElementById('rel-dept-lab').value;
@@ -1275,11 +858,11 @@
       let correct = (r1 === 'aggregation') && (r2 === 'composition') && (r3 === 'generalization') && (r4 === 'three');
 
       if (correct) {
-        fb.className = "mt-3 text-xs font-semibold text-emerald-700 bg-emerald-50 p-3 rounded border border-emerald-200";
-        fb.innerHTML = "✅ PERFECT! Department-to-Doctor is Aggregation (Doctor outlives Department). Department-to-LabTest is Composition (tests destroyed). MedicalRecord is Generalization. And class boxes MUST always have 3 compartments!";
+        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
+        fb.innerHTML = "✅ Correct! Department-to-Doctor is Aggregation (Doctor outlives Department). Department-to-LabTest is Composition (tests destroyed). MedicalRecord is Generalization. And class boxes always have 3 compartments.";
       } else {
-        fb.className = "mt-3 text-xs font-semibold text-rose-700 bg-rose-50 p-3 rounded border border-rose-200";
-        fb.innerHTML = "❌ Check your choices. Remember: Doctors survive hospital closure (Aggregation), but LabTests do not (Composition). And always draw 3 compartments!";
+        fb.className = "mt-2 text-xs font-semibold text-rose-700";
+        fb.innerHTML = "❌ Check: Doctors survive hospital closure (Aggregation), but LabTests do not (Composition). And always draw 3 compartments.";
       }
     }
 
@@ -1295,6 +878,21 @@
       } else {
         fb.className = "mt-2 text-xs font-semibold text-rose-700";
         fb.innerHTML = "❌ Incorrect. Check abstract notation (italicized) and interface realization (dashed line with hollow triangle).";
+      }
+    }
+
+    function checkAdapterDrill() {
+      const q1 = document.getElementById('ad-q1').value;
+      const q2 = document.getElementById('ad-q2').value;
+      const q3 = document.getElementById('ad-q3').value;
+      const fb = document.getElementById('ad-fb');
+
+      if (q1 === 'correct' && q2 === 'correct' && q3 === 'correct') {
+        fb.className = "mt-2 text-xs font-semibold text-emerald-700";
+        fb.innerHTML = "✅ 100% Correct Adapter Pattern: Client calls Target; Adapter implements Target and wraps Adaptee via private reference!";
+      } else {
+        fb.className = "mt-2 text-xs font-semibold text-rose-700";
+        fb.innerHTML = "❌ Check your answers against the in-class Adapter activity.";
       }
     }
 
@@ -1334,7 +932,7 @@
         explanation: "Slide 16 notes that Use Case Scenarios unify and link the elements of the other 4 views, ensuring completeness with respect to requirements."
       },
       {
-        q: "According to Dr. Sadasivuni's golden class diagram rule, drawing a class with only 2 compartments when it has no operations is:",
+        q: "Drawing a class with only 2 compartments when it has no operations is:",
         options: [
           "Wrong! You must always draw all 3 compartments, leaving the operations compartment empty.",
           "Acceptable, as empty compartments can be omitted.",
@@ -1342,7 +940,7 @@
           "Required by IEEE 830."
         ],
         answer: 0,
-        explanation: "Dr. Sadasivuni explicitly stressed in class: 'Any class with 2 modules is WRONG! Must always draw all 3 compartments.'"
+        explanation: "Class boxes must always show all 3 compartments: Name, Attributes, Operations."
       },
       {
         q: "In the hospital management scenario, why is the relationship between Department and Doctor modeled as Aggregation (<>--) rather than Composition (<*>--)?",
@@ -1514,7 +1112,7 @@
         fb.className = "mt-3 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium";
         fb.innerHTML = `✅ <strong>Correct!</strong> ${q.explanation}`;
       } else {
-        fb.className = "mt-3 p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium";
+        fb.className = "mt-3 p-3 rounded-lg bg-slate-100 border border-slate-300 text-slate-800 text-xs font-medium";
         fb.innerHTML = `❌ <strong>Incorrect.</strong> Correct answer: <em>${q.options[q.answer]}</em><br><span class="text-slate-600 mt-1 block">${q.explanation}</span>`;
       }
       updateScoreBadge();
