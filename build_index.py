@@ -1,5 +1,5 @@
 import base64
-with open(r'fonts/CATHSGBR.TTF', 'rb') as f:
+with open(r'fonts/GoodDogPlain.ttf', 'rb') as f:
     b64_font = base64.b64encode(f.read()).decode('ascii')
 
 template = """<!DOCTYPE html>
@@ -18,10 +18,10 @@ template = """<!DOCTYPE html>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Kalam:wght@300;400&family=Patrick+Hand&display=swap" rel="stylesheet">
   
   <style>
-                /* User Custom Font: Catholic School Girls BB (both local file and embedded base64 fallback) */
+                    /* User Custom Font: GoodDog Plain (both local file and embedded base64 fallback) */
     @font-face {
-      font-family: 'Catholic School Girls BB';
-      src: url('./fonts/CATHSGBR.TTF') format('truetype'),
+      font-family: 'GoodDog Plain';
+      src: url('./fonts/GoodDogPlain.ttf') format('truetype'),
            url(data:font/truetype;charset=utf-8;base64,__B64_FONT__) format('truetype');
       font-weight: normal;
       font-style: normal;
@@ -30,7 +30,7 @@ template = """<!DOCTYPE html>
 
     /* Pure Handwritten Font, Completely Unbolded, Natural Pen Look */
     .font-pure-notes {
-      font-family: 'Catholic School Girls BB', 'CatholicSchoolGirls BB', 'Kalam', 'Patrick Hand', 'Caveat', cursive, sans-serif;
+      font-family: 'GoodDog Plain', 'GoodDogPlain', 'Kalam', 'Patrick Hand', 'Caveat', cursive, sans-serif;
       font-weight: 400;
       color: #0f172a;
     }
@@ -558,7 +558,7 @@ template = """<!DOCTYPE html>
     </div>
 
     <!-- ============================================================== -->
-    <!-- TAB 5: PRINTABLE CHEAT SHEET (AWESOME FONT, PURE UNBOLDED)     -->
+    <!-- TAB 5: PRINTABLE CHEAT SHEET (GOOD DOG PLAIN FONT, PURE UNBOLDED)     -->
     <!-- ============================================================== -->
     <div id="tab-cheatsheet" class="tab-content hidden">
       <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
@@ -566,9 +566,9 @@ template = """<!DOCTYPE html>
         <!-- Screen Top Bar -->
         <div class="flex flex-wrap justify-between items-center border-b border-slate-200 pb-4 mb-4 no-print gap-3">
           <div>
-            <h2 class="text-xl font-bold text-slate-900">Handwritten Cheat Sheet (Catholic School Girls Font)</h2>
+            <h2 class="text-xl font-bold text-slate-900">Handwritten Cheat Sheet (Good Dog Plain Font)</h2>
             <p class="text-xs text-slate-500 mt-0.5">
-              Custom installed Catholic School Girls BB font • Organic micro-variations • Pure unbolded text • Zero lines & zero headers
+              Custom installed GoodDog Plain font • Organic micro-variations • Pure unbolded text • Zero lines & zero headers
             </p>
           </div>
           <button onclick="window.print()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition text-xs sm:text-sm">
@@ -577,7 +577,7 @@ template = """<!DOCTYPE html>
         </div>
 
         <!-- ============================================== -->
-        <!-- PRINT AREA: AWESOME FONT HANDWRITTEN NOTES     -->
+        <!-- PRINT AREA: GOOD DOG PLAIN HANDWRITTEN NOTES     -->
         <!-- ============================================== -->
         <div id="cheat-sheet-print-area" class="font-pure-notes text-slate-900 leading-snug">
           
