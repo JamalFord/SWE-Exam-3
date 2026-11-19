@@ -11,16 +11,14 @@
   <!-- Google Fonts: Handwritten Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Kalam:wght@300;400&family=Patrick+Hand&display=swap" rel="stylesheet">
   
   <style>
-    /* Handwritten Font Family */
-    .font-notes {
+    /* Pure Handwritten Font, Unbolded, Natural Pen Look */
+    .font-pure-notes {
       font-family: 'Kalam', 'Patrick Hand', 'Caveat', cursive;
-      color: #1e293b;
-    }
-    .font-caveat {
-      font-family: 'Caveat', cursive;
+      font-weight: 400;
+      color: #0f172a;
     }
 
     /* Print Specific Rules: Strict 2-Page Double Sided Sheet */
@@ -33,9 +31,9 @@
         top: 0;
         width: 100%;
         margin: 0;
-        padding: 0.15in;
-        font-size: 8pt;
-        line-height: 1.14;
+        padding: 0.12in;
+        font-size: 8.2pt;
+        line-height: 1.15;
         color: #0f172a !important;
       }
       .page-break { page-break-before: always; }
@@ -46,34 +44,7 @@
       }
     }
 
-    /* Informal Handwritten Styling for Cheat Sheet */
-    .hand-header {
-      font-family: 'Caveat', cursive;
-      font-weight: 700;
-      font-size: 1.15rem;
-      border-bottom: 1.5px dashed #64748b;
-      padding-bottom: 2px;
-      margin-bottom: 4px;
-      color: #0f172a;
-    }
-    .hand-sub {
-      font-family: 'Caveat', cursive;
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: #1e3a8a;
-    }
-    .highlighter {
-      background-color: #fef08a;
-      padding: 0 3px;
-      border-radius: 2px;
-    }
-    .highlighter-blue {
-      background-color: #e0e7ff;
-      padding: 0 3px;
-      border-radius: 2px;
-    }
-
-    /* Interactive diagram boxes */
+    /* Interactive diagram boxes for tabs */
     .uml-box { border: 2px solid #334155; border-radius: 4px; background: #ffffff; }
     .uml-header { background: #f1f5f9; border-bottom: 2px solid #334155; padding: 6px; font-weight: bold; text-align: center; }
     .uml-section { border-bottom: 1px solid #94a3b8; padding: 6px 10px; font-family: monospace; font-size: 12px; min-height: 44px; }
@@ -350,15 +321,15 @@
           </div>
           <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-3 text-xs">
             <div class="space-y-2">
-              <p><strong>Combined Fragment Matching:</strong></p>
+              <p>Combined Fragment Matching:</p>
               <div class="p-2 border bg-white rounded">
-                <b>alt fragment:</b> Represents <code>if-then-else</code> alternatives. Separated by a dashed horizontal line with boolean guards in square brackets <code>[authorized]</code> and <code>[else]</code>.
+                alt fragment: Represents if-then-else alternatives. Separated by a dashed horizontal line with boolean guards in square brackets [authorized] and [else].
               </div>
               <div class="p-2 border bg-white rounded">
-                <b>loop fragment:</b> Represents repeated execution (e.g. iterating over test records) with guard condition <code>[hasMoreTests]</code> or range <code>[1, *]</code>.
+                loop fragment: Represents repeated execution (e.g. iterating over test records) with guard condition [hasMoreTests] or range [1, *].
               </div>
               <div class="p-2 border bg-white rounded">
-                <b>Arrowhead Types:</b> Synchronous calls use a <u>solid line with filled arrowhead</u> (<code>&mdash;&mdash;&blacktriangleright;</code>). Return messages use a <u>dashed line with stick arrowhead</u> (<code>&lt;- - -</code>).
+                Arrowhead Types: Synchronous calls use a solid line with filled arrowhead (&mdash;&mdash;&blacktriangleright;). Return messages use a dashed line with stick arrowhead (&lt;- - -).
               </div>
             </div>
           </div>
@@ -389,14 +360,14 @@
           <div class="bg-slate-50 border-l-4 border-amber-600 p-4 rounded-r-lg mb-6">
             <h3 class="font-bold text-slate-900 text-sm">Diagram 6: Insulin Pump Activity Diagram (Fork & Join)</h3>
             <p class="text-xs text-slate-600 mt-1">
-              A <strong>Fork bar</strong> splits 1 incoming flow into multiple concurrent parallel flows. A <strong>Join bar</strong> synchronizes concurrent parallel flows into 1 outgoing flow.
+              A Fork bar splits 1 incoming flow into multiple concurrent parallel flows. A Join bar synchronizes concurrent parallel flows into 1 outgoing flow.
             </p>
           </div>
           <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-2 text-xs">
             <div class="p-3 bg-white border rounded">
-              &bull; <b>Fork:</b> After sensor measures blood sugar, execution splits into: (1) Compute required insulin dosage, and (2) Log sensor timestamp.<br>
-              &bull; <b>Join:</b> Both the dosage calculation and logging must complete before advancing to Inject Insulin.<br>
-              &bull; <b>Decision Diamond:</b> <code>[sugarLevel &gt; safeRange]</code> &rarr; Inject Insulin; <code>[sugarLevel &le; safeRange]</code> &rarr; Sleep 10 min.
+              &bull; Fork: After sensor measures blood sugar, execution splits into: (1) Compute required insulin dosage, and (2) Log sensor timestamp.<br>
+              &bull; Join: Both the dosage calculation and logging must complete before advancing to Inject Insulin.<br>
+              &bull; Decision Diamond: [sugarLevel &gt; safeRange] &rarr; Inject Insulin; [sugarLevel &le; safeRange] &rarr; Sleep 10 min.
             </div>
           </div>
         </div>
@@ -411,10 +382,10 @@
           </div>
           <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-2 text-xs">
             <div class="p-3 bg-white border rounded">
-              &bull; <b>Lane 1 (Patient/User):</b> Submit appointment request, Provide insurance card.<br>
-              &bull; <b>Lane 2 (Receptionist):</b> Verify identity, Check doctor schedule, Confirm slot.<br>
-              &bull; <b>Lane 3 (Medical Records Subsystem):</b> Generate appointment record, update patient history.<br>
-              &bull; <b>Transitions crossing lanes:</b> Indicate handoff of responsibility between actors/systems.
+              &bull; Lane 1 (Patient/User): Submit appointment request, Provide insurance card.<br>
+              &bull; Lane 2 (Receptionist): Verify identity, Check doctor schedule, Confirm slot.<br>
+              &bull; Lane 3 (Medical Records Subsystem): Generate appointment record, update patient history.<br>
+              &bull; Transitions crossing lanes: Indicate handoff of responsibility between actors/systems.
             </div>
           </div>
         </div>
@@ -424,14 +395,14 @@
           <div class="bg-slate-50 border-l-4 border-rose-600 p-4 rounded-r-lg mb-6">
             <h3 class="font-bold text-slate-900 text-sm">Diagram 8: Microwave Oven State Machine Diagram</h3>
             <p class="text-xs text-slate-600 mt-1">
-              UML State Transition Syntax: <code>Event [Guard] / Action</code>
+              UML State Transition Syntax: Event [Guard] / Action
             </p>
           </div>
           <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-2 text-xs">
             <div class="p-3 bg-white border rounded">
-              &bull; <b>States:</b> Waiting, Half power, Full power, Set time, Operation, Disabled.<br>
-              &bull; <b>Transition example:</b> <code>start [door_closed] / run_generator(300W)</code><br>
-              &bull; <b>Door open event:</b> From state <em>Operation</em> &rarr; <code>door_open / stop_generator(), turn_lamp_on()</code> &rarr; state <em>Disabled</em>.
+              &bull; States: Waiting, Half power, Full power, Set time, Operation, Disabled.<br>
+              &bull; Transition example: start [door_closed] / run_generator(300W)<br>
+              &bull; Door open event: From state Operation &rarr; door_open / stop_generator(), turn_lamp_on() &rarr; state Disabled.
             </div>
           </div>
         </div>
@@ -446,8 +417,8 @@
           </div>
           <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-2 text-xs">
             <div class="p-3 bg-white border rounded">
-              &bull; <b>&laquo;include&raquo;:</b> Mandatory sub-routine. Base use case is incomplete without it. Dashed arrow points from base use case to included use case. (E.g. <code>View Record --&gt; &laquo;include&raquo; --&gt; Authenticate User</code>).<br>
-              &bull; <b>&laquo;extend&raquo;:</b> Optional behavior triggered under specific conditions at an extension point. Base is complete on its own. Dashed arrow points from extending use case to base use case. (E.g. <code>Print Hardcopy --&gt; &laquo;extend&raquo; --&gt; View Record</code>).
+              &bull; &laquo;include&raquo;: Mandatory sub-routine. Base use case is incomplete without it. Dashed arrow points from base use case to included use case. (E.g. View Record --&gt; &laquo;include&raquo; --&gt; Authenticate User).<br>
+              &bull; &laquo;extend&raquo;: Optional behavior triggered under specific conditions at an extension point. Base is complete on its own. Dashed arrow points from extending use case to base use case. (E.g. Print Hardcopy --&gt; &laquo;extend&raquo; --&gt; View Record).
             </div>
           </div>
         </div>
@@ -525,7 +496,7 @@
     </div>
 
     <!-- ============================================================== -->
-    <!-- TAB 5: PRINTABLE CHEAT SHEET (NATURAL HANDWRITTEN STUDENT NOTES) -->
+    <!-- TAB 5: PRINTABLE CHEAT SHEET (PURE UNSTRUCTURED HANDWRITTEN)   -->
     <!-- ============================================================== -->
     <div id="tab-cheatsheet" class="tab-content hidden">
       <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
@@ -533,12 +504,9 @@
         <!-- Screen Top Bar -->
         <div class="flex flex-wrap justify-between items-center border-b border-slate-200 pb-4 mb-4 no-print gap-3">
           <div>
-            <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
-              <i data-lucide="pen-tool" class="w-6 h-6 text-indigo-600"></i>
-              Handwritten Cheat Sheet (Front & Back)
-            </h2>
+            <h2 class="text-xl font-bold text-slate-900">Handwritten Cheat Sheet (Front & Back)</h2>
             <p class="text-xs text-slate-500 mt-0.5">
-              Natural student study notes • Ultra-dense handwritten pen layout • Ready to print or copy onto 8.5" x 11" paper
+              Pure unbolded handwritten text • No borders, no dashed lines, no headers • Ready for 8.5" x 11" paper
             </p>
           </div>
           <button onclick="window.print()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition text-xs sm:text-sm">
@@ -547,85 +515,70 @@
         </div>
 
         <!-- ============================================== -->
-        <!-- PRINT AREA: NATURAL UNSTRUCTURED HANDWRITTEN   -->
+        <!-- PRINT AREA: PURE TEXT HANDWRITTEN NOTES        -->
         <!-- ============================================== -->
-        <div id="cheat-sheet-print-area" class="font-notes text-slate-900 leading-tight">
+        <div id="cheat-sheet-print-area" class="font-pure-notes text-slate-900 leading-snug">
           
           <!-- ============================== -->
           <!-- SIDE 1: FRONT OF PAGE          -->
           <!-- ============================== -->
-          <div class="p-2 bg-white mb-6">
+          <div class="p-1 mb-4">
             
-            <!-- Top informal title -->
-            <div class="border-b border-slate-400 pb-1 mb-2 flex justify-between items-baseline">
-              <span class="font-caveat text-xl font-bold text-slate-900">SWE Exam 3 Study Notes • Side 1: Architecture, SDLC & Testing</span>
-              <span class="text-[9pt] text-slate-500 font-caveat">CSC 4350 / 6350 • Fall 2026</span>
-            </div>
-
-            <!-- Dense 3-Column Organic Flow -->
-            <div class="grid grid-cols-3 gap-3 text-[8pt] leading-[1.14]">
+            <!-- Dense 3-Column Pure Handwritten Text Flow -->
+            <div class="grid grid-cols-3 gap-3 text-[8.2pt] leading-[1.15]">
               
               <!-- Column 1 -->
-              <div class="space-y-2 pr-1 border-r border-dashed border-slate-300">
+              <div class="space-y-2">
                 
                 <div>
-                  <div class="hand-header">SDLC & Fundamentals</div>
-                  • <span class="highlighter">SDLC stages:</span> Requirements &rarr; Design &rarr; Implementation &rarr; Testing &rarr; Deployment &rarr; Maintenance.<br>
-                  • <b>4 P's of SWE:</b> People, Product, Process, Project.<br>
-                  • <b>4 Good SW Attributes:</b> Maintainability (evolves), Dependability & Security (safe), Efficiency (fast, low RAM), Acceptability (usable).<br>
-                  • <b>Costs:</b> 60% Dev, 40% Testing. For custom systems, evolution &gt; initial dev cost.<br>
-                  • <b>ACM/IEEE Ethics Priority:</b> Public interest &gt; Client & Employer &gt; Product &gt; Judgment &gt; Management &gt; Profession &gt; Colleagues &gt; Self.
+                  SDLC and Fundamentals:<br>
+                  - SDLC phases: Requirements -> Design -> Implementation -> Testing -> Deployment -> Maintenance.<br>
+                  - 4 Ps of SWE: People, Product, Process, Project.<br>
+                  - 4 software quality attributes: Maintainability (system evolves with changing customer needs), Dependability & Security (reliability, safety, resilience), Efficiency (optimal CPU, memory, responsiveness), Acceptability (understandable, usable, compatible).<br>
+                  - Software costs: roughly 60% development cost, 40% testing cost. For custom software systems, long-term evolution costs exceed original development costs.<br>
+                  - ACM/IEEE professional ethics priority: 1. Public interest, 2. Client and employer, 3. Product, 4. Judgment, 5. Management, 6. Profession, 7. Colleagues, 8. Self.
                 </div>
 
                 <div>
-                  <div class="hand-header">Requirements Rules</div>
-                  • <b>Functional:</b> What system MUST do (inputs &rarr; outputs, reactions).<br>
-                  • <b>Non-Functional (NFR):</b> Constraints (security, performance, portability).<br>
-                  • <b>Vague words to rewrite:</b> Never use "instantaneously", "user-friendly", "little training" &rarr; Rewrite into measurable numbers (e.g. &le; 200ms latency, &le; 2 errors per 8 hrs).<br>
-                  • <b>Use Case Relations:</b><br>
-                  &nbsp;&nbsp;- <code>&laquo;include&raquo;</code>: mandatory sub-task; base is incomplete without it.<br>
-                  &nbsp;&nbsp;- <code>&laquo;extend&raquo;</code>: optional branch at extension point; base is complete alone.
+                  Requirements Engineering:<br>
+                  - Functional requirements: statements of services system must provide, reactions to inputs, behavior in situations.<br>
+                  - Non-functional requirements (NFR): constraints on services and system functions such as timing, security, standards, reliability.<br>
+                  - Precision rules: avoid vague subjective language. Words like "instantaneously", "user-friendly", "rapidly", "little training" must be rewritten into measurable engineering values (e.g. response time <= 200 ms, training time <= 2 hours, error rate <= 1 error per 8 hour shift).<br>
+                  - Use case relationships: &laquo;include&raquo; represents a mandatory sub-task where base use case is incomplete without it. &laquo;extend&raquo; represents an optional behavior triggered at an extension point where base use case is complete on its own.
                 </div>
 
                 <div>
-                  <div class="hand-header">Kruchten 4+1 View Model</div>
-                  • <b>Logical View:</b> Classes, packages, domain objects. Audience: Devs & Users. Concern: Functionality.<br>
-                  • <b>Process View:</b> Concurrency, threads, runtime performance, scalability. Audience: Devs.<br>
-                  • <b>Development View:</b> Software code artifacts, modules, binaries, build hierarchy. Audience: Devs.<br>
-                  • <b>Physical View:</b> Hardware nodes, networks, servers. Audience: Operations.<br>
-                  • <b>+1 Scenarios (Use Cases):</b> Unifies and validates the other 4 views!
+                  Kruchten 4+1 View Model:<br>
+                  - Logical View: end-user functionality, domain abstractions, classes, entities. Target audience: developers and users. Concern: functional requirements.<br>
+                  - Process View: dynamic runtime aspects, concurrency, active processes, threads, synchronization, communication (RPC, message bus). Target audience: developers. Concern: performance, scalability.<br>
+                  - Development View: static organization of code artifacts, packages, modules, libraries, build hierarchy. Target audience: developers. Concern: reuse, ease of build.<br>
+                  - Physical View: hardware topology, execution nodes, network interconnects, distribution across processors. Target audience: system engineers and operations.<br>
+                  - +1 Scenarios (Use Cases): unifies and links the other 4 views together, validating that architecture satisfies all requirements.
                 </div>
 
               </div>
 
               <!-- Column 2 -->
-              <div class="space-y-2 pr-1 border-r border-dashed border-slate-300">
+              <div class="space-y-2">
                 
                 <div>
-                  <div class="hand-header">Architecture Patterns</div>
-                  • <b>IEEE Definition:</b> Fundamental organization of a system embodied in components, relationships, environment, and design principles.<br>
-                  • <b>3 Partitioning Steps:</b> (1) System Structuring, (2) Control Modeling, (3) Modular Decomposition.<br>
-                  • <b>1. Layered Pattern:</b> UI &rarr; Interface/Auth &rarr; Logic &rarr; DB.<br>
-                  &nbsp;&nbsp;+ Replaceable layers, defense-in-depth security.<br>
-                  &nbsp;&nbsp;- Performance overhead across layers, hard clean separation.<br>
-                  • <b>2. Repository Pattern (IDE):</b> Passive central DB + active tools.<br>
-                  &nbsp;&nbsp;+ Efficient sharing of large data, tool independence.<br>
-                  &nbsp;&nbsp;- Single point of failure; data schema compromise.<br>
-                  • <b>3. Client-Server Pattern:</b> Distributed servers offer services.<br>
-                  &nbsp;&nbsp;+ Failure in one server doesn't crash others; scalable.<br>
-                  &nbsp;&nbsp;- Network latency, each service point of failure.<br>
-                  • <b>4. Pipe & Filter Pattern:</b> Sequential data transforms.<br>
-                  &nbsp;&nbsp;+ Subsystem reuse, intuitive flow (Unix pipes).<br>
-                  &nbsp;&nbsp;- Agreed data format overhead, high latency.<br>
-                  • <b>MVC:</b> Controller (input) &rarr; Model (data) &rarr; View (output).
+                  Architectural Design and Styles:<br>
+                  - IEEE architecture definition: fundamental organization of a system embodied in its components, relationships to one another and environment, and principles governing its design and evolution.<br>
+                  - Partitioning process: 1. System Structuring, 2. Control Modeling, 3. Modular Decomposition.<br>
+                  - Why plan explicitly: stakeholder communication, system analysis before coding, large-scale subsystem reuse, security access boundary enforcement.<br>
+                  - Layered Architecture: system organized into hierarchical layers where layer N only depends on layer N-1. Advantages: replaceable layers if interfaces held constant, changes isolated to adjacent layers, multi-layer security defense. Disadvantages: clean separation difficult in practice, performance overhead passing calls through multiple layers.<br>
+                  - Repository Architecture: central passive data store accessed and updated by independent active subsystems. Example: IDE with central Project Information and Code surrounded by Java Editor, Python Editor, Model Editor, Code Generator, Report Generator, Design Analyzer. Advantages: efficient sharing of large datasets, independent components. Disadvantages: single point of failure and communication bottleneck, data evolution is difficult.<br>
+                  - Client-Server Architecture: set of dedicated servers offering services across network to clients. Example: Film Library with wide-bandwidth network connecting clients to Catalogue Server, Video Server, Picture Server, Hypertext Server. Advantages: distributed failure isolation, straightforward scaling. Disadvantages: network latency, each server is a failure point.<br>
+                  - Pipe and Filter Architecture: sequential stream transformations where output of one filter serves as input to next through pipe (e.g. Unix pipes, invoice processing: Invoices -> Process Invoices -> Identify Payments -> Issue Receipts). Advantages: subsystem reuse, intuitive flow. Disadvantages: agreed data format overhead, high parsing latency.<br>
+                  - MVC: Controller handles input, Model maintains state and logic, View renders display output.
                 </div>
 
                 <div>
-                  <div class="hand-header">Control Models</div>
-                  • <b>Centralized - Call-Return:</b> Top-down subroutine call tree for sequential systems (Main &rarr; Subsystems &rarr; Methods).<br>
-                  • <b>Centralized - Manager Model:</b> One central System Controller starts/stops/coordinates concurrent tasks (Sensors, Actuators, UI, Fault Handler).<br>
-                  • <b>Event - Broadcast:</b> Events published to bus; registered subsystems handle. Decentralized, but handling timing uncertain.<br>
-                  • <b>Event - Interrupt-Driven:</b> Hardware interrupt array mapped to memory addresses &rarr; handlers. Fast real-time, but hard to validate!
+                  System Control Models:<br>
+                  - Centralized Call-Return Model: top-down subroutine call tree applicable to sequential systems (Main -> Subsystems -> Methods).<br>
+                  - Centralized Manager Model: single process controls stopping, starting, and coordination of concurrent processes (System Controller coordinating Sensors, Actuators, Computation, Fault Handler, User Interface).<br>
+                  - Decentralized Broadcast Model: events published to common message bus; registered subsystems handle events. Effective for distributed systems, but subsystems do not know if or when event handled.<br>
+                  - Decentralized Interrupt-Driven Model: hardware interrupt array mapped to specific memory locations; dedicated handlers watch address and coordinate response (e.g. Temperature, Radiation, Fire Alarm, Fuel handlers). Used for fast real-time response, but complex to program and hard to validate.
                 </div>
 
               </div>
@@ -634,39 +587,37 @@
               <div class="space-y-2">
                 
                 <div>
-                  <div class="hand-header">Testing Fundamentals & V-Model</div>
-                  • <b>Verification:</b> "Are we building the product RIGHT?" (conformance to specification).<br>
-                  • <b>Validation:</b> "Are we building the RIGHT product?" (satisfies user needs).<br>
-                  • <b>Dijkstra's Axiom:</b> "Testing shows the presence of bugs, NEVER their absence!"<br>
-                  • <b>V-Model Pairs:</b><br>
-                  &nbsp;&nbsp;- Requirements &harr; Acceptance Testing (Alpha/Beta)<br>
-                  &nbsp;&nbsp;- System Spec &harr; System Testing<br>
-                  &nbsp;&nbsp;- Architectural Design &harr; Subsystem / Integration Testing<br>
-                  &nbsp;&nbsp;- Detailed Design &harr; Unit Testing
+                  Software Testing Fundamentals:<br>
+                  - Verification: "Are we building the product right?" (conformance to specification).<br>
+                  - Validation: "Are we building the right product?" (satisfies customer operational needs).<br>
+                  - Dijkstra's axiom: "Program testing can be used to show the presence of bugs, but never to show their absence."<br>
+                  - Defect testing exposes flaws; validation testing demonstrates system meets user requirements.<br>
+                  - V-Model lifecycle pairings:<br>
+                  Requirements engineering <-> Acceptance testing (alpha and beta)<br>
+                  System specification <-> System testing<br>
+                  Architectural design <-> Subsystem and integration testing<br>
+                  Detailed module design <-> Unit testing
                 </div>
 
                 <div>
-                  <div class="hand-header">Test Scaffolding & JUnit</div>
-                  • <b>Driver:</b> Simulates the calling module (invokes unit).<br>
-                  • <b>Stub / Mock:</b> Simulates a called sub-module (dummy return).<br>
-                  • <b>Harness:</b> Test framework and runner (JUnit).<br>
-                  • <b>Oracle:</b> Mechanism comparing actual vs expected outputs.<br>
-                  • <b>JUnit Lifecycle:</b><br>
-                  &nbsp;&nbsp;<code>@Test</code>: Marks test method.<br>
-                  &nbsp;&nbsp;<code>@Before / @BeforeEach</code>: Runs before EVERY test.<br>
-                  &nbsp;&nbsp;<code>@After / @AfterEach</code>: Runs after EVERY test.<br>
-                  &nbsp;&nbsp;<code>@BeforeClass / @BeforeAll</code>: Runs ONCE before test suite.<br>
-                  &nbsp;&nbsp;<code>@AfterClass / @AfterAll</code>: Runs ONCE after suite.
+                  Test Scaffolding and JUnit:<br>
+                  - Test Driver: software module that invokes the unit under test and passes simulated inputs.<br>
+                  - Test Stub / Mock: dummy module called by the unit under test that returns synthetic values.<br>
+                  - Test Harness: framework environment that automates execution of test suites (e.g. JUnit).<br>
+                  - Test Oracle: mechanism (specification, human, dual run) determining if actual output matches expected output.<br>
+                  - JUnit annotations:<br>
+                  @Test: marks executable test method.<br>
+                  @Before / @BeforeEach: executes before every individual test method to initialize test fixture.<br>
+                  @After / @AfterEach: executes after every test method to tear down test fixture.<br>
+                  @BeforeClass / @BeforeAll: executes once before all test methods in class (static, opens DB/sockets).<br>
+                  @AfterClass / @AfterAll: executes once after all test methods finish (static, closes DB/sockets).
                 </div>
 
                 <div>
-                  <div class="hand-header">Mentcare & ATM Architecture</div>
-                  • <b>Mentcare 4 Layers:</b><br>
-                  &nbsp;&nbsp;1. Web browser<br>
-                  &nbsp;&nbsp;2. Login, Role checking, Form & menu mgr, Validation<br>
-                  &nbsp;&nbsp;3. Security, Patient info manager, Report generation<br>
-                  &nbsp;&nbsp;4. Transaction management, Patient database<br>
-                  • <b>ATM 4-Tier Pipeline:</b> I/O Processing &harr; App Logic &harr; Tx Manager &harr; Database.
+                  Mentcare and ATM Architecture Reference:<br>
+                  - Mentcare 4-Layer System: Layer 1 is Web browser; Layer 2 is User communications (Login, Role checking, Form & menu manager, Data validation); Layer 3 is Information retrieval and modification (Security management, Patient info manager, Data import/export, Report generation); Layer 4 is Transaction management and Patient database.<br>
+                  - ATM 4-Tier Pipeline: I/O Processing <-> Application Logic <-> Transaction Manager <-> Database.<br>
+                  - ATM 3-Phase Flow: Input (Get account ID, Validate card, Select service) -> Process (Query account, Update account) -> Output (Print details, Return card, Dispense cash).
                 </div>
 
               </div>
@@ -680,88 +631,73 @@
           <!-- ============================== -->
           <!-- SIDE 2: BACK OF PAGE           -->
           <!-- ============================== -->
-          <div class="p-2 bg-white">
+          <div class="p-1">
             
-            <!-- Top informal title -->
-            <div class="border-b border-slate-400 pb-1 mb-2 flex justify-between items-baseline">
-              <span class="font-caveat text-xl font-bold text-slate-900">SWE Exam 3 Study Notes • Side 2: UML Diagrams, Coverage & DB</span>
-              <span class="text-[9pt] text-slate-500 font-caveat">CSC 4350 / 6350 • Fall 2026</span>
-            </div>
-
-            <!-- Dense 3-Column Organic Flow -->
-            <div class="grid grid-cols-3 gap-3 text-[8pt] leading-[1.14]">
+            <!-- Dense 3-Column Pure Handwritten Text Flow -->
+            <div class="grid grid-cols-3 gap-3 text-[8.2pt] leading-[1.15]">
               
               <!-- Column 1: UML Diagrams -->
-              <div class="space-y-2 pr-1 border-r border-dashed border-slate-300">
+              <div class="space-y-2">
                 
                 <div>
-                  <div class="hand-header">UML Class Diagrams Rules</div>
-                  • <b>3 Compartments:</b> Always draw all 3 boxes: (1) Class Name, (2) Attributes, (3) Operations. Even if empty, draw the 3rd box line!<br>
-                  • <b>Class Naming:</b> Noun = Class, Noun Phrase = Attribute, Verb = Operation.<br>
-                  • <b>Abstract Class:</b> Italicized font or <code>&laquo;abstract&raquo;</code>.<br>
-                  • <b>Visibility:</b> <code>+</code> Public | <code>-</code> Private | <code>#</code> Protected | <code>~</code> Package<br>
-                  • <b>Attribute format:</b> <code>visibility name: type = default</code><br>
-                  • <b>Operation format:</b> <code>visibility name(param: type): returnType</code><br>
-                  • <b>Aggregation <code>&lt;&gt;--</code> :</b> Open diamond at whole. Weak ownership ("has-a"). Part outlives whole! E.g. <code>Department &lt;&gt;-- Doctor</code> (doctors retain licenses).<br>
-                  • <b>Composition <code>&lt;*&gt;--</code> :</b> Solid diamond at whole. Strong ownership ("part-of"). Part destroyed with whole! E.g. <code>Department &lt;*&gt;-- LabTest</code>, <code>Customer &lt;*&gt;-- Address</code>.<br>
-                  • <b>Generalization <code>--|&gt;</code> :</b> Hollow triangle at parent ("is-a"). E.g. <code>MedicalRecord --|&gt; SurgicalRecord</code>.<br>
-                  • <b>Realization <code>..|&gt;</code> :</b> Dashed line with hollow triangle at interface. E.g. <code>SavingsAccount ..|&gt; InterestBearing</code>.<br>
-                  • <b>Dependency <code>..&gt;</code> :</b> Dashed line with open arrow ("uses").
+                  UML Class Diagram Syntax and Rules:<br>
+                  - Strict 3-compartment rule: every class box must show all 3 compartments: 1. Class Name, 2. Attributes, 3. Operations. Even if attributes or operations are empty, draw the 3rd compartment box line.<br>
+                  - Class discovery: Nouns become Classes, Noun phrases become Attributes, Verbs become Operations.<br>
+                  - Abstract class name: render in italic font style or tag with &laquo;abstract&raquo;.<br>
+                  - Visibility symbols: + is Public, - is Private, # is Protected, ~ is Package-private.<br>
+                  - Attribute format: visibility name : type = defaultValue.<br>
+                  - Operation format: visibility name(parameter : type) : returnType.<br>
+                  - Association: solid line without arrows or with open navigation arrow; multiplicity placed at both ends (1, 0..1, 1..*, *).<br>
+                  - Aggregation (<>--): open hollow diamond at whole end. Represents weak containment ("has-a"). Part can exist independently of whole. Doctor outlives Department (Department <>-- Doctor).<br>
+                  - Composition (<*>--): solid filled diamond at whole end. Represents strong containment ("part-of"). Part lifetime bound to whole; destroyed when whole is deleted. Department <*>-- LabTest, Customer <*>-- Address.<br>
+                  - Generalization (--|>): solid line with hollow triangular arrowhead pointing to parent class. Represents inheritance ("is-a"). MedicalRecord --|> SurgicalRecord, BankAccount --|> CheckingAccount.<br>
+                  - Realization (..|>): dashed line with hollow triangular arrowhead pointing to interface. SavingsAccount ..|> InterestBearing.<br>
+                  - Dependency (..>): dashed line with open arrow ("uses").
                 </div>
 
                 <div>
-                  <div class="hand-header">Adapter Pattern Class Diagram</div>
-                  • <b>Client:</b> Calls methods on the Target interface.<br>
-                  • <b>Target:</b> Interface expected by Client.<br>
-                  • <b>Adapter:</b> Implements Target (<code>..|&gt;</code>) and wraps Adaptee via private reference (<code>adapter.adaptee.specificRequest()</code>).<br>
-                  • <b>Adaptee:</b> Existing class with incompatible interface.
+                  Adapter Pattern Class Diagram:<br>
+                  - Client: calls methods on the Target interface.<br>
+                  - Target: abstract interface expected by client.<br>
+                  - Adapter: implements Target interface (..|> Target) and holds a private reference to the Adaptee instance (adapter calls adaptee.specificRequest()).<br>
+                  - Adaptee: existing legacy class with incompatible interface that client cannot call directly.
                 </div>
 
                 <div>
-                  <div class="hand-header">Sequence Diagrams</div>
-                  • <b>Lifeline:</b> Vertical dashed line extending down from box.<br>
-                  • <b>Activation:</b> Vertical thin rectangle of execution control.<br>
-                  • <b>Sync Call:</b> Solid line + filled arrowhead <code>&mdash;&mdash;&blacktriangleright;</code> (sender blocks).<br>
-                  • <b>Async Call:</b> Solid line + stick open arrow <code>&mdash;&mdash;&gt;</code> (non-blocking).<br>
-                  • <b>Return:</b> Dashed line + stick arrow <code>&lt;- - -</code><br>
-                  • <b>Creation/Destruction:</b> <code>&laquo;create&raquo;</code> points to box; <code>X</code> at bottom of lifeline destroys object.<br>
-                  • <b>Fragments:</b> <code>alt</code> (if-else separated by dashed line), <code>opt</code> (if only), <code>loop [min, max]</code>, <code>par</code> (parallel).
+                  Sequence Diagram Rules:<br>
+                  - Lifeline: vertical dashed line extending downward from object box.<br>
+                  - Activation bar: thin vertical rectangle on lifeline indicating execution control.<br>
+                  - Synchronous call: solid line with filled arrowhead (──▶); sender halts until reply.<br>
+                  - Asynchronous call: solid line with stick open arrowhead (──>); sender continues without waiting.<br>
+                  - Reply / Return message: dashed line with stick open arrow (< - - -).<br>
+                  - Object creation: message labeled &laquo;create&raquo; points directly to object box.<br>
+                  - Object destruction: an X placed at the base of an activation lifeline.<br>
+                  - Combined fragments: alt (mutually exclusive if-then-else separated by dashed line with [guard]), opt (optional conditional execution if only), loop [min, max] (repetition over elements), par (concurrent parallel sub-sequences).
                 </div>
 
               </div>
 
               <!-- Column 2: Activity, Statechart & White-Box Testing -->
-              <div class="space-y-2 pr-1 border-r border-dashed border-slate-300">
+              <div class="space-y-2">
                 
                 <div>
-                  <div class="hand-header">Activity & Statechart UML</div>
-                  • <b>Activity Diagram Elements:</b><br>
-                  &nbsp;&nbsp;- Start Node: Solid black circle.<br>
-                  &nbsp;&nbsp;- Activity State: Rounded rectangle.<br>
-                  &nbsp;&nbsp;- Decision / Merge: Diamond with <code>[guard]</code>.<br>
-                  &nbsp;&nbsp;- Fork Bar: 1 incoming &rarr; 2+ concurrent parallel flows.<br>
-                  &nbsp;&nbsp;- Join Bar: 2+ concurrent flows synchronized &rarr; 1 outgoing flow.<br>
-                  &nbsp;&nbsp;- Activity Final: Bullseye (dot inside circle).<br>
-                  &nbsp;&nbsp;- Swimlanes: Partitions showing responsible roles/actors.<br>
-                  • <b>State Machine (Microwave Oven):</b><br>
-                  &nbsp;&nbsp;- States: Waiting, Half power, Full power, Operation, Disabled.<br>
-                  &nbsp;&nbsp;- Transition Syntax: <code>Event [Guard] / Action</code><br>
-                  &nbsp;&nbsp;<i>Ex:</i> <code>start [door_closed] / run_generator(300W)</code>
+                  Activity and Statechart Diagrams:<br>
+                  - Activity Diagram elements: initial node is solid filled circle; activity state is rounded rectangle; decision and merge are diamond symbols with [guard]; fork bar is thick black synchronization bar splitting 1 incoming flow into 2 or more concurrent parallel flows; join bar is thick black synchronization bar waiting for multiple concurrent flows to finish before 1 outgoing flow proceeds; activity final node is bullseye (solid circle inside outer circle); swimlanes (partitions) indicate which role or subsystem performs each activity.<br>
+                  - Insulin pump activity flow: sensor measures blood sugar -> fork bar splits into: (1) calculate required insulin dosage, and (2) log sensor reading -> join bar synchronizes both -> decision diamond [sugar > target] -> inject insulin.<br>
+                  - State Machine diagram: states shown as rounded rectangles (Waiting, Half power, Full power, Operation, Disabled); initial state is solid black circle; final state is bullseye.<br>
+                  - Transition label syntax: Event [Guard] / Action.<br>
+                  - Microwave example: start [door_closed] / run_generator(300W); door_open / stop_generator(), turn_lamp_on() -> state Disabled.
                 </div>
 
                 <div>
-                  <div class="hand-header">White-Box Structural Testing</div>
-                  • <b>Statement Coverage ($C_0$):</b><br>
-                  &nbsp;&nbsp;$\frac{\text{statements executed}}{\text{total statements}} \times 100\%$. Weakest metric! Fails to test untaken false branches in single <code>if</code> statements.<br>
-                  • <b>Branch Coverage ($C_1$):</b><br>
-                  &nbsp;&nbsp;Every decision edge (True & False) traversed at least once.<br>
-                  &nbsp;&nbsp;<b>Subsumption:</b> Branch coverage subsumes Statement coverage!<br>
-                  • <b>Condition Coverage:</b> Each individual boolean condition in a composite expression evaluates to True and False at least once.<br>
-                  • <b>MC/DC (Modified Condition/Decision):</b><br>
-                  &nbsp;&nbsp;Avionics DO-178C standard. Each condition shown to independently affect decision outcome while holding others fixed.<br>
-                  &nbsp;&nbsp;Test cases required: <b>$n + 1$</b> (vs $2^n$ full condition).<br>
-                  • <b>Path Coverage:</b> Every execution path. Often infinite due to loops.<br>
-                  • <b>Loop Boundary Coverage:</b> 0 iterations, 1 iteration, typical, max-1, max iterations.
+                  White-Box Structural Testing and Coverage:<br>
+                  - Statement Coverage (C0): percentage of executable statements traversed by test cases (statements executed / total statements * 100%). Weakest coverage metric! Cannot detect missing false branches in single if statements.<br>
+                  - Branch Coverage (C1): requires every decision branch (both True and False edges in Control Flow Graph) to be traversed at least once.<br>
+                  - Subsumption rule: Branch coverage subsumes Statement coverage (100% branch implies 100% statement, but not vice-versa).<br>
+                  - Condition Coverage: requires each individual boolean sub-condition in composite expression to evaluate to True and False at least once.<br>
+                  - MC/DC (Modified Condition/Decision Coverage): required by DO-178C avionics safety standard. Each condition must be shown to independently affect the overall decision outcome while holding all other conditions fixed. For n conditions, requires n + 1 test cases (compared to 2^n for multiple condition coverage).<br>
+                  - Path Coverage: every possible execution path from entry to exit tested. Often infinite or intractable due to loops.<br>
+                  - Loop Boundary Coverage: test 0 iterations, 1 iteration, typical iterations, max-1 iterations, max iterations.
                 </div>
 
               </div>
@@ -770,30 +706,30 @@
               <div class="space-y-2">
                 
                 <div>
-                  <div class="hand-header">Black-Box (EP & BVA)</div>
-                  • <b>Equivalence Partitioning (EP):</b> Partition input into valid and invalid classes; pick 1 representative per class.<br>
-                  • <b>Boundary Value Analysis (BVA):</b> Test edges of ranges: $min-1, min, min+1, nom, max-1, max, max+1$.<br>
-                  • <b>PIN [0000..9999]:</b> Valid: 1234; Invalid: -1, 10000, "ABC", 3 digits, 5 digits.
+                  Black-Box Testing (EP & BVA):<br>
+                  - Equivalence Partitioning (EP): divide input domain into valid and invalid equivalence classes; select 1 representative test input per class.<br>
+                  - Boundary Value Analysis (BVA): test values immediately at, below, and above boundary edges: min-1, min, min+1, nominal, max-1, max, max+1.<br>
+                  - PIN [0000..9999]: valid class = 1234; invalid classes = negative numbers (-1), numbers > 9999 (10000), non-digits ("ABCD"), 3 digits, 5 digits.
                 </div>
 
                 <div>
-                  <div class="hand-header">5 Test Cases Template</div>
-                  Columns: <code>[ID, Objective, Pre-Conditions, Steps/Inputs, Expected Result, Pass/Fail]</code><br>
-                  • <b>TC-1 (Valid EP):</b> Normal user registration &rarr; Saved to DB, HTTP 201 Created.<br>
-                  • <b>TC-2 (Min Boundary):</b> Input = 0 (min valid age) &rarr; Accepted as Infant.<br>
-                  • <b>TC-3 (Negative BVA):</b> Input = -1 &rarr; Error "Age must be &ge; 0", form rejected.<br>
-                  • <b>TC-4 (Concurrency):</b> Simultaneous withdrawals of $100 on $100 balance &rarr; 1st succeeds, 2nd rejected, balance never negative.<br>
-                  • <b>TC-5 (Null/Exception):</b> DoctorID = NULL &rarr; HTTP 400 Bad Request, graceful error logging (no 500 crash).
+                  5 Test Cases Structure and Rubric:<br>
+                  Columns: TC ID, Objective, Pre-Conditions, Test Steps/Inputs, Expected Result, Pass/Fail Criteria.<br>
+                  - TC-01 (Valid EP Registration): pre-condition: user logged in; inputs: valid name, DOB, SSN; expected result: patient record created in DB, unique ID assigned, HTTP 201 Created toast displayed; criteria: record persists in DB.<br>
+                  - TC-02 (Min Boundary Value): inputs: age = 0 (minimum valid age); expected result: form accepted, classified as infant; criteria: profile created with infant tag.<br>
+                  - TC-03 (Negative Boundary Value): inputs: age = -1; expected result: submission blocked, error message "Age must be >= 0" displayed; criteria: no DB write, form retains input.<br>
+                  - TC-04 (Concurrency / Double Withdrawal): pre-condition: balance = $100; inputs: simultaneous ATM and mobile app withdrawals of $100 within 10 ms; expected result: 1st transaction succeeds, 2nd rejected for insufficient funds; criteria: balance never negative ($0 balance).<br>
+                  - TC-05 (Exception / Null Pointer): inputs: DoctorID = NULL on prescription request; expected result: system rejects with HTTP 400 Bad Request, logs missing doctor reference safely; criteria: no unhandled 500 crash or stack trace shown.
                 </div>
 
                 <div>
-                  <div class="hand-header">Relational Database & Normal Forms</div>
-                  • <b>Entity Integrity:</b> Primary Key (PK) cannot be NULL.<br>
-                  • <b>Referential Integrity:</b> Foreign Key (FK) must match existing PK in parent table or be NULL.<br>
-                  • <b>1NF:</b> Atomic column values, no repeating groups.<br>
-                  • <b>2NF:</b> 1NF + no partial functional dependencies (all non-key attributes fully depend on composite PK).<br>
-                  • <b>3NF:</b> 2NF + no transitive dependencies (no non-key attribute depends on another non-key attribute).<br>
-                  <i>"All attributes depend on the key, the whole key, and nothing but the key!"</i>
+                  Relational Database and Normalization:<br>
+                  - Entity Integrity: Primary Key (PK) column cannot be NULL and must be unique.<br>
+                  - Referential Integrity: Foreign Key (FK) column must match an existing valid PK value in parent table or be NULL.<br>
+                  - 1NF (First Normal Form): all column values must be atomic (no repeating groups, multi-valued attributes, or composite values).<br>
+                  - 2NF (Second Normal Form): table is in 1NF AND every non-key attribute is fully functionally dependent on the entire composite Primary Key (no partial key dependencies).<br>
+                  - 3NF (Third Normal Form): table is in 2NF AND no non-key attribute depends on another non-key attribute (no transitive dependencies).<br>
+                  - Canonical rule: "Every attribute must depend on the key, the whole key, and nothing but the key."
                 </div>
 
               </div>
